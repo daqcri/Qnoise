@@ -6,12 +6,9 @@ package qa.qcri.qnoise;
 
 import org.apache.commons.cli.*;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**

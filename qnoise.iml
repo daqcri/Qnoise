@@ -19,6 +19,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="guava-14.0.1" level="project" />
+    <orderEntry type="library" name="derby" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
