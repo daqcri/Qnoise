@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="916940ec-6a39-4e19-867d-b879966c2822" name="Default" comment="Adds CSV import to DB (by default DerbyDB is used).">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/net_sf_opencsv_opencsv_2_3.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/tools/CSVTools.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qnoise.iml" afterPath="$PROJECT_DIR$/qnoise.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qnoise.sh" afterPath="$PROJECT_DIR$/qnoise.sh" />
+    <list default="true" id="916940ec-6a39-4e19-867d-b879966c2822" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/opencsv-2.3-javadoc.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/opencsv-2.3.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="qnoise.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382875263456" ignored="false" />
+    <file path="/Dummy.txt" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382875509961" ignored="false" />
     <file path="/Main.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382254965643" ignored="false" />
     <file path="/Qnoise.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382873861593" ignored="false" />
     <file path="/build.xml" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382257959629" ignored="false" />
@@ -155,10 +144,19 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="Qnoise.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="Qnoise.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="65" column="79" selection-start="2417" selection-end="2417" vertical-scroll-proportion="-1.3899848">
+                <state line="65" column="79" selection-start="2417" selection-end="2417" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".travis.yml" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.travis.yml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="4" column="12" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09104704">
                   <folding />
                 </state>
               </provider>
@@ -167,10 +165,8 @@
           <file leaf-file-name="Tracer.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="94" column="46" selection-start="2453" selection-end="2453" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
+                <state line="92" column="46" selection-start="2391" selection-end="2391" vertical-scroll-proportion="0.0">
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -294,7 +290,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DBTools.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DBConfig.java" />
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/dumptest.csv" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialectTools.java" />
@@ -306,10 +301,11 @@
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -676,7 +672,15 @@
       <created>1382275255858</created>
       <updated>1382275255858</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adds random injection support.">
+      <created>1382875336478</created>
+      <updated>1382875336478</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adds Travis support.">
+      <created>1382875512481</created>
+      <updated>1382875512481</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -684,7 +688,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1920" y="100" width="1722" height="1001" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -752,7 +756,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds CSV import to DB (by default DerbyDB is used)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds Travis support." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -767,6 +771,8 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Adds CSV import to DB (by default DerbyDB is used)." />
+    <MESSAGE value="Adds random injection support." />
+    <MESSAGE value="Adds Travis support." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -776,15 +782,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DerbySQLDialect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="72" selection-start="1481" selection-end="1481" vertical-scroll-proportion="0.1867647">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialectBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="38" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.9044118">
@@ -834,10 +831,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="46" selection-start="2453" selection-end="2453" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="92" column="46" selection-start="2391" selection-end="2391" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -899,7 +894,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="79" selection-start="2417" selection-end="2417" vertical-scroll-proportion="-1.3899848">
+        <state line="65" column="79" selection-start="2417" selection-end="2417" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09104704">
           <folding />
         </state>
       </provider>
