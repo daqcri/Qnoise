@@ -5,5 +5,5 @@ if ! [ -d "out" ]; then
     echo Qnoise is not yet compiled, please first run 'ant' to build it.
 else
     cmd='java -d64 -cp out/bin/*:. qa.qcri.qnoise.Qnoise'
-    exec $cmd
+    exec $cmd $@
 fi

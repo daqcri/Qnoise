@@ -11,7 +11,7 @@ import org.junit.Test;
 import qa.qcri.qnoise.sql.DBConfig;
 import qa.qcri.qnoise.sql.DBTools;
 import qa.qcri.qnoise.sql.SQLDialect;
-import qa.qcri.qnoise.tools.CSVTools;
+import qa.qcri.qnoise.util.CSVTools;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -3,7 +3,7 @@
  * Licensed under the MIT license <http://www.opensource.org/licenses/MIT>.
  */
 
-package qa.qcri.qnoise.tools;
+package qa.qcri.qnoise.util;
 
 import com.google.common.base.Preconditions;
 import qa.qcri.qnoise.sql.DBConfig;
@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 /**
- * CSV common manipulation tools.
+ * CSV common manipulation util.
  */
 public class CSVTools {
     /**
