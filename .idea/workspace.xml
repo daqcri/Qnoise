@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="916940ec-6a39-4e19-867d-b879966c2822" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/opencsv-2.3-javadoc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/opencsv-2.3.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/commons-math3-3.2-javadoc.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/commons-math3-3.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_commons_commons_math3_3_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qnoise.iml" afterPath="$PROJECT_DIR$/qnoise.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="qnoise.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382875509961" ignored="false" />
+    <file path="/Dummy.txt" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383114680669" ignored="false" />
     <file path="/Main.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382254965643" ignored="false" />
-    <file path="/Qnoise.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382873861593" ignored="false" />
+    <file path="/Qnoise.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383116130940" ignored="false" />
     <file path="/build.xml" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382257959629" ignored="false" />
     <file path="/qnoise.sh" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382256265902" ignored="false" />
     <file path="/CSVImportTest.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382273842280" ignored="false" />
@@ -28,13 +33,13 @@
     <file path="/DBTools.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382269371594" ignored="false" />
     <file path="/dumptest.csv" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382270680523" ignored="false" />
     <file path="/fragment.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382870273896" ignored="false" />
-    <file path="/NoiseGenerator.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382874713130" ignored="false" />
-    <file path="/NoiseSpec.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382863569690" ignored="false" />
+    <file path="/NoiseGenerator.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383116182190" ignored="false" />
+    <file path="/NoiseSpec.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383115917303" ignored="false" />
     <file path="/NoiseGranularity.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382875212812" ignored="false" />
     <file path="/NoiseModal.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382863381689" ignored="false" />
     <file path="/Pair.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382867325875" ignored="false" />
     <file path="/Tracer.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382870991222" ignored="false" />
-    <file path="/NoiseReport.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382873882195" ignored="false" />
+    <file path="/NoiseReport.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383114841086" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +54,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -101,22 +107,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" line="58" class="qa.qcri.qnoise.Qnoise" package="qa.qcri.qnoise">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" line="36" class="qa.qcri.qnoise.NoiseGenerator" package="qa.qcri.qnoise">
+      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" line="74" class="qa.qcri.qnoise.NoiseGenerator" package="qa.qcri.qnoise">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -132,7 +123,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -141,133 +131,7 @@
     <favorites_list name="qnoise" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="Qnoise.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="65" column="79" selection-start="2417" selection-end="2417" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name=".travis.yml" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/.travis.yml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="4" column="12" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09104704">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Tracer.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="92" column="46" selection-start="2391" selection-end="2391" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NoiseReport.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="77" column="60" selection-start="2526" selection-end="2526" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NoiseSpec.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="22" column="18" selection-start="549" selection-end="549" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NoiseModal.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="0" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NoiseGranularity.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="28" column="0" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="e#0#722#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="qnoise.sh" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/qnoise.sh">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="56" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Pair.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="0" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DBConfig.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DBConfig.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="30" column="23" selection-start="827" selection-end="827" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="NoiseReport.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="78" column="70" selection-start="2622" selection-end="2622" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NoiseGenerator.java" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="65" column="0" selection-start="2274" selection-end="2274" vertical-scroll-proportion="1.4338236">
-                  <folding>
-                    <element signature="e#0#2566#0" expanded="true" />
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -298,14 +162,14 @@
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" />
         <option value="$PROJECT_DIR$/qnoise.sh" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" />
       </list>
     </option>
   </component>
@@ -475,6 +339,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qnoise" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qnoise" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qnoise" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -491,6 +373,7 @@
     <property name="options.lastSelected" value="Errors" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/vendors/derbynet.jar!/" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -680,33 +563,37 @@
       <created>1382875512481</created>
       <updated>1382875512481</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix the build.">
+      <created>1382875614054</created>
+      <updated>1382875614054</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="0" width="1922" height="1201" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1920" y="100" width="1722" height="1001" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39981008" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14781217" sideWeight="0.67046535" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14781217" sideWeight="0.6001899" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1920" y="100" width="1722" height="1001" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -756,7 +643,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds Travis support." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix the build." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -773,6 +660,7 @@
     <MESSAGE value="Adds CSV import to DB (by default DerbyDB is used)." />
     <MESSAGE value="Adds random injection support." />
     <MESSAGE value="Adds Travis support." />
+    <MESSAGE value="Fix the build." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -784,11 +672,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialectBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="38" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.9044118">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="41" column="38" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.9044118" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/dumptest.csv">
@@ -798,11 +682,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="21" selection-start="2695" selection-end="2695" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="78" column="21" selection-start="2695" selection-end="2695" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java">
@@ -815,93 +695,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="18" selection-start="549" selection-end="549" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DBConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="23" selection-start="827" selection-end="827" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="46" selection-start="2391" selection-end="2391" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="30" column="23" selection-start="827" selection-end="827" vertical-scroll-proportion="0.022058824" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="6" column="0" selection-start="172" selection-end="172" vertical-scroll-proportion="0.13235295" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/vendors/opencsv-2.3.jar!/au/com/bytecode/opencsv/CSVWriter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="16" selection-start="1549" selection-end="1549" vertical-scroll-proportion="0.4363929">
+        <state line="34" column="16" selection-start="1549" selection-end="1549" vertical-scroll-proportion="0.4363929" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09104704" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="0" selection-start="1842" selection-end="1842" vertical-scroll-proportion="0.023323616">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="60" selection-start="2526" selection-end="2526" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="24" column="22" selection-start="621" selection-end="621" vertical-scroll-proportion="0.20408164">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="2274" selection-end="2274" vertical-scroll-proportion="1.4338236">
-          <folding>
-            <element signature="e#0#2566#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="84" column="0" selection-start="2369" selection-end="2369" vertical-scroll-proportion="0.5626822">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="218" selection-end="553" vertical-scroll-proportion="0.116618074">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#722#0" expanded="true" />
-          </folding>
+        <state line="7" column="12" selection-start="180" selection-end="180" vertical-scroll-proportion="0.058309037">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qnoise.sh">
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="56" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
+        <state line="67" column="20" selection-start="1921" selection-end="1921" vertical-scroll-proportion="-0.34110788">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="79" selection-start="2417" selection-end="2417" vertical-scroll-proportion="0.0">
+        <state line="58" column="20" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.10204082">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
+    <entry file="file://$PROJECT_DIR$/qnoise.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09104704">
+        <state line="6" column="56" selection-start="274" selection-end="274" vertical-scroll-proportion="0.08746356">
           <folding />
         </state>
       </provider>
@@ -970,7 +835,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>net.sf.opencsv:opencsv:2.3</last-edited>
+          <last-edited>org.apache.commons:commons-math3:3.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

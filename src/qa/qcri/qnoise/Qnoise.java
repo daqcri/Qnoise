@@ -8,6 +8,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import com.google.common.collect.Lists;
 import org.apache.commons.cli.*;
+import qa.qcri.qnoise.util.Tracer;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -33,38 +34,36 @@ public class Qnoise {
         CSVWriter writer = null;
         try {
             CommandLine line = parser.parse(options, args);
-            if (line.hasOption("f")) {
-                String fileName = line.getOptionValue("f");
-                if (Files.notExists(Paths.get(fileName))) {
-                    throw new FileNotFoundException("Input file " + fileName + " does not exist.");
-                }
-                reader = new CSVReader(new FileReader(fileName));
-                header = reader.readNext();
-                entries = reader.readAll();
+
+            if (line.hasOption("v")) {
+                Tracer.setVerbose(true);
             }
 
-            double perc = Double.parseDouble(line.getOptionValue("p"));
-            NoiseModal modal = NoiseModal.getNoiseModal(line.getOptionValue("m"));
-            NoiseGranularity granularity =
-                NoiseGranularity.getNoiseGranularity(line.getOptionValue("g"));
-            NoiseSpec spec =
-                new NoiseSpec.NoiseSpecBuilder()
-                    .modal(modal)
-                    .granularity(granularity)
-                    .perc(perc)
-                    .build();
+            String fileName = line.getOptionValue("f");
+            if (Files.notExists(Paths.get(fileName))) {
+                throw new FileNotFoundException("Input file " + fileName + " does not exist.");
+            }
+            reader = new CSVReader(new FileReader(fileName));
+            header = reader.readNext();
+            entries = reader.readAll();
 
+            NoiseSpec spec = NoiseSpec.valueOf(line);
             NoiseReport report = new NoiseReport(spec);
 
-            new NoiseGenerator().nullInject(spec, entries, report);
-
-            if (line.hasOption("o")) {
-                String fileName = line.getOptionValue("o");
-                writer = new CSVWriter(new FileWriter(fileName));
-                writer.writeAll(entries);
-                writer.flush();
-                report.addMetric(NoiseReport.Metric.OutputRow, entries.size());
+            NoiseGenerator.Type type =
+                NoiseGenerator.Type.getGeneratorType(line.getOptionValue("t"));
+            switch (type) {
+                case Missing:
+                    new NoiseGenerator().missingInject(spec, entries, report);
+                case Duplicate:
+                    new NoiseGenerator().duplicateInject(spec, entries, report);
             }
+
+            fileName = line.getOptionValue("o");
+            writer = new CSVWriter(new FileWriter(fileName));
+            writer.writeAll(entries);
+            writer.flush();
+            report.addMetric(NoiseReport.Metric.OutputRow, entries.size());
 
             report.print();
 
@@ -113,7 +112,6 @@ public class Qnoise {
         options.addOption(
             OptionBuilder.
                 withArgName("percentage").
-                isRequired().
                 hasArg().
                 withDescription("Injection data percentage.").
                 withType(Double.class).
@@ -159,6 +157,11 @@ public class Qnoise {
                 create("o")
         );
 
+        options.addOption(
+            OptionBuilder.
+                withDescription("Verbose output.").
+                create("v")
+        );
         return options;
     }
 }
