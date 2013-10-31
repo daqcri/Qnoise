@@ -18,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 public class NoiseGenerator {
     public static enum Type {
         Missing,
+        Inconsistency,
+        Outlier,
         Duplicate;
 
         public static NoiseGenerator.Type getGeneratorType(String modal) {

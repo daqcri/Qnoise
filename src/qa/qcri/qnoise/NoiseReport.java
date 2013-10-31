@@ -18,18 +18,28 @@ public class NoiseReport {
     private static Map<Metric, List<Object>> stats = Maps.newHashMap();
 
     public enum Metric {
-        Modal,
+        Type,
+        Model,
         Percentage,
+        PercentageOfSeed,
+        PercentageOfDuplicate,
+        InputRow,
+        OutputRow,
         Granularity,
         ChangedItem,
         InjectionTime,
-        OutputRow
+        InjectionTimestamp,
+        InputFilePath,
+        OutputFilePath,
+        Schema
     }
 
     public NoiseReport(NoiseSpec spec) {
-        appendMetric(Metric.Modal, spec.getModal().toString());
+        appendMetric(Metric.Model, spec.getModal().toString());
         appendMetric(Metric.Percentage, spec.getPerc());
         appendMetric(Metric.Granularity, spec.getGranularity().toString());
+        appendMetric(Metric.PercentageOfSeed, spec.getDuplicateSeed());
+        appendMetric(Metric.PercentageOfDuplicate, spec.getDuplicateTime());
     }
 
     /**
@@ -71,12 +81,20 @@ public class NoiseReport {
         Tracer tracer = Tracer.getTracer(Tracer.class);
         tracer.info("Noise Generation report:");
         tracer.info("----------------------------------------------------------------");
-        tracer.info(formatMetric(Metric.Modal, "Modal"));
-        tracer.info(formatMetric(Metric.Percentage, "Percentage"));
+        tracer.info(formatMetric(Metric.Type, "Type of Noise"));
+        tracer.info(formatMetric(Metric.Model, "Model"));
         tracer.info(formatMetric(Metric.Granularity, "Granularity"));
+        tracer.info(formatMetric(Metric.Percentage, "Noise Percentage"));
+        tracer.info(formatMetric(Metric.PercentageOfSeed, "Number of Seeds"));
+        tracer.info(formatMetric(Metric.PercentageOfDuplicate, "Number of Duplicate"));
         tracer.info(formatMetric(Metric.ChangedItem, "Changed item"));
-        tracer.info(formatMetric(Metric.InjectionTime, "Null injection time", "ms"));
-        tracer.info(formatMetric(Metric.OutputRow, "New file row count"));
+        tracer.info(formatMetric(Metric.InjectionTime, "Injection time", "ms"));
+        tracer.info(formatMetric(Metric.InputRow, "Original file record number"));
+        tracer.info(formatMetric(Metric.OutputRow, "Output file re cord number"));
+        tracer.info(formatMetric(Metric.InjectionTimestamp, "Injection Timestamp"));
+        tracer.info(formatMetric(Metric.InputFilePath, "Input file path"));
+        tracer.info(formatMetric(Metric.OutputFilePath, "Output file path"));
+        tracer.info(formatMetric(Metric.Schema, "Schema"));
         tracer.info("----------------------------------------------------------------");
     }
 

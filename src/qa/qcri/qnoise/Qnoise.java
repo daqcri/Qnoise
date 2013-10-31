@@ -67,6 +67,8 @@ public class Qnoise {
 
             report.print();
 
+        } catch (MissingOptionException me) {
+            printHelp();
         } catch (ParseException ex) {
             ex.printStackTrace();
             printHelp();
@@ -89,7 +91,7 @@ public class Qnoise {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp(
             100,
-            "qnoise.sh -f <input csv file> -o <output csv file> [OPTIONS]",
+            "qnoise.sh -f <input csv file> [OPTIONS]",
             "All the options:",
             options,
             null
@@ -111,15 +113,6 @@ public class Qnoise {
 
         options.addOption(
             OptionBuilder.
-                withArgName("percentage").
-                hasArg().
-                withDescription("Injection data percentage.").
-                withType(Double.class).
-                create("p")
-        );
-
-        options.addOption(
-            OptionBuilder.
                 withArgName("[row | cell]").
                 isRequired().
                 hasArg().
@@ -130,38 +123,46 @@ public class Qnoise {
 
         options.addOption(
             OptionBuilder.
-                withArgName("[random | norm]").
-                isRequired().
-                hasArg().
-                withDescription("Noise distribution modal, default value is random.").
-                withType(String.class).
-                create("m")
-        );
-        /*
-        options.addOption(
-            OptionBuilder.
-                    withArgName("url").
-                    hasArg().
-                    withDescription(
-                            "Input database JDBC url, e.g. " +
-                                    "jdbc:postgresql://localhost/test?usr=myUser&password=myPassword").
-                    create("url")
-        );
-        */
-        options.addOption(
-            OptionBuilder.
-                withArgName("file").
-                isRequired().
-                hasArg().
-                withDescription("Output to CSV file.").
-                create("o")
+                withDescription("Verbose output.").
+                create("v")
         );
 
         options.addOption(
             OptionBuilder.
-                withDescription("Verbose output.").
-                create("v")
+                withArgName("<Missing value parameter>").
+                hasArg().
+                withDescription("Inject missing noises.").
+                withType(String.class).
+                create("m")
         );
+
+        options.addOption(
+            OptionBuilder.
+                withArgName("<Duplicate value parameter>").
+                hasArg().
+                withDescription("Inject duplicate noises.").
+                withType(String.class).
+                create("d")
+        );
+
+        options.addOption(
+            OptionBuilder.
+                withArgName("<Inconsistency parameter>").
+                hasArg().
+                withDescription("Inject inconsistency noises.").
+                withType(String.class).
+                create("i")
+        );
+
+        options.addOption(
+            OptionBuilder.
+                withArgName("<Outlier parameter>").
+                hasArg().
+                withDescription("Inject outlier noises.").
+                withType(String.class).
+                create("o")
+        );
+
         return options;
     }
 }

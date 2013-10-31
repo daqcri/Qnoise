@@ -14,9 +14,9 @@ public class NoiseSpec {
     private double perc;
     private int duplicateSeed;
     private int duplicateTime;
+    private NoiseGenerator.Type type;
     private NoiseGranularity granularity;
     private NoiseModal modal;
-
 
     private NoiseSpec() {}
     public NoiseSpec(NoiseSpec spec) {
@@ -72,26 +72,46 @@ public class NoiseSpec {
 
     public static NoiseSpec valueOf(CommandLine line) {
         NoiseSpec spec = new NoiseSpec();
-        if (line.hasOption("p")) {
-            spec.perc = Double.parseDouble(line.getOptionValue("p"));
-        }
-
-        if (line.hasOption("m")) {
-            spec.modal = NoiseModal.getNoiseModal(line.getOptionValue("m"));
-        }
 
         if (line.hasOption("g")) {
             spec.granularity =
                 NoiseGranularity.getNoiseGranularity(line.getOptionValue("g"));
         }
 
-        if (line.hasOption("ns")) {
-            spec.duplicateSeed = Integer.parseInt(line.getOptionValue("ns"));
+        // Missing value
+        if (line.hasOption("m")) {
+            spec.type = NoiseGenerator.Type.Missing;
         }
 
-        if (line.hasOption("nd")) {
-            spec.duplicateTime = Integer.parseInt(line.getOptionValue("nd"));
+        // Duplicate
+        if (line.hasOption("d")) {
+            spec.type = NoiseGenerator.Type.Duplicate;
+            if (line.hasOption("ns")) {
+                spec.duplicateSeed = Integer.parseInt(line.getOptionValue("ns"));
+            }
+
+            if (line.hasOption("nd")) {
+                spec.duplicateTime = Integer.parseInt(line.getOptionValue("nd"));
+            }
         }
+
+        // Inconsistency
+        if (line.hasOption("i")) {
+            spec.type = NoiseGenerator.Type.Inconsistency;
+            if (line.hasOption("ns")) {
+                spec.duplicateSeed = Integer.parseInt(line.getOptionValue("ns"));
+            }
+
+            if (line.hasOption("nd")) {
+                spec.duplicateTime = Integer.parseInt(line.getOptionValue("nd"));
+            }
+        }
+
+        // Outlier
+        if (line.hasOption("o")) {
+            spec.type = NoiseGenerator.Type.Outlier;
+        }
+
         return spec;
     }
 
