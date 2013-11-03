@@ -10,7 +10,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import qa.qcri.qnoise.util.Tracer;
 
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,11 +37,14 @@ public class NoiseReport {
     }
 
     public NoiseReport(NoiseSpec spec) {
-        appendMetric(Metric.Model, spec.getModal().toString());
+        appendMetric(Metric.Type, spec.getType().toString());
+        appendMetric(Metric.Model, spec.getModel().toString());
         appendMetric(Metric.Percentage, spec.getPerc());
         appendMetric(Metric.Granularity, spec.getGranularity().toString());
-        appendMetric(Metric.PercentageOfSeed, spec.getDuplicateSeed());
-        appendMetric(Metric.PercentageOfDuplicate, spec.getDuplicateTime());
+        appendMetric(Metric.PercentageOfSeed, spec.getDuplicateSeedPerc());
+        appendMetric(Metric.PercentageOfDuplicate, spec.getDuplicateTimePerc());
+        appendMetric(Metric.InjectionTimestamp, new Timestamp(new Date().getTime()).toString());
+        appendMetric(Metric.InputFilePath, spec.getInputFile());
     }
 
     /**
@@ -59,7 +64,7 @@ public class NoiseReport {
     /**
      * Accumulate values in the trace statistic entry.
      */
-    public synchronized void addMetric(Metric metric, long value) {
+    public synchronized void addMetric(Metric metric, double value) {
         if (!stats.containsKey(metric)) {
             appendMetric(metric, value);
         } else {
@@ -69,7 +74,7 @@ public class NoiseReport {
                     "Entry " + metric + " is found more than once in the report."
                 );
             }
-            Long newValue = (Long)values.get(0) + value;
+            double newValue = (double)values.get(0) + value;
             values.set(0, newValue);
         }
     }
@@ -81,7 +86,7 @@ public class NoiseReport {
         Tracer tracer = Tracer.getTracer(Tracer.class);
         tracer.info("Noise Generation report:");
         tracer.info("----------------------------------------------------------------");
-        tracer.info(formatMetric(Metric.Type, "Type of Noise"));
+        tracer.info(formatMetric(Metric.Type, "Type"));
         tracer.info(formatMetric(Metric.Model, "Model"));
         tracer.info(formatMetric(Metric.Granularity, "Granularity"));
         tracer.info(formatMetric(Metric.Percentage, "Noise Percentage"));
@@ -90,7 +95,7 @@ public class NoiseReport {
         tracer.info(formatMetric(Metric.ChangedItem, "Changed item"));
         tracer.info(formatMetric(Metric.InjectionTime, "Injection time", "ms"));
         tracer.info(formatMetric(Metric.InputRow, "Original file record number"));
-        tracer.info(formatMetric(Metric.OutputRow, "Output file re cord number"));
+        tracer.info(formatMetric(Metric.OutputRow, "Output file record number"));
         tracer.info(formatMetric(Metric.InjectionTimestamp, "Injection Timestamp"));
         tracer.info(formatMetric(Metric.InputFilePath, "Input file path"));
         tracer.info(formatMetric(Metric.OutputFilePath, "Output file path"));

@@ -72,4 +72,39 @@ public class CSVImportTest {
             } catch (Exception ex) {}
         }
     }
+
+    /*
+    public boolean isNumber(String s) {
+
+        boolean isNumber = true;
+        String ss = s.trim();
+        if (ss.length() == 0)
+            return false;
+        char lastC = ss.charAt(ss.length() - 1);
+        if (lastC == '.')
+            ss = ss.substring(0, ss.length() - 1);
+        if (ss.length() == 0)
+            return false;
+        lastC = ss.charAt(ss.length() - 1);
+
+        if (lastC < '0' || lastC > '9')
+            return false;
+        try {
+            Double.parseDouble(ss);
+        } catch(Exception ex) {
+            isNumber = false;
+        }
+        return isNumber;
+    }
+
+    @Test
+    public void test2() {
+        String[] ins = { "0..", ".", "0", "...", ".1." };
+        boolean[] rs = { false, false, true, false, false };
+
+        for (int i = 0; i < ins.length; i ++) {
+            Assert.assertEquals(rs[i], isNumber(ins[i]));
+        }
+    }
+    */
 }

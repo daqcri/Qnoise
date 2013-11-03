@@ -1,0 +1,11 @@
+{
+    "source" : "test/src/input/dumptest.csv",
+    "noises" : [{
+        "type" : "d",
+        "granularity" : "row",
+        "ns" : 0.2,
+        "nt" : 0.3,
+        "distant" : 20,
+        "model" : "r"
+    }]
+}

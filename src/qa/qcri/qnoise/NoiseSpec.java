@@ -5,47 +5,78 @@
 
 package qa.qcri.qnoise;
 
-import org.apache.commons.cli.CommandLine;
+import com.google.common.base.Optional;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.File;
 
 /**
  * Noise generation specification.
  */
 public class NoiseSpec {
-    private double perc;
-    private int duplicateSeed;
-    private int duplicateTime;
-    private NoiseGenerator.Type type;
+    private Optional<Double> perc;
+    private Optional<Double> duplicateSeed;
+    private Optional<Double> duplicateTime;
+
+    private String inputFile;
+    private String outputFile;
+
+    private NoiseType type;
     private NoiseGranularity granularity;
-    private NoiseModal modal;
+    private NoiseModel model;
 
     private NoiseSpec() {}
     public NoiseSpec(NoiseSpec spec) {
         this.perc = spec.getPerc();
         this.granularity = spec.getGranularity();
-        this.modal = spec.getModal();
-        this.duplicateSeed = spec.getDuplicateSeed();
-        this.duplicateTime = spec.getDuplicateTime();
+        this.model = spec.getModel();
+        this.duplicateSeed = spec.getDuplicateSeedPerc();
+        this.duplicateTime = spec.getDuplicateTimePerc();
+        this.type = spec.type;
+        this.inputFile = spec.inputFile;
+        this.outputFile = spec.outputFile;
     }
 
     public static class NoiseSpecBuilder {
-        private double perc;
         private NoiseGranularity granularity;
-        private NoiseModal modal;
-        private int duplicateSeed;
-        private int duplicateTime;
+        private NoiseModel modal;
 
-        public NoiseSpecBuilder perc(double perc) {
-            this.perc = perc;
+        private Optional<Double> perc;
+        private Optional<Double> duplicateSeed;
+        private Optional<Double> duplicateTime;
+
+        private NoiseType type;
+        private String inputFile;
+        private String outputFile;
+
+        public NoiseSpecBuilder perc(Double perc) {
+            this.perc = Optional.of(perc);
             return this;
         }
 
-        public NoiseSpecBuilder duplicateSeed(int ds) {
-            this.duplicateSeed = ds;
+        public NoiseSpecBuilder inputFile(String inputFile) {
+            this.inputFile = inputFile;
             return this;
         }
 
-        public NoiseSpecBuilder duplicateTime(int dt) {
-            this.duplicateTime = dt;
+        public NoiseSpecBuilder outputFile(String outputFile) {
+            this.outputFile = outputFile;
+            return this;
+        }
+
+        public NoiseSpecBuilder duplicateSeed(Double ds) {
+            this.duplicateSeed = Optional.of(ds);
+            return this;
+        }
+
+        public NoiseSpecBuilder duplicateTime(Double dt) {
+            this.duplicateTime = Optional.of(dt);
+            return this;
+        }
+
+        public NoiseSpecBuilder type(NoiseType type) {
+            this.type = type;
             return this;
         }
 
@@ -54,7 +85,7 @@ public class NoiseSpec {
             return this;
         }
 
-        public NoiseSpecBuilder modal(NoiseModal modal) {
+        public NoiseSpecBuilder modal(NoiseModel modal) {
             this.modal = modal;
             return this;
         }
@@ -63,95 +94,84 @@ public class NoiseSpec {
             NoiseSpec result = new NoiseSpec();
             result.perc = perc;
             result.granularity = granularity;
-            result.modal = modal;
+            result.model = modal;
             result.duplicateTime = duplicateTime;
             result.duplicateSeed = duplicateSeed;
             return result;
         }
     }
 
-    public static NoiseSpec valueOf(CommandLine line) {
+    public static NoiseSpec valueOf(JSONObject jsonObject) {
+        String inputFile = (String)jsonObject.get("source");
+        File file = new File(inputFile);
+
+        JSONArray noises = (JSONArray)jsonObject.get("noises");
         NoiseSpec spec = new NoiseSpec();
 
-        if (line.hasOption("g")) {
-            spec.granularity =
-                NoiseGranularity.getNoiseGranularity(line.getOptionValue("g"));
-        }
+        for (Object obj : noises) {
+            JSONObject noise = (JSONObject)obj;
+            NoiseType type = NoiseType.getGeneratorType((String) noise.get("type"));
+            NoiseGranularity granularity =
+                NoiseGranularity.fromString((String) noise.get("granularity"));
+            NoiseModel model = NoiseModel.fromString((String) noise.get("model"));
 
-        // Missing value
-        if (line.hasOption("m")) {
-            spec.type = NoiseGenerator.Type.Missing;
-        }
+            Object tmp = noise.get("percentage");
+            Optional<Double> percentage =
+                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
 
-        // Duplicate
-        if (line.hasOption("d")) {
-            spec.type = NoiseGenerator.Type.Duplicate;
-            if (line.hasOption("ns")) {
-                spec.duplicateSeed = Integer.parseInt(line.getOptionValue("ns"));
-            }
+            tmp = noise.get("ns");
+            Optional<Double> ns =
+                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
 
-            if (line.hasOption("nd")) {
-                spec.duplicateTime = Integer.parseInt(line.getOptionValue("nd"));
-            }
-        }
+            tmp = noise.get("nt");
+            Optional<Double> nt =
+                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
 
-        // Inconsistency
-        if (line.hasOption("i")) {
-            spec.type = NoiseGenerator.Type.Inconsistency;
-            if (line.hasOption("ns")) {
-                spec.duplicateSeed = Integer.parseInt(line.getOptionValue("ns"));
-            }
-
-            if (line.hasOption("nd")) {
-                spec.duplicateTime = Integer.parseInt(line.getOptionValue("nd"));
-            }
-        }
-
-        // Outlier
-        if (line.hasOption("o")) {
-            spec.type = NoiseGenerator.Type.Outlier;
+            tmp = noise.get("distant");
+            Optional<Double> distant =
+                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
+            spec.inputFile = file.getAbsolutePath();
+            spec.type = type;
+            spec.granularity = granularity;
+            spec.model = model;
+            spec.perc = percentage;
+            spec.duplicateSeed = ns;
+            spec.duplicateTime = nt;
         }
 
         return spec;
     }
 
-    public double getPerc() {
+    public Optional<Double> getPerc() {
         return perc;
-    }
-
-    public void setPerc(double perc) {
-        this.perc = perc;
     }
 
     public NoiseGranularity getGranularity() {
         return granularity;
     }
 
-    public void setGranularity(NoiseGranularity granularity) {
-        this.granularity = granularity;
+    public NoiseModel getModel() {
+        return model;
     }
 
-    public NoiseModal getModal() {
-        return modal;
+    public NoiseType getType() {
+        return type;
     }
 
-    public void setModal(NoiseModal modal) {
-        this.modal = modal;
-    }
-
-    public int getDuplicateTime() {
+    public Optional<Double> getDuplicateTimePerc() {
         return duplicateTime;
     }
 
-    public void setDuplicateTime(int duplicateTime) {
-        this.duplicateTime = duplicateTime;
-    }
-
-    public int getDuplicateSeed() {
+    public Optional<Double> getDuplicateSeedPerc() {
         return duplicateSeed;
     }
 
-    public void setDuplicateSeed(int duplicateSeed) {
-        this.duplicateSeed = duplicateSeed;
+    public String getInputFile() {
+        return inputFile;
     }
+
+    public void setInputFile(String inputFile) {
+        this.inputFile = inputFile;
+    }
+
 }

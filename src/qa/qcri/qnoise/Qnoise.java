@@ -6,8 +6,9 @@ package qa.qcri.qnoise;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
-import com.google.common.collect.Lists;
 import org.apache.commons.cli.*;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.io.FileNotFoundException;
@@ -28,13 +29,11 @@ public class Qnoise {
     public static void main(String[] args) {
         options = createQnoiseOption();
         CommandLineParser parser = new GnuParser();
-        List<String[]> entries = Lists.newArrayList();
-        String[] header = null;
+        List<String[]> entries;
         CSVReader reader = null;
         CSVWriter writer = null;
         try {
             CommandLine line = parser.parse(options, args);
-
             if (line.hasOption("v")) {
                 Tracer.setVerbose(true);
             }
@@ -43,26 +42,34 @@ public class Qnoise {
             if (Files.notExists(Paths.get(fileName))) {
                 throw new FileNotFoundException("Input file " + fileName + " does not exist.");
             }
-            reader = new CSVReader(new FileReader(fileName));
-            header = reader.readNext();
-            entries = reader.readAll();
 
-            NoiseSpec spec = NoiseSpec.valueOf(line);
+            Object inputJSON = JSONValue.parse(new FileReader(fileName));
+            if (inputJSON == null) {
+                throw new IllegalArgumentException("Input file is not a valid JSON file.");
+            }
+
+            NoiseSpec spec =
+                NoiseSpec.valueOf((JSONObject)inputJSON);
             NoiseReport report = new NoiseReport(spec);
+            reader = new CSVReader(new FileReader(spec.getInputFile()));
+            reader.readNext(); // skip the header
+            entries = reader.readAll();
+            report.addMetric(NoiseReport.Metric.InputRow, entries.size());
 
-            NoiseGenerator.Type type =
-                NoiseGenerator.Type.getGeneratorType(line.getOptionValue("t"));
-            switch (type) {
+            switch (spec.getType()) {
                 case Missing:
                     new NoiseGenerator().missingInject(spec, entries, report);
+                    break;
                 case Duplicate:
                     new NoiseGenerator().duplicateInject(spec, entries, report);
+                    break;
             }
 
             fileName = line.getOptionValue("o");
             writer = new CSVWriter(new FileWriter(fileName));
             writer.writeAll(entries);
             writer.flush();
+            report.appendMetric(NoiseReport.Metric.OutputFilePath, fileName);
             report.addMetric(NoiseReport.Metric.OutputRow, entries.size());
 
             report.print();
@@ -91,7 +98,7 @@ public class Qnoise {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp(
             100,
-            "qnoise.sh -f <input csv file> [OPTIONS]",
+            "qnoise.sh -f <input JSON file> -o <output file>",
             "All the options:",
             options,
             null
@@ -106,19 +113,9 @@ public class Qnoise {
                 withArgName("file").
                 isRequired().
                 hasArg().
-                withDescription("Input with CSV file.").
+                withDescription("Input JSON file path.").
                 withType(String.class).
                 create("f")
-        );
-
-        options.addOption(
-            OptionBuilder.
-                withArgName("[row | cell]").
-                isRequired().
-                hasArg().
-                withDescription("Injection data granularity, default value is row.").
-                withType(String.class).
-                create("g")
         );
 
         options.addOption(
@@ -129,36 +126,9 @@ public class Qnoise {
 
         options.addOption(
             OptionBuilder.
-                withArgName("<Missing value parameter>").
+                withArgName("output file").
                 hasArg().
-                withDescription("Inject missing noises.").
-                withType(String.class).
-                create("m")
-        );
-
-        options.addOption(
-            OptionBuilder.
-                withArgName("<Duplicate value parameter>").
-                hasArg().
-                withDescription("Inject duplicate noises.").
-                withType(String.class).
-                create("d")
-        );
-
-        options.addOption(
-            OptionBuilder.
-                withArgName("<Inconsistency parameter>").
-                hasArg().
-                withDescription("Inject inconsistency noises.").
-                withType(String.class).
-                create("i")
-        );
-
-        options.addOption(
-            OptionBuilder.
-                withArgName("<Outlier parameter>").
-                hasArg().
-                withDescription("Inject outlier noises.").
+                withDescription("Output file path.").
                 withType(String.class).
                 create("o")
         );

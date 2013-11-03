@@ -10,7 +10,7 @@ public enum NoiseGranularity {
     ROW,
     CELL;
 
-    public static NoiseGranularity getNoiseGranularity(String granularity) {
+    public static NoiseGranularity fromString(String granularity) {
         if (granularity.equalsIgnoreCase("row")) {
             return NoiseGranularity.ROW;
         }

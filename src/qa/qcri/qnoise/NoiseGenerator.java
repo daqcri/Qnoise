@@ -5,6 +5,7 @@
 
 package qa.qcri.qnoise;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
@@ -16,24 +17,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class NoiseGenerator {
-    public static enum Type {
-        Missing,
-        Inconsistency,
-        Outlier,
-        Duplicate;
-
-        public static NoiseGenerator.Type getGeneratorType(String modal) {
-            if (modal.equalsIgnoreCase("m")) {
-                return Missing;
-            }
-
-            if (modal.equalsIgnoreCase("d")) {
-                return Duplicate;
-            }
-
-            throw new IllegalArgumentException("Unknown modal string " + modal);
-        }
-    }
 
     private Tracer tracer = Tracer.getTracer(NoiseGenerator.class);
 
@@ -76,9 +59,13 @@ public class NoiseGenerator {
     public <T> NoiseGenerator missingInject(NoiseSpec spec, List<T[]> data, NoiseReport report) {
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
-        switch (spec.getModal()) {
+        switch (spec.getModel()) {
         case RANDOM:
-            double perc = spec.getPerc();
+            Optional<Double> obj = spec.getPerc();
+            if (!obj.isPresent())
+                throw new IllegalArgumentException("No percentage information is present.");
+
+            double perc = obj.get();
             int len = (int)Math.floor(perc * data.size());
             report.addMetric(NoiseReport.Metric.ChangedItem, len);
             int count = 0;
@@ -94,6 +81,7 @@ public class NoiseGenerator {
 
                     rowData[cellIndex] = null;
                     tracer.verbose(String.format("[%d, %d] <- null", index, cellIndex));
+                    log.add(record);
                 } else {
                     Pair<Integer, Integer> record = new Pair<>(index, -1);
                     if (log.contains(record)) {
@@ -101,11 +89,11 @@ public class NoiseGenerator {
                     }
                     data.set(index, null);
                     tracer.verbose(String.format("[%d] <- null", index));
+                    log.add(record);
                 }
                 count ++;
             }
             break;
-        case NORMAL:
         default:
             throw new UnsupportedOperationException("Unsupported data distribution modal.");
         }
@@ -127,12 +115,21 @@ public class NoiseGenerator {
         Preconditions.checkArgument(spec.getGranularity() == NoiseGranularity.ROW);
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
-        switch (spec.getModal()) {
+        switch (spec.getModel()) {
             case RANDOM:
-                int nseed = spec.getDuplicateSeed();
-                int ntime = spec.getDuplicateTime();
+                Optional<Double> obj = spec.getDuplicateSeedPerc();
+                if (!obj.isPresent())
+                    throw new IllegalArgumentException("No seed information is present.");
+                double seedperc = obj.get();
 
-                report.addMetric(NoiseReport.Metric.ChangedItem, nseed * ntime);
+                obj = spec.getDuplicateTimePerc();
+                if (!obj.isPresent())
+                    throw new IllegalArgumentException("No duplicate time information is present.");
+                double timeperc = obj.get();
+
+                int nseed = (int)(Math.ceil(data.size() * seedperc));
+                int ntime = (int)(Math.ceil(data.size() * timeperc));
+
                 int count = 0;
                 while(count < nseed) {
                     int index = getRandomIndex(0, data.size());
@@ -142,8 +139,11 @@ public class NoiseGenerator {
                     }
                     count ++;
                 }
+                report.appendMetric(NoiseReport.Metric.ChangedItem, nseed * ntime);
+                report.appendMetric(NoiseReport.Metric.PercentageOfSeed, seedperc);
+                report.appendMetric(NoiseReport.Metric.PercentageOfDuplicate, timeperc);
+
                 break;
-            case NORMAL:
             default:
                 throw new UnsupportedOperationException("Unsupported data distribution modal.");
         }

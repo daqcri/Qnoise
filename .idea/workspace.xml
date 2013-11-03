@@ -2,23 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="916940ec-6a39-4e19-867d-b879966c2822" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/commons-math3-3.2-javadoc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/commons-math3-3.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_commons_commons_math3_3_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Duplicate1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing2.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseType.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qnoise.iml" afterPath="$PROJECT_DIR$/qnoise.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test.iml" afterPath="$PROJECT_DIR$/test/test.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="qnoise.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383114680669" ignored="false" />
+    <file path="/Dummy.txt" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383480892808" ignored="false" />
     <file path="/Main.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382254965643" ignored="false" />
-    <file path="/Qnoise.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383116130940" ignored="false" />
+    <file path="/Qnoise.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383485248289" ignored="false" />
     <file path="/build.xml" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382257959629" ignored="false" />
     <file path="/qnoise.sh" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382256265902" ignored="false" />
-    <file path="/CSVImportTest.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382273842280" ignored="false" />
+    <file path="/CSVImportTest.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383484935073" ignored="false" />
     <file path="/CSVTools.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382275016896" ignored="false" />
     <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/util/sql/DerbySQLDialect.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382264020337" ignored="false" />
     <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/util/CSVTools.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382264020337" ignored="false" />
@@ -32,14 +38,37 @@
     <file path="/DBConfig.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382274372142" ignored="false" />
     <file path="/DBTools.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382269371594" ignored="false" />
     <file path="/dumptest.csv" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382270680523" ignored="false" />
-    <file path="/fragment.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382870273896" ignored="false" />
-    <file path="/NoiseGenerator.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383116182190" ignored="false" />
-    <file path="/NoiseSpec.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383115917303" ignored="false" />
+    <file path="/fragment.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383486238927" ignored="false" />
+    <file path="/NoiseGenerator.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383486062111" ignored="false" />
+    <file path="/NoiseSpec.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383478075543" ignored="false" />
     <file path="/NoiseGranularity.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382875212812" ignored="false" />
     <file path="/NoiseModal.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382863381689" ignored="false" />
     <file path="/Pair.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382867325875" ignored="false" />
     <file path="/Tracer.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1382870991222" ignored="false" />
-    <file path="/NoiseReport.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383114841086" ignored="false" />
+    <file path="/NoiseReport.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383486265165" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/.idea/workspace.xml" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383461679268" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/ViolationExport.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/Operator.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/SourceImport.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/test/src/qa/qcri/nadeef/test/core/CountOperator.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/FixExport.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/NodeCacheManager.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/test/src/qa/qcri/nadeef/test/core/SQLTableTest.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/CleanExecutor.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/ViolationDetector.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/test/src/qa/qcri/nadeef/test/core/FlowTest.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/Iterator.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/Updater.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/datamodel/Rule.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/CleanExecutorContext.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/IncrementalUpdate.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/datamodel/SingleTupleRule.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/datamodel/PairTupleRule.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/UpdateExecutor.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="$PROJECT_DIR$/../trunk/core/src/qa/qcri/nadeef/core/pipeline/Node.java" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383230062447" ignored="false" />
+    <file path="/Duplicate1.json" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383485819026" ignored="false" />
+    <file path="/Missing1.json" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383480643631" ignored="false" />
+    <file path="/Missing2.json" changelist="916940ec-6a39-4e19-867d-b879966c2822" time="1383476340482" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +83,83 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" line="37" class="qa.qcri.qnoise.test.CSVImportTest" package="qa.qcri.qnoise.test">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" line="59" class="qa.qcri.qnoise.NoiseGenerator" package="qa.qcri.qnoise">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" line="71" class="qa.qcri.qnoise.test.CSVImportTest" package="qa.qcri.qnoise.test">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" line="114" class="qa.qcri.qnoise.NoiseGenerator" package="qa.qcri.qnoise">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" line="39" class="qa.qcri.qnoise.NoiseReport" package="qa.qcri.qnoise">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
@@ -91,38 +197,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" line="37" class="qa.qcri.qnoise.test.CSVImportTest" package="qa.qcri.qnoise.test">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" line="74" class="qa.qcri.qnoise.NoiseGenerator" package="qa.qcri.qnoise">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -131,7 +205,96 @@
     <favorites_list name="qnoise" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="Qnoise.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="75" column="0" selection-start="2656" selection-end="2656" vertical-scroll-proportion="1.025">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CSVImportTest.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="40" column="32" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="e#0#2875#0" expanded="true" />
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="NoiseSpec.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="111" column="0" selection-start="3195" selection-end="3195" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="e#3974#3982#0" expanded="true" />
+                    <element signature="e#4138#4146#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="NoiseGenerator.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="114" column="0" selection-start="4074" selection-end="4074" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="Missing1.json" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing1.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="6" column="11" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Duplicate1.json" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Duplicate1.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="10" column="4" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Duplicate1.json" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/examples/Duplicate1.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="7" column="24" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="NoiseReport.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="88" column="0" selection-start="2816" selection-end="2816" vertical-scroll-proportion="0.3852941">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -154,22 +317,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DBConfig.java" />
-        <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/dumptest.csv" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialectTools.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DerbySQLDialect.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/tools/CSVTools.java" />
-        <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" />
-        <option value="$PROJECT_DIR$/qnoise.sh" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseType.java" />
+        <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing2.json" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModel.java" />
+        <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing1.json" />
+        <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java" />
+        <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Duplicate1.json" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
+        <option value="$PROJECT_DIR$/examples/Duplicate1.json" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
       </list>
     </option>
   </component>
@@ -257,8 +420,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -357,21 +518,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qnoise" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qnoise" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="examples" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/qa/qcri/qnoise" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="Errors" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/vendors/derbynet.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../trunk/vendors/json-simple-1.1.1.jar!/" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -390,11 +567,11 @@
       <recent name="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Qnoise">
-    <configuration default="false" name="Qnoise" type="Application" factoryName="Application" temporary="true">
+  <component name="RunManager" selected="Application.Qnoise - Duplicate">
+    <configuration default="false" name="Qnoise - Missing" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="qa.qcri.qnoise.Qnoise" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="-f examples/bank1.csv -o test.csv -p 0.5 -m random -g row" />
+      <option name="PROGRAM_PARAMETERS" value="-f ./examples/Missing1.json -o test.csv" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -438,6 +615,84 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="CSVImportTest.minCutTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="test" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="qa.qcri.qnoise.test" />
+      <option name="MAIN_CLASS_NAME" value="qa.qcri.qnoise.test.CSVImportTest" />
+      <option name="METHOD_NAME" value="minCutTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="CSVImportTest.test" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="test" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="qa.qcri.qnoise.test" />
+      <option name="MAIN_CLASS_NAME" value="qa.qcri.qnoise.test.CSVImportTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="CSVImportTest.test2" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="test" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="qa.qcri.qnoise.test" />
+      <option name="MAIN_CLASS_NAME" value="qa.qcri.qnoise.test.CSVImportTest" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -529,14 +784,41 @@
       <patterns />
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.Qnoise" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.CSVImportTest" />
+    <configuration default="false" name="Qnoise - Duplicate" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="qa.qcri.qnoise.Qnoise" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="-f ./examples/Duplicate1.json -o test.csv" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="qnoise" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <ConfigurationWrapper RunnerId="Debug" />
+      <method />
+    </configuration>
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Application.Qnoise - Duplicate" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Qnoise - Missing" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.CSVImportTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.CSVImportTest.minCutTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.CSVImportTest.test" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.CSVImportTest.test2" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.Qnoise" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.CSVImportTest" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Application.Qnoise - Missing" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.CSVImportTest.test2" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.CSVImportTest.test" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.CSVImportTest.minCutTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CSVImportTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -574,7 +856,8 @@
     <frame x="1919" y="0" width="1922" height="1201" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="2036" y="141" width="1722" height="1001" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -583,17 +866,16 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14781217" sideWeight="0.6001899" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1920" y="100" width="1722" height="1001" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15154749" sideWeight="0.6001899" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.331434" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -670,104 +952,119 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialectBase.java">
+    <entry file="jar://$PROJECT_DIR$/vendors/junit-4.11.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="38" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.9044118" />
+        <state line="11" column="40" selection-start="388" selection-end="388" vertical-scroll-proportion="0.25817555" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/dumptest.csv">
+    <entry file="jar://$PROJECT_DIR$/vendors/commons-cli-1.2.jar!/org/apache/commons/cli/CommandLine.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="21" selection-start="2695" selection-end="2695" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="54" selection-start="1346" selection-end="1346" vertical-scroll-proportion="0.5367647">
-          <folding>
-            <element signature="e#0#1975#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/sql/DBConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="23" selection-start="827" selection-end="827" vertical-scroll-proportion="0.022058824" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="172" selection-end="172" vertical-scroll-proportion="0.13235295" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/vendors/opencsv-2.3.jar!/au/com/bytecode/opencsv/CSVWriter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="16" selection-start="1549" selection-end="1549" vertical-scroll-proportion="0.4363929" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="48" selection-end="48" vertical-scroll-proportion="0.09104704" />
+        <state line="26" column="28" selection-start="891" selection-end="891" vertical-scroll-proportion="0.34609494" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="1842" selection-end="1842" vertical-scroll-proportion="0.023323616">
+        <state line="73" column="0" selection-start="1842" selection-end="1842" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="22" selection-start="621" selection-end="621" vertical-scroll-proportion="0.20408164">
+        <state line="16" column="0" selection-start="336" selection-end="336" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing2.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="0" selection-start="2369" selection-end="2369" vertical-scroll-proportion="0.5626822">
+        <state line="6" column="21" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModal.java">
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="218" selection-end="553" vertical-scroll-proportion="0.116618074">
+        <state line="10" column="39" selection-start="245" selection-end="245" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="12" selection-start="180" selection-end="180" vertical-scroll-proportion="0.058309037">
+        <state line="12" column="45" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Duplicate1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="24" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/CSVImportTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="32" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2875#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Duplicate1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="4" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="11" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="0" selection-start="3195" selection-end="3195" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#3974#3982#0" expanded="true" />
+            <element signature="e#4138#4146#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="20" selection-start="1921" selection-end="1921" vertical-scroll-proportion="-0.34110788">
+        <state line="114" column="0" selection-start="4074" selection-end="4074" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="20" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.10204082">
+        <state line="75" column="0" selection-start="2656" selection-end="2656" vertical-scroll-proportion="1.025">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qnoise.sh">
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="56" selection-start="274" selection-end="274" vertical-scroll-proportion="0.08746356">
-          <folding />
+        <state line="88" column="0" selection-start="2816" selection-end="2816" vertical-scroll-proportion="0.3852941">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
