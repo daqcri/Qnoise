@@ -1,0 +1,9 @@
+{
+    "source" : "examples/dumptest.csv",
+    "noises" : [{
+        "type" : "m",
+        "granularity" : "cell",
+        "percentage" : 0.2,
+		"model" : "r"
+    }]
+}
