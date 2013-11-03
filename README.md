@@ -19,10 +19,10 @@ All the options:
 
 Currently Qnoise supports 2 (out of 4) types of noises. They are
 
-* Missing value noises (null).
-* Duplication noises.
-* Inconsistency noises based on certain contraints.
-* Outlier value noises.
+* **Missing value noises (null).**
+* **Duplication noises.**
+* **Inconsistency noises based on certain contraints.**
+* **Outlier value noises.**
 
 A simple example of generating duplication spec. is as following
 
