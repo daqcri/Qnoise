@@ -8,15 +8,34 @@ Qnoise is a Java based noise data generator, developed by the data analytic grou
 ### See it in Action
 
 ```
-usage: qnoise.sh -f <input csv file> -o <output csv file> [OPTIONS]
+usage: qnoise.sh -f <input JSON noise spec. file> -o <output file>
 All the options:
- -f <file>              Input with CSV file.
- -g <[row | cell]>      Injection data granularity, default value is row.
- -help                  Print this message.
- -m <[random | norm]>   Noise distribution modal, default value is random.
- -o <file>              Output to CSV file.
- -p <percentage>        Injection data percentage.
+ -f <file>          Input JSON file path.
+ -help              Print this message.
+ -o <output file>   Output file path.
+ -v                 Verbose output.
 
+```
+
+Currently Qnoise supports 2 (out of 4) types of noises. They are
+
+# Missing value noises (null).
+# Duplication noises.
+# Inconsistency noises based on certain contraints.
+# Outlier value noises.
+
+A simple example of generating duplication spec. is as following
+
+```
+{
+    "source" : "test/src/input/dumptest.csv",
+    "noises" : [{
+        "type" : "m",
+        "granularity" : "cell",
+        "percentage" : 0.2,
+        "model" : "r"
+    }]
+}
 ```
 
 ### License
