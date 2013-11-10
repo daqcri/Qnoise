@@ -19,6 +19,9 @@ public class NoiseSpec {
     private Optional<Double> duplicateSeed;
     private Optional<Double> duplicateTime;
 
+    private Optional<Double> approximateDistance;
+    private Optional<String[]> approximateCells;
+
     private String inputFile;
     private String outputFile;
 
@@ -36,6 +39,8 @@ public class NoiseSpec {
         this.type = spec.type;
         this.inputFile = spec.inputFile;
         this.outputFile = spec.outputFile;
+        this.approximateCells = spec.getApproximateCells();
+        this.approximateDistance = spec.getApproximateDistance();
     }
 
     public static class NoiseSpecBuilder {
@@ -130,6 +135,20 @@ public class NoiseSpec {
             tmp = noise.get("distant");
             Optional<Double> distant =
                 tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
+            spec.approximateDistance = distant;
+
+            tmp = noise.get("distant cells");
+            if (tmp == null) {
+                spec.approximateCells = Optional.<String[]>absent();
+            } else {
+                JSONArray jsonArray = (JSONArray)tmp;
+                String[] cells = new String[jsonArray.size()];
+                for (int i = 0; i < jsonArray.size(); i ++) {
+                    cells[i] = (String)jsonArray.get(i);
+                }
+                spec.approximateCells = Optional.of(cells);
+            }
+
             spec.inputFile = file.getAbsolutePath();
             spec.type = type;
             spec.granularity = granularity;
@@ -174,4 +193,11 @@ public class NoiseSpec {
         this.inputFile = inputFile;
     }
 
+    public Optional<Double> getApproximateDistance() {
+        return approximateDistance;
+    }
+
+    public Optional<String[]> getApproximateCells() {
+        return approximateCells;
+    }
 }
