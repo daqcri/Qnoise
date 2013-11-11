@@ -8,10 +8,12 @@ package qa.qcri.qnoise;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.BiMap;
 import com.google.common.collect.Sets;
 import qa.qcri.qnoise.util.Pair;
 import qa.qcri.qnoise.util.Tracer;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -41,17 +43,22 @@ public class NoiseGenerator {
     /**
      * Missing value injection based on the given specification.
      * @param spec {@link NoiseSpec}.
-     * @param data input data.
-     * @param <T> data element type.
+     * @param dataProfile input data.
      * @return injected data.
      */
-    public <T> NoiseGenerator missingInject(NoiseSpec spec, List<T[]> data, NoiseReport report) {
+    public NoiseGenerator missingInject(
+        NoiseSpec spec,
+        DataProfile dataProfile,
+        NoiseReport report
+    ) {
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
         IndexStrategy indexStrategy = IndexStrategy.createIndexStrategy(spec.getModel());
         Optional<Double> obj = spec.getPerc();
         if (!obj.isPresent())
             throw new IllegalArgumentException("No percentage information is present.");
+
+        List<String[]> data = dataProfile.getData();
 
         double perc = obj.get();
         int len = (int)Math.floor(perc * data.size());
@@ -60,7 +67,7 @@ public class NoiseGenerator {
         while(count < len) {
             int index = indexStrategy.getIndex(0, data.size());
             if (spec.getGranularity() == NoiseGranularity.CELL) {
-                T[] rowData = data.get(index);
+                Object[] rowData = data.get(index);
                 int cellIndex = indexStrategy.getIndex(0, rowData.length);
                 Pair<Integer, Integer> record = new Pair<>(index, cellIndex);
                 if (log.contains(record)) {
@@ -91,16 +98,19 @@ public class NoiseGenerator {
     /**
      * Duplicate injection based on the given specification.
      * @param spec {@link NoiseSpec}.
-     * @param data input data.
-     * @param <T> data element type.
+     * @param dataProfile input data.
      * @return injected data.
      */
-    public <T> NoiseGenerator duplicateInject(NoiseSpec spec, List<T[]> data, NoiseReport report) {
+    public NoiseGenerator duplicateInject(
+            NoiseSpec spec,
+            DataProfile dataProfile,
+            NoiseReport report
+    ) {
         Preconditions.checkArgument(spec.getGranularity() == NoiseGranularity.ROW);
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
         IndexStrategy indexStrategy = IndexStrategy.createIndexStrategy(spec.getModel());
-
+        List<String[]> data = dataProfile.getData();
         Optional<Double> obj = spec.getDuplicateSeedPerc();
         if (!obj.isPresent())
             throw new IllegalArgumentException("No seed information is present.");
@@ -118,43 +128,81 @@ public class NoiseGenerator {
         while(count < nseed) {
             int index = indexStrategy.getIndex(0, data.size());
             for (int i = 0; i < ntime; i ++) {
-                T[] rowData = data.get(index).clone();
+                String[] rowData = data.get(index);
                 Optional<Double> distance = spec.getApproximateDistance();
-                Optional<String[]> cells = spec.getApproximateCells();
-                playTheJazz(rowData, distance, cells);
+                Optional<String[]> columns = spec.getApproximateColumns();
+                playTheJazz(rowData, distance, columns, dataProfile);
                 data.add(rowData);
-
             }
             count ++;
         }
         report.appendMetric(NoiseReport.Metric.ChangedItem, nseed * ntime);
         report.appendMetric(NoiseReport.Metric.PercentageOfSeed, seedperc);
         report.appendMetric(NoiseReport.Metric.PercentageOfDuplicate, timeperc);
-
-        long elapsedTime = stopwatch.elapsed(TimeUnit.MILLISECONDS);
-        report.addMetric(NoiseReport.Metric.InjectionTime, elapsedTime);
+        report.addMetric(
+            NoiseReport.Metric.InjectionTime,
+            stopwatch.elapsed(TimeUnit.MILLISECONDS)
+        );
         return this;
     }
 
-    private <T> void playTheJazz(T[] data, Optional<Double> distance, Optional<String[]> cells) {
+    private void playTheJazz(
+        Object[] data,
+        Optional<Double> distance,
+        Optional<String[]> columns,
+        DataProfile profile
+    ) {
         if (!distance.isPresent())
             return;
 
-        double d = distance.get();
+        HashMap<String, DataType> types = profile.getTypes();
+        String[] selectedColumns;
+        if (columns.isPresent()) {
+            selectedColumns = columns.get();
+        } else {
+            selectedColumns = new String[types.size()];
+            types.keySet().toArray(selectedColumns);
+        }
 
-        for (int i = 0; i < data.length; i ++) {
-            if (data[i] instanceof String) {
-                StringBuilder sb = new StringBuilder((String)data[i]);
-                int len = (int)Math.floor(d * sb.length() * 0.01);
-                for (int j = 0; j < len; j ++) {
-                    char c = sb.charAt(j);
-                    char nc = getRandomChar();
-                    while (nc == c) {
-                        nc = getRandomChar();
+        BiMap<String, Integer> indexes = profile.getIndexes();
+
+        double d = distance.get();
+        for (int i = 0; i < selectedColumns.length; i ++) {
+            String columnName = selectedColumns[i];
+            int index = indexes.get(columnName);
+            DataType type = types.get(columnName);
+            switch (type) {
+                case TEXT:
+                    StringBuilder sb = new StringBuilder((String)data[index]);
+                    int len = (int)Math.floor(d * sb.length() * 0.01);
+                    for (int j = 0; j < len; j ++) {
+                        char c = sb.charAt(j);
+                        char nc = getRandomChar();
+                        while (nc == c) {
+                            nc = getRandomChar();
+                        }
+                        sb.setCharAt(j, nc);
                     }
-                    sb.setCharAt(j, nc);
-                }
-                data[i] = (T) sb.toString();
+                    data[index] = sb.toString();
+                    break;
+                case NUMERICAL:
+                    double std = profile.getStandardDeviationOn(columnName);
+                    double nvalue = d * 0.01 * std * getRandomSign();
+                    data[index] = nvalue;
+                    break;
+                case ENUM:
+                    List<String[]> table = profile.getData();
+                    Object cur = data[index];
+                    for (int j = 0; j < profile.getLength(); j ++) {
+                        Object t = table.get(j)[index];
+                        if (!t.equals(cur)) {
+                            data[index] = t;
+                            break;
+                        }
+                    }
+                    break;
+                default:
+                    throw new UnsupportedOperationException("Unknown type " + type);
             }
         }
     }
@@ -166,4 +214,13 @@ public class NoiseGenerator {
             return (char)(r + 'a');
         return (char)(r - 26 + 'A');
     }
+
+    private int getRandomSign() {
+        IndexStrategy indexStrategy = IndexStrategy.createIndexStrategy(NoiseModel.RANDOM);
+        int r = indexStrategy.getIndex(0, 2);
+        if (r < 1)
+            return -1;
+        return 1;
+    }
+
 }

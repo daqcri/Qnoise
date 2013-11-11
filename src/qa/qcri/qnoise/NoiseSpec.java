@@ -39,7 +39,7 @@ public class NoiseSpec {
         this.type = spec.type;
         this.inputFile = spec.inputFile;
         this.outputFile = spec.outputFile;
-        this.approximateCells = spec.getApproximateCells();
+        this.approximateCells = spec.getApproximateColumns();
         this.approximateDistance = spec.getApproximateDistance();
     }
 
@@ -197,7 +197,7 @@ public class NoiseSpec {
         return approximateDistance;
     }
 
-    public Optional<String[]> getApproximateCells() {
+    public Optional<String[]> getApproximateColumns() {
         return approximateCells;
     }
 }

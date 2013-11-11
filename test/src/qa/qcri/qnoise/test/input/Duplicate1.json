@@ -1,5 +1,7 @@
 {
-    "source" : "test/src/input/dumptest.csv",
+    "source" : {
+        "path" : "test/src/input/dumptest.csv"
+    },
     "noises" : [{
         "type" : "d",
         "granularity" : "row",

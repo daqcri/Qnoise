@@ -7,6 +7,7 @@ package qa.qcri.qnoise;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import org.apache.commons.cli.*;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import qa.qcri.qnoise.util.Tracer;
@@ -17,7 +18,6 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * Qnoise launcher.
@@ -29,7 +29,7 @@ public class Qnoise {
     public static void main(String[] args) {
         options = createQnoiseOption();
         CommandLineParser parser = new GnuParser();
-        List<String[]> entries;
+
         CSVReader reader = null;
         CSVWriter writer = null;
         try {
@@ -43,34 +43,38 @@ public class Qnoise {
                 throw new FileNotFoundException("Input file " + fileName + " does not exist.");
             }
 
-            Object inputJSON = JSONValue.parse(new FileReader(fileName));
-            if (inputJSON == null) {
+            JSONObject input = (JSONObject)JSONValue.parse(new FileReader(fileName));
+            if (input == null) {
                 throw new IllegalArgumentException("Input file is not a valid JSON file.");
             }
 
-            NoiseSpec spec =
-                NoiseSpec.valueOf((JSONObject)inputJSON);
+            JSONObject source = (JSONObject)input.get("source");
+            NoiseSpec spec = NoiseSpec.valueOf(input);
+
             NoiseReport report = new NoiseReport(spec);
             reader = new CSVReader(new FileReader(spec.getInputFile()));
-            reader.readNext(); // skip the header
-            entries = reader.readAll();
-            report.addMetric(NoiseReport.Metric.InputRow, entries.size());
+            DataProfile profile =
+                DataProfile.readData(
+                    reader,
+                    source.containsKey("type") ? (JSONArray)source.get("type") : null
+                );
+
+            report.addMetric(NoiseReport.Metric.InputRow, profile.getLength());
 
             switch (spec.getType()) {
                 case Missing:
-                    new NoiseGenerator().missingInject(spec, entries, report);
+                    new NoiseGenerator().missingInject(spec, profile, report);
                     break;
                 case Duplicate:
-                    new NoiseGenerator().duplicateInject(spec, entries, report);
+                    new NoiseGenerator().duplicateInject(spec, profile, report);
                     break;
             }
 
             fileName = line.getOptionValue("o");
             writer = new CSVWriter(new FileWriter(fileName));
-            writer.writeAll(entries);
-            writer.flush();
+            profile.writeData(writer);
             report.appendMetric(NoiseReport.Metric.OutputFilePath, fileName);
-            report.addMetric(NoiseReport.Metric.OutputRow, entries.size());
+            report.addMetric(NoiseReport.Metric.OutputRow, profile.getLength());
 
             report.print();
 
