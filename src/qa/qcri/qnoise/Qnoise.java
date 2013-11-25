@@ -68,6 +68,9 @@ public class Qnoise {
                 case Duplicate:
                     new NoiseGenerator().duplicateInject(spec, profile, report);
                     break;
+                case Inconsistency:
+                    new NoiseGenerator().inconsistencyInject(spec, profile, report);
+                    break;
             }
 
             fileName = line.getOptionValue("o");
@@ -85,6 +88,7 @@ public class Qnoise {
             printHelp();
         } catch (Exception ex) {
             tracer.println("Exception : " + ex.getMessage());
+            ex.printStackTrace();
         } finally {
             try {
                 if (reader != null) {

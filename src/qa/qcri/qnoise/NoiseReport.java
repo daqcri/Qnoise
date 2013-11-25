@@ -64,7 +64,7 @@ public class NoiseReport {
     /**
      * Accumulate values in the trace statistic entry.
      */
-    public synchronized void addMetric(Metric metric, double value) {
+    public synchronized <T> void addMetric(Metric metric, T value) {
         if (!stats.containsKey(metric)) {
             appendMetric(metric, value);
         } else {
@@ -74,8 +74,15 @@ public class NoiseReport {
                     "Entry " + metric + " is found more than once in the report."
                 );
             }
-            double newValue = (double)values.get(0) + value;
-            values.set(0, newValue);
+
+            if (value instanceof Integer)
+                values.set(0, (Integer)values.get(0) + (Integer)value);
+            else if (value instanceof Double)
+                values.set(0, (Double)values.get(0) + (Double)value);
+            else if (value instanceof Long)
+                values.set(0, (Long)values.get(0) + (Long)value);
+            else
+                throw new IllegalArgumentException("Unknown addition type.");
         }
     }
 
@@ -117,7 +124,7 @@ public class NoiseReport {
             for (Object metric : metrics) {
                 if (metric instanceof String) {
                     outputBuilder.append(String.format("%s", metric));
-                } else if (metric instanceof Long) {
+                } else if (metric instanceof Long || metric instanceof Integer) {
                     outputBuilder.append(String.format("%-9d", metric));
                 } else if (metric instanceof Double) {
                     outputBuilder.append(String.format("%-9.2f", metric));

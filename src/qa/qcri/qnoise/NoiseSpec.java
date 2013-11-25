@@ -8,6 +8,8 @@ package qa.qcri.qnoise;
 import com.google.common.base.Optional;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import qa.qcri.qnoise.constraint.Constraint;
+import qa.qcri.qnoise.constraint.ConstraintFactory;
 
 import java.io.File;
 
@@ -21,6 +23,7 @@ public class NoiseSpec {
 
     private Optional<Double> approximateDistance;
     private Optional<String[]> approximateCells;
+    private Optional<Constraint> constraint;
 
     private String inputFile;
     private String outputFile;
@@ -41,73 +44,12 @@ public class NoiseSpec {
         this.outputFile = spec.outputFile;
         this.approximateCells = spec.getApproximateColumns();
         this.approximateDistance = spec.getApproximateDistance();
-    }
-
-    public static class NoiseSpecBuilder {
-        private NoiseGranularity granularity;
-        private NoiseModel modal;
-
-        private Optional<Double> perc;
-        private Optional<Double> duplicateSeed;
-        private Optional<Double> duplicateTime;
-
-        private NoiseType type;
-        private String inputFile;
-        private String outputFile;
-
-        public NoiseSpecBuilder perc(Double perc) {
-            this.perc = Optional.of(perc);
-            return this;
-        }
-
-        public NoiseSpecBuilder inputFile(String inputFile) {
-            this.inputFile = inputFile;
-            return this;
-        }
-
-        public NoiseSpecBuilder outputFile(String outputFile) {
-            this.outputFile = outputFile;
-            return this;
-        }
-
-        public NoiseSpecBuilder duplicateSeed(Double ds) {
-            this.duplicateSeed = Optional.of(ds);
-            return this;
-        }
-
-        public NoiseSpecBuilder duplicateTime(Double dt) {
-            this.duplicateTime = Optional.of(dt);
-            return this;
-        }
-
-        public NoiseSpecBuilder type(NoiseType type) {
-            this.type = type;
-            return this;
-        }
-
-        public NoiseSpecBuilder granularity(NoiseGranularity granularity) {
-            this.granularity = granularity;
-            return this;
-        }
-
-        public NoiseSpecBuilder modal(NoiseModel modal) {
-            this.modal = modal;
-            return this;
-        }
-
-        public NoiseSpec build() {
-            NoiseSpec result = new NoiseSpec();
-            result.perc = perc;
-            result.granularity = granularity;
-            result.model = modal;
-            result.duplicateTime = duplicateTime;
-            result.duplicateSeed = duplicateSeed;
-            return result;
-        }
+        this.constraint = spec.constraint;
     }
 
     public static NoiseSpec valueOf(JSONObject jsonObject) {
-        String inputFile = (String)jsonObject.get("source");
+        JSONObject sourceObj = (JSONObject)jsonObject.get("source");
+        String inputFile = (String)sourceObj.get("path");
         File file = new File(inputFile);
 
         JSONArray noises = (JSONArray)jsonObject.get("noises");
@@ -132,10 +74,18 @@ public class NoiseSpec {
             Optional<Double> nt =
                 tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
 
-            tmp = noise.get("distant");
-            Optional<Double> distant =
-                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
-            spec.approximateDistance = distant;
+            tmp = noise.get("distance");
+            spec.approximateDistance =
+                    tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
+
+            tmp = noise.get("constraint");
+            if (tmp == null) {
+                spec.constraint = Optional.absent();
+            } else {
+                Constraint constraint =
+                    ConstraintFactory.createConstraintFromString((String) tmp);
+                spec.constraint = Optional.of(constraint);
+            }
 
             tmp = noise.get("distant cells");
             if (tmp == null) {
@@ -177,6 +127,10 @@ public class NoiseSpec {
         return type;
     }
 
+    public Optional<Constraint> getConstraint() {
+        return constraint;
+    }
+
     public Optional<Double> getDuplicateTimePerc() {
         return duplicateTime;
     }
@@ -187,10 +141,6 @@ public class NoiseSpec {
 
     public String getInputFile() {
         return inputFile;
-    }
-
-    public void setInputFile(String inputFile) {
-        this.inputFile = inputFile;
     }
 
     public Optional<Double> getApproximateDistance() {

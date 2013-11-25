@@ -11,15 +11,19 @@ public enum NoiseType {
     Outlier,
     Duplicate;
 
-    public static NoiseType getGeneratorType(String modal) {
-        if (modal.equalsIgnoreCase("m")) {
+    public static NoiseType getGeneratorType(String model) {
+        if (model.equalsIgnoreCase("m")) {
             return Missing;
         }
 
-        if (modal.equalsIgnoreCase("d")) {
+        if (model.equalsIgnoreCase("d")) {
             return Duplicate;
         }
 
-        throw new IllegalArgumentException("Unknown modal string " + modal);
+        if (model.equalsIgnoreCase("i")) {
+            return Inconsistency;
+        }
+
+        throw new IllegalArgumentException("Unknown model string " + model);
     }
 }

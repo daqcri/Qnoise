@@ -1,5 +1,7 @@
 {
-    "source" : "test/src/input/dumptest.csv",
+    "source" : {
+        "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
+    },
     "noises" : [{
         "type" : "m",
         "granularity" : "cell",

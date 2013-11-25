@@ -1,0 +1,14 @@
+{
+    "source" : {
+        "path" : "test/src/qa/qcri/qnoise/test/input/personal.csv",
+        "type" : ["TEXT", "NUMERICAL", "ENUM"]
+    },
+    "noises" : [{
+        "type" : "i",
+        "granularity" : "row",
+        "constraint" : "age>40",
+        "percentage" : 20.0,
+        "model" : "r",
+        "distance from active domain" : 0.0
+    }]
+}
