@@ -18,15 +18,7 @@ public class Pair<TLeft, TRight> {
         return left;
     }
 
-    public void setLeft(TLeft left) {
-        this.left = left;
-    }
-
     public TRight getRight() {
         return right;
-    }
-
-    public void setRight(TRight right) {
-        this.right = right;
     }
 }

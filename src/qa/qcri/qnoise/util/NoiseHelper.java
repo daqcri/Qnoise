@@ -6,11 +6,12 @@
 package qa.qcri.qnoise.util;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.DataType;
-import qa.qcri.qnoise.IndexGenerationBase;
-import qa.qcri.qnoise.NoiseModel;
+import qa.qcri.qnoise.model.ModelBase;
+import qa.qcri.qnoise.model.ModelFactory;
 
 import java.util.HashMap;
 
@@ -45,12 +46,21 @@ public class NoiseHelper {
         playTheJazz(d, selectedColumns, profile, rowIndex);
     }
 
+    /**
+     * Change cell value based on distance.
+     * @param distance the distance from the new value.
+     * @param selectedColumns changed column names.
+     * @param profile data profile.
+     * @param rowIndex tuple index.
+     */
     public static void playTheJazz(
         double distance,
-        String[] columns,
+        String[] selectedColumns,
         DataProfile profile,
         int rowIndex
     ) {
+        Preconditions.checkNotNull(selectedColumns);
+        Preconditions.checkArgument(distance >= 0.0);
         if (distance == 0.0) {
             return;
         }
@@ -59,8 +69,8 @@ public class NoiseHelper {
         BiMap<String, Integer> indexes = profile.getIndexes();
         HashMap<String, DataType> types = profile.getTypes();
 
-        for (int i = 0; i < columns.length; i ++) {
-            String columnName = columns[i];
+        for (int i = 0; i < selectedColumns.length; i ++) {
+            String columnName = selectedColumns[i];
             int columnIndex = indexes.get(columnName);
             DataType type = types.get(columnName);
             String currentValue = tuple[columnIndex];
@@ -116,8 +126,8 @@ public class NoiseHelper {
     }
 
     private static char getRandomChar() {
-        IndexGenerationBase indexStrategy =
-                IndexGenerationBase.createIndexStrategy(NoiseModel.RANDOM);
+        ModelBase indexStrategy =
+                ModelFactory.createRandomModel();
         int r = indexStrategy.nextIndex(0, 52);
         if (r < 26)
             return (char)(r + 'a');
@@ -125,8 +135,8 @@ public class NoiseHelper {
     }
 
     private static int getRandomSign() {
-        IndexGenerationBase indexStrategy =
-                IndexGenerationBase.createIndexStrategy(NoiseModel.RANDOM);
+        ModelBase indexStrategy =
+                ModelFactory.createRandomModel();
         int r = indexStrategy.nextIndex(0, 2);
         if (r < 1)
             return -1;

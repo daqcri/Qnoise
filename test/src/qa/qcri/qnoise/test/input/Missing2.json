@@ -1,11 +1,13 @@
 {
     "source" : {
-        "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
+        "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv",
+        "type" : ["NUMERICAL", "TEXT", "TEXT", "TEXT", "NUMERICAL"]
     },
-    "noises" : [{
-        "type" : "m",
+    "noise" : {
+        "NoiseType" : "m",
         "granularity" : "cell",
-        "percentage" : 0.2,
-        "filter" : "B"
-    }]
+        "percentage" : 0.5,
+        "model" : "h",
+        "column" : "B"
+    }
 }

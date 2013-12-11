@@ -3,12 +3,12 @@
         "path" : "test/src/qa/qcri/qnoise/test/input/personal.csv",
         "type" : ["TEXT", "NUMERICAL", "ENUM"]
     },
-    "noises" : [{
-        "type" : "i",
+    "noise" : {
+        "noisetype" : "i",
         "granularity" : "row",
         "constraint" : "age<=20",
-        "percentage" : 20.0,
+        "percentage" : 0.2,
         "model" : "r",
         "distance" : 1.0
-    }]
+    }
 }

@@ -8,6 +8,7 @@
         "NumberOfSeed" : 0.2,
         "percentage" : 0.3,
         "distance" : 70.0,
+        "column" : ["ID"],
         "model" : "r"
     }
 }

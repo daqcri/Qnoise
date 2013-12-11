@@ -11,7 +11,7 @@ public enum NoiseType {
     Outlier,
     Duplicate;
 
-    public static NoiseType getGeneratorType(String model) {
+    public static NoiseType fromString(String model) {
         if (model.equalsIgnoreCase("m")) {
             return Missing;
         }

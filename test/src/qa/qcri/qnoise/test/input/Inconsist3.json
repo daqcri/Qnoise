@@ -3,11 +3,11 @@
         "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
     },
     "noise" : {
-        "NoiseType" : "d",
+        "noisetype" : "i",
         "granularity" : "row",
-        "NumberOfSeed" : 0.2,
-        "percentage" : 0.3,
-        "distance" : 70.0,
-        "model" : "r"
+        "constraint" : "C | B",
+        "percentage" : 0.20,
+        "model" : "r",
+        "distance" : 80.0
     }
 }

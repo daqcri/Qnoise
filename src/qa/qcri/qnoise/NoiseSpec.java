@@ -5,149 +5,86 @@
 
 package qa.qcri.qnoise;
 
-import com.google.common.base.Optional;
-import org.json.simple.JSONArray;
+import com.google.common.collect.Maps;
 import org.json.simple.JSONObject;
-import qa.qcri.qnoise.constraint.Constraint;
-import qa.qcri.qnoise.constraint.ConstraintFactory;
 
-import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Noise generation specification.
  */
 public class NoiseSpec {
-    private Optional<Double> perc;
-    private Optional<Double> duplicateSeed;
-    private Optional<Double> duplicateTime;
+    private HashMap<SpecEntry, Object> entries;
+    public enum SpecEntry {
+        InputFile,
+        Schema,
+        NoiseType,
+        Granularity,
+        Percentage,
+        Model,
+        Column,
+        NumberOfSeed,
+        Distance,
+        Constraint;
 
-    private Optional<Double> approximateDistance;
-    private Optional<String[]> approximateCells;
-    private Optional<Constraint> constraint;
+        public static SpecEntry fromString(String v) {
+            SpecEntry[] dict = SpecEntry.values();
+            SpecEntry match = null;
+            for (SpecEntry entry : dict) {
+                if (entry.name().equalsIgnoreCase(v)) {
+                    match = entry;
+                    break;
+                }
+            }
 
-    private String inputFile;
-    private String outputFile;
-
-    private NoiseType type;
-    private NoiseGranularity granularity;
-    private NoiseModel model;
-
-    private NoiseSpec() {}
-    public NoiseSpec(NoiseSpec spec) {
-        this.perc = spec.getPerc();
-        this.granularity = spec.getGranularity();
-        this.model = spec.getModel();
-        this.duplicateSeed = spec.getDuplicateSeedPerc();
-        this.duplicateTime = spec.getDuplicateTimePerc();
-        this.type = spec.type;
-        this.inputFile = spec.inputFile;
-        this.outputFile = spec.outputFile;
-        this.approximateCells = spec.getApproximateColumns();
-        this.approximateDistance = spec.getApproximateDistance();
-        this.constraint = spec.constraint;
+            if (match == null) {
+                throw new IllegalArgumentException("Unknown spec. entry " + v);
+            }
+            return match;
+        }
     }
 
-    public static NoiseSpec valueOf(JSONObject jsonObject) {
-        JSONObject sourceObj = (JSONObject)jsonObject.get("source");
-        String inputFile = (String)sourceObj.get("path");
-        File file = new File(inputFile);
+    private NoiseSpec() {
+        entries = Maps.newHashMap();
+    }
 
-        JSONArray noises = (JSONArray)jsonObject.get("noises");
+    @SuppressWarnings("unchecked")
+    public NoiseSpec(NoiseSpec spec) {
+        this.entries = (HashMap<SpecEntry, Object>)spec.entries.clone();
+    }
+
+    public boolean hasEntry(SpecEntry entry) {
+        return entries.containsKey(entry);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getValue(SpecEntry entry) {
+        return (T)entries.get(entry);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static NoiseSpec valueOf(JSONObject jsonObject) {
         NoiseSpec spec = new NoiseSpec();
 
-        for (Object obj : noises) {
-            JSONObject noise = (JSONObject)obj;
-            NoiseType type = NoiseType.getGeneratorType((String) noise.get("type"));
-            NoiseGranularity granularity =
-                NoiseGranularity.fromString((String) noise.get("granularity"));
-            NoiseModel model = NoiseModel.fromString((String) noise.get("model"));
+        JSONObject sourceObj = (JSONObject)jsonObject.get("source");
+        String inputFile = (String)sourceObj.get("path");
+        spec.entries.put(SpecEntry.InputFile, inputFile);
+        if (sourceObj.containsKey("type")) {
+            spec.entries.put(SpecEntry.Schema, sourceObj.get("type"));
+        } else {
+            // TODO: remove the trick
+            spec.entries.put(SpecEntry.Schema, null);
+        }
 
-            Object tmp = noise.get("percentage");
-            Optional<Double> percentage =
-                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
-
-            tmp = noise.get("ns");
-            Optional<Double> ns =
-                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
-
-            tmp = noise.get("nt");
-            Optional<Double> nt =
-                tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
-
-            tmp = noise.get("distance");
-            spec.approximateDistance =
-                    tmp == null ? Optional.<Double>absent() : Optional.of((double)tmp);
-
-            tmp = noise.get("constraint");
-            if (tmp == null) {
-                spec.constraint = Optional.absent();
-            } else {
-                Constraint constraint =
-                    ConstraintFactory.createConstraintFromString((String) tmp);
-                spec.constraint = Optional.of(constraint);
-            }
-
-            tmp = noise.get("distant cells");
-            if (tmp == null) {
-                spec.approximateCells = Optional.<String[]>absent();
-            } else {
-                JSONArray jsonArray = (JSONArray)tmp;
-                String[] cells = new String[jsonArray.size()];
-                for (int i = 0; i < jsonArray.size(); i ++) {
-                    cells[i] = (String)jsonArray.get(i);
-                }
-                spec.approximateCells = Optional.of(cells);
-            }
-
-            spec.inputFile = file.getAbsolutePath();
-            spec.type = type;
-            spec.granularity = granularity;
-            spec.model = model;
-            spec.perc = percentage;
-            spec.duplicateSeed = ns;
-            spec.duplicateTime = nt;
+        JSONObject noise = (JSONObject)jsonObject.get("noise");
+        Set<Map.Entry<String, String>> entries = noise.entrySet();
+        for (Map.Entry<String, String> entryObj : entries) {
+            SpecEntry entry = SpecEntry.fromString(entryObj.getKey());
+            spec.entries.put(entry, entryObj.getValue());
         }
 
         return spec;
-    }
-
-    public Optional<Double> getPerc() {
-        return perc;
-    }
-
-    public NoiseGranularity getGranularity() {
-        return granularity;
-    }
-
-    public NoiseModel getModel() {
-        return model;
-    }
-
-    public NoiseType getType() {
-        return type;
-    }
-
-    public Optional<Constraint> getConstraint() {
-        return constraint;
-    }
-
-    public Optional<Double> getDuplicateTimePerc() {
-        return duplicateTime;
-    }
-
-    public Optional<Double> getDuplicateSeedPerc() {
-        return duplicateSeed;
-    }
-
-    public String getInputFile() {
-        return inputFile;
-    }
-
-    public Optional<Double> getApproximateDistance() {
-        return approximateDistance;
-    }
-
-    public Optional<String[]> getApproximateColumns() {
-        return approximateCells;
     }
 }

@@ -7,9 +7,11 @@ package qa.qcri.qnoise;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import org.apache.commons.cli.*;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import qa.qcri.qnoise.inject.DuplicateInjector;
+import qa.qcri.qnoise.inject.InconsistencyInjector;
+import qa.qcri.qnoise.inject.MissingInjector;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.io.FileNotFoundException;
@@ -18,6 +20,7 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Qnoise launcher.
@@ -52,24 +55,31 @@ public class Qnoise {
             NoiseSpec spec = NoiseSpec.valueOf(input);
 
             NoiseReport report = new NoiseReport(spec);
-            reader = new CSVReader(new FileReader(spec.getInputFile()));
+            reader =
+                new CSVReader(
+                    new FileReader(spec.<String>getValue(NoiseSpec.SpecEntry.InputFile))
+                );
+
             DataProfile profile =
                 DataProfile.readData(
                     reader,
-                    source.containsKey("type") ? (JSONArray)source.get("type") : null
+                    (List<String>)spec.getValue(NoiseSpec.SpecEntry.Schema)
                 );
 
             report.addMetric(NoiseReport.Metric.InputRow, profile.getLength());
-
-            switch (spec.getType()) {
+            NoiseType noiseType =
+                NoiseType.fromString(
+                    (String) spec.getValue(NoiseSpec.SpecEntry.NoiseType)
+                );
+            switch (noiseType) {
                 case Missing:
-                    new NoiseGenerator().missingInject(spec, profile, report);
+                    new MissingInjector().inject(spec, profile, report);
                     break;
                 case Duplicate:
-                    new NoiseGenerator().duplicateInject(spec, profile, report);
+                    new DuplicateInjector().inject(spec, profile, report);
                     break;
                 case Inconsistency:
-                    new NoiseGenerator().inconsistencyInject(spec, profile, report);
+                    new InconsistencyInjector().inject(spec, profile, report);
                     break;
             }
 

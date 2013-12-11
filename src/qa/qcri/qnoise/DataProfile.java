@@ -11,15 +11,14 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
-import org.json.simple.JSONArray;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-// TODO: not a thread-safe class.
 public class DataProfile {
     private List<String[]> data;
+    private String[] columnNames;
     private HashMap<String, DataType> types;
     private BiMap<String, Integer> indexes;
     private HashMap<String, Double> mean;
@@ -27,14 +26,21 @@ public class DataProfile {
     private HashMap<String, Double> min;
     private HashMap<String, Double> max;
 
-    public DataProfile(
+    DataProfile(
         List<String[]> data,
-        HashMap<String, DataType> schema,
-        BiMap<String, Integer> indexes
+        String[] columnNames,
+        DataType[] types
     ) {
         this.data = data;
-        this.types = schema;
-        this.indexes = indexes;
+        this.columnNames = new String[columnNames.length];
+        this.types = Maps.newHashMap();
+        this.indexes = HashBiMap.create();
+        for (int i = 0; i < columnNames.length; i ++) {
+            this.columnNames[i] = columnNames[i].trim();
+            this.types.put(this.columnNames[i], types[i]);
+            this.indexes.put(this.columnNames[i], i);
+        }
+
         this.mean = Maps.newHashMap();
         this.var = Maps.newHashMap();
         this.max = Maps.newHashMap();
@@ -48,6 +54,10 @@ public class DataProfile {
 
     public List<String[]> getData() {
         return data;
+    }
+
+    public String[] getColumnNames() {
+        return columnNames;
     }
 
     public HashMap<String, DataType> getTypes() {
@@ -99,6 +109,13 @@ public class DataProfile {
     public String getCell(int rowIndex, int columnIndex) {
         String[] tuple = getTuple(rowIndex);
         return tuple[columnIndex];
+    }
+
+    public double getDouble(int rowIndex, int columnIndex) {
+        DataType type = getType(columnIndex);
+        Preconditions.checkArgument(type == DataType.NUMERICAL);
+        String[] tuple = getTuple(rowIndex);
+        return Double.parseDouble(tuple[columnIndex]);
     }
 
     /**
@@ -198,26 +215,30 @@ public class DataProfile {
         return Math.sqrt(var);
     }
 
-    public static DataProfile readData(CSVReader reader, JSONArray schemaObj) throws IOException {
-        String[] header = reader.readNext(); // skip the header
+    /**
+     * Creates a DataProfile from a CSV file.
+     * @param reader reader instance.
+     * @param typeList column type list.
+     * @return a DataProfile instance.
+     * @throws IOException
+     */
+    public static DataProfile readData(
+        CSVReader reader,
+        List<String> typeList
+    ) throws IOException {
+        Preconditions.checkNotNull(reader);
+        String[] header = reader.readNext();
         List<String[]> entries = reader.readAll();
-        HashMap<String, DataType> schema = Maps.newHashMap();
-        BiMap<String, Integer> indexes = HashBiMap.create();
-        if (schemaObj == null) {
-            for (int i = 0; i < header.length; i ++) {
-                schema.put(header[i].trim(), DataType.TEXT);
-                indexes.put(header[i].trim(), i);
-            }
-        } else {
-            for (int i = 0; i < header.length; i ++) {
-                String typeString = (String)schemaObj.get(i);
-                DataType type = DataType.valueOf(typeString);
-                schema.put(header[i].trim(), type);
-                indexes.put(header[i].trim(), i);
+        DataType[] types = new DataType[header.length];
+
+        for (int i = 0; i < types.length; i ++) {
+            if (typeList == null) {
+                types[i] = DataType.TEXT;
+            } else {
+                types[i] = DataType.valueOf(typeList.get(i));
             }
         }
-
-        return new DataProfile(entries, schema, indexes);
+        return new DataProfile(entries, header, types);
     }
 
     public void writeData(CSVWriter writer) throws IOException {

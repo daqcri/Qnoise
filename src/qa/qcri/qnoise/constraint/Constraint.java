@@ -15,5 +15,5 @@ public abstract class Constraint {
 
     public abstract boolean isValid(DataProfile profile, int index);
 
-    public abstract void messIt(DataProfile profile, int index, double distance);
+    public abstract int messIt(DataProfile profile, int index, double distance);
 }

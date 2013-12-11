@@ -7,8 +7,8 @@ package qa.qcri.qnoise.constraint;
 
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.DataType;
-import qa.qcri.qnoise.IndexGenerationBase;
-import qa.qcri.qnoise.NoiseModel;
+import qa.qcri.qnoise.model.ModelBase;
+import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.util.regex.Matcher;
@@ -76,19 +76,15 @@ public class PredicateConstraint extends Constraint {
     }
 
     @Override
-    public void messIt(
-        DataProfile profile,
-        int index,
-        double distance
-    ) throws IllegalArgumentException{
+    public int messIt(DataProfile profile, int index, double distance)
+            throws IllegalArgumentException {
         String[] tuple = profile.getTuple(index);
         int columnIndex = profile.getColumnIndex(leftHand);
         DataType type = profile.getType(columnIndex);
         if (type != DataType.NUMERICAL) {
             throw new IllegalArgumentException("The given index is not a numerical type.");
         }
-        IndexGenerationBase indexGen =
-            IndexGenerationBase.createIndexStrategy(NoiseModel.RANDOM);
+        ModelBase indexGen = ModelFactory.createRandomModel();
 
         double nv = 0.0;
         int genIndex;
@@ -103,8 +99,7 @@ public class PredicateConstraint extends Constraint {
                         break;
                     }
 
-                    String[] selectedTuple = profile.getTuple(genIndex);
-                    nv = Double.parseDouble(selectedTuple[columnIndex]);
+                    nv = profile.getDouble(genIndex, columnIndex);
                     if (nv < rightValue)
                         break;
                     genIndex = indexGen.nextIndexWithoutReplacement(0, profile.getLength(), false);
@@ -120,8 +115,7 @@ public class PredicateConstraint extends Constraint {
                         break;
                     }
 
-                    String[] selectedTuple = profile.getTuple(genIndex);
-                    nv = Double.parseDouble(selectedTuple[columnIndex]);
+                    nv = profile.getDouble(genIndex, columnIndex);
                     if (nv > rightValue)
                         break;
                     genIndex = indexGen.nextIndexWithoutReplacement(0, profile.getLength(), false);
@@ -136,9 +130,8 @@ public class PredicateConstraint extends Constraint {
                         break;
                     }
 
-                    String[] selectedTuple = profile.getTuple(genIndex);
-                    nv = Double.parseDouble(selectedTuple[columnIndex]);
-                    if (nv != rightValue)
+                    nv = profile.getDouble(genIndex, columnIndex);
+                    if (nv == rightValue)
                         break;
                     genIndex = indexGen.nextIndexWithoutReplacement(0, profile.getLength(), false);
                 }
@@ -166,6 +159,6 @@ public class PredicateConstraint extends Constraint {
             )
         );
         tuple[columnIndex] = result;
-
+        return columnIndex;
     }
 }

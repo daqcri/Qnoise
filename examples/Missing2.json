@@ -1,9 +1,13 @@
 {
-    "source" : "examples/dumptest.csv",
-    "noises" : [{
-        "type" : "m",
+    "source" : {
+        "path" : "examples/dumptest.csv",
+        "type" : ["NUMERICAL", "TEXT", "TEXT", "TEXT", "NUMERICAL"]
+    },
+    "noise" : {
+        "NoiseType" : "m",
         "granularity" : "cell",
-        "percentage" : 0.2,
-        "filter" : "B"
-    }]
+        "percentage" : 0.5,
+        "model" : "h",
+        "column" : "B"
+    }
 }

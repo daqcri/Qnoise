@@ -5,14 +5,14 @@
 
 package qa.qcri.qnoise.constraint;
 
-import com.google.common.collect.Sets;
 import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.IndexGenerationBase;
-import qa.qcri.qnoise.NoiseModel;
+import qa.qcri.qnoise.model.ModelBase;
+import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.NoiseHelper;
 import qa.qcri.qnoise.util.Tracer;
 
-import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * FD Constraint.
@@ -20,52 +20,51 @@ import java.util.HashSet;
 public class FunctionDependencyConstraint extends Constraint {
     private String leftHand;
     private String rightHand;
+    private static final Pattern pattern =
+        Pattern.compile("\\s*([a-zA-Z]\\w*)\\s*\\|\\s*([a-zA-Z]\\w*)\\s*");
     private Tracer tracer = Tracer.getTracer(FunctionDependencyConstraint.class);
 
     public Constraint parse(String text) {
-        String[] tokens = text.split("|");
-        if (tokens.length != 2) {
+        Matcher matcher = pattern.matcher(text);
+        if (!matcher.matches()) {
             return null;
         }
 
-        leftHand = tokens[0].trim();
-        rightHand = tokens[1].trim();
+        leftHand = matcher.group(1);
+        rightHand = matcher.group(2);
         return this;
     }
 
     @Override
     public boolean isValid(DataProfile profile, int index) {
-        int columnIndex = profile.getColumnIndex(leftHand);
-        HashSet<String> set = Sets.newHashSet();
-        for (int i = 0; i < profile.getLength(); i ++) {
-            set.add(profile.getCell(i, columnIndex));
-            if (set.size() > 1)
-                return false;
-        }
+        // For FD, it is always true by given one tuple.
         return true;
     }
 
     @Override
-    public void messIt(DataProfile profile, int index, double distance) {
-        int columnIndex = profile.getColumnIndex(rightHand);
-        String[] tuple = profile.getTuple(index);
-        String currentValue = profile.getCell(index, columnIndex);
+    public int messIt(DataProfile profile, int index, double distance) {
+        int leftColumnIndex = profile.getColumnIndex(leftHand);
+        int rightColumnIndex = profile.getColumnIndex(rightHand);
 
-        IndexGenerationBase indexGen =
-            IndexGenerationBase.createIndexStrategy(NoiseModel.RANDOM);
+        String[] tuple = profile.getTuple(index);
+        String currentLeftValue = profile.getCell(index, leftColumnIndex);
+
+        ModelBase indexGen =
+            ModelFactory.createRandomModel();
 
         int genIndex =
             indexGen.nextIndexWithoutReplacement(0, profile.getLength(), true);
         String nv;
         while (true) {
             if (genIndex == Integer.MIN_VALUE) {
-                nv = tuple[columnIndex];
-                break;
+                tracer.info("There is no extra data to use to make noise.");
+                return -1;
             }
 
-            String selectedCell = profile.getCell(genIndex, columnIndex);
-            if (currentValue != selectedCell) {
-                nv = selectedCell;
+            String selectedLeftValue = profile.getCell(genIndex, leftColumnIndex);
+            String selectedRightValue = profile.getCell(genIndex, rightColumnIndex);
+            if (!selectedLeftValue.equals(currentLeftValue)) {
+                nv = selectedRightValue;
                 break;
             }
             genIndex = indexGen.nextIndexWithoutReplacement(0, profile.getLength(), false);
@@ -76,11 +75,12 @@ public class FunctionDependencyConstraint extends Constraint {
                 "[%d][%s] from %s to %s",
                 index,
                 rightHand,
-                tuple[columnIndex],
+                tuple[rightColumnIndex],
                 nv
             )
         );
-        tuple[columnIndex] = nv;
+        tuple[rightColumnIndex] = nv;
         NoiseHelper.playTheJazz(distance, rightHand, profile, index);
+        return rightColumnIndex;
     }
 }

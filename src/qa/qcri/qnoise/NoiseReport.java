@@ -5,9 +5,11 @@
 
 package qa.qcri.qnoise;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import qa.qcri.qnoise.util.Pair;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.sql.Timestamp;
@@ -18,6 +20,7 @@ import java.util.Map;
 
 public class NoiseReport {
     private static Map<Metric, List<Object>> stats = Maps.newHashMap();
+    private List<Pair<Pair<Integer, Integer>, String>> logBook = Lists.newArrayList();
 
     public enum Metric {
         Type,
@@ -37,26 +40,47 @@ public class NoiseReport {
     }
 
     public NoiseReport(NoiseSpec spec) {
-        appendMetric(Metric.Type, spec.getType().toString());
-        appendMetric(Metric.Model, spec.getModel().toString());
-        appendMetric(Metric.Percentage, spec.getPerc());
-        appendMetric(Metric.Granularity, spec.getGranularity().toString());
-        appendMetric(Metric.PercentageOfSeed, spec.getDuplicateSeedPerc());
-        appendMetric(Metric.PercentageOfDuplicate, spec.getDuplicateTimePerc());
+        appendMetric(Metric.Type, spec.getValue(NoiseSpec.SpecEntry.NoiseType));
+        appendMetric(Metric.Model, spec.getValue(NoiseSpec.SpecEntry.Model));
+        appendMetric(Metric.Percentage, spec.getValue(NoiseSpec.SpecEntry.Percentage));
+        appendMetric(Metric.Granularity, spec.getValue(NoiseSpec.SpecEntry.Granularity));
+        appendMetric(Metric.PercentageOfSeed, spec.getValue(NoiseSpec.SpecEntry.NumberOfSeed));
         appendMetric(Metric.InjectionTimestamp, new Timestamp(new Date().getTime()).toString());
-        appendMetric(Metric.InputFilePath, spec.getInputFile());
+        appendMetric(Metric.InputFilePath, spec.getValue(NoiseSpec.SpecEntry.InputFile));
+    }
+
+    public synchronized void logChange(int i, int j, String value) {
+        Pair<Integer, Integer> pair = new Pair<>(i, j);
+        logBook.add(new Pair<>(pair, value));
+    }
+
+    public List<Pair<Pair<Integer, Integer>, String>> getLogBook() {
+        return logBook;
     }
 
     /**
      * Appends values to the trace statistic metric.
      */
     public synchronized void appendMetric(Metric metric, Object value) {
+        if (value == null) {
+            return;
+        }
+
+        Object obj = value;
+        if (value instanceof Optional) {
+            Optional optional = (Optional)value;
+            if (!optional.isPresent()) {
+                return;
+            }
+            obj = optional.get();
+        }
+
         if (stats.containsKey(metric)) {
             List<Object> metrics = stats.get(metric);
-            metrics.add(value);
+            metrics.add(obj);
         } else {
             List<Object> values = Lists.newArrayList();
-            values.add(value);
+            values.add(obj);
             stats.put(metric, values);
         }
     }
@@ -97,8 +121,8 @@ public class NoiseReport {
         tracer.info(formatMetric(Metric.Model, "Model"));
         tracer.info(formatMetric(Metric.Granularity, "Granularity"));
         tracer.info(formatMetric(Metric.Percentage, "Noise Percentage"));
-        tracer.info(formatMetric(Metric.PercentageOfSeed, "Number of Seeds"));
-        tracer.info(formatMetric(Metric.PercentageOfDuplicate, "Number of Duplicate"));
+        tracer.info(formatMetric(Metric.PercentageOfSeed, "Percentage Seeds"));
+        tracer.info(formatMetric(Metric.PercentageOfDuplicate, "Percentage Duplicate"));
         tracer.info(formatMetric(Metric.ChangedItem, "Changed item"));
         tracer.info(formatMetric(Metric.InjectionTime, "Injection time", "ms"));
         tracer.info(formatMetric(Metric.InputRow, "Original file record number"));
@@ -115,9 +139,9 @@ public class NoiseReport {
     }
 
     private static String formatMetric(Metric type, String title, String suffix) {
-        String value;
+        String result;
         if (!stats.containsKey(type)) {
-            value = "";
+            result = null;
         } else {
             Collection<Object> metrics = stats.get(type);
             StringBuilder outputBuilder = new StringBuilder(50);
@@ -130,11 +154,15 @@ public class NoiseReport {
                     outputBuilder.append(String.format("%-9.2f", metric));
                 }
             }
-            value = outputBuilder.toString();
+            result = outputBuilder.toString();
         }
-        if (!Strings.isNullOrEmpty(suffix)) {
-            title = title + " (" + suffix + ")";
+
+        if (result != null) {
+            if (!Strings.isNullOrEmpty(suffix)) {
+                title = title + " (" + suffix + ")";
+            }
+            result = String.format("%-40s %s", title, result);
         }
-        return String.format("%-40s %s", title, value);
+        return result;
     }
 }

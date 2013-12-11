@@ -58,7 +58,7 @@ public class Tracer {
      * @param msg info message.
      */
     public void info(String msg) {
-        if (isInfoOn()) {
+        if (isInfoOn() && msg != null) {
             logger.println(msg);
         }
     }

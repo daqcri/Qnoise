@@ -2,10 +2,10 @@
     "source" : {
         "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
     },
-    "noises" : [{
-        "type" : "m",
+    "noise" : {
+        "NoiseType" : "m",
         "granularity" : "cell",
-        "percentage" : 0.2,
+        "percentage" : 0.5,
         "model" : "r"
-    }]
+    }
 }
