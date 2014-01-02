@@ -7,7 +7,7 @@
         "granularity" : "row",
         "NumberOfSeed" : 0.2,
         "percentage" : 0.3,
-        "distance" : 70.0,
+        "distance" : 0.0,
         "model" : "r"
     }
 }

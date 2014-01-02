@@ -68,7 +68,6 @@ public class DuplicateInjector extends InjectorBase {
         }
 
         report.appendMetric(NoiseReport.Metric.ChangedItem, nseed * ntime);
-        report.appendMetric(NoiseReport.Metric.PercentageOfSeed, seedperc);
         report.appendMetric(NoiseReport.Metric.PercentageOfDuplicate, timeperc);
         report.addMetric(
             NoiseReport.Metric.InjectionTime,

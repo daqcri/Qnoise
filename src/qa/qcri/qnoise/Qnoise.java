@@ -146,6 +146,7 @@ public class Qnoise {
             OptionBuilder.
                 withArgName("output file").
                 hasArg().
+                isRequired().
                 withDescription("Output file path.").
                 withType(String.class).
                 create("o")

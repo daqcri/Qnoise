@@ -1,0 +1,14 @@
+{
+    "source" : {
+        "path" : "examples/personal.csv",
+        "type" : ["TEXT", "NUMERICAL", "TEXT"]
+    },
+    "noise" : {
+        "noisetype" : "i",
+        "granularity" : "row",
+        "constraint" : "age>40",
+        "percentage" : 0.2,
+        "model" : "r",
+        "distance" : 0.0
+    }
+}
