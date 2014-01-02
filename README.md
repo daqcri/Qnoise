@@ -38,7 +38,7 @@ A simple example of generating duplication spec. is as following
 }
 ```
 
-More details on the usage is at the Tutorial page. 
+More details on the usage can be found in the examples. 
 
 ### License
 
