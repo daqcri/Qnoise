@@ -17,7 +17,7 @@ All the options:
 
 ```
 
-Currently Qnoise supports 2 (out of 4) types of noises. They are
+Currently Qnoise supports the following types of noises
 
 * **Missing value noises (null).**
 * **Duplication noises.**
@@ -37,6 +37,8 @@ A simple example of generating duplication spec. is as following
     }]
 }
 ```
+
+More details on the usage can be found in the examples. 
 
 ### License
 
