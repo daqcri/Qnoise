@@ -38,7 +38,7 @@ A simple example of generating duplication spec. is as following
 }
 ```
 
-More details on the usage can be found in the examples. 
+More details on the usage can be found in the examples or the [document](https://github.com/Qatar-Computing-Research-Institute/Qnoise/wiki/QNoise-JSON-Specification-Details). 
 
 ### License
 
