@@ -7,6 +7,8 @@ package qa.qcri.qnoise.test.inject;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.google.common.collect.Lists;
+import org.javatuples.Pair;
+import org.javatuples.Quartet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +17,7 @@ import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.inject.MissingInjector;
 import qa.qcri.qnoise.test.TestDataRepository;
-import qa.qcri.qnoise.util.Pair;
+import qa.qcri.qnoise.util.OperationType;
 
 import java.io.FileReader;
 import java.util.List;
@@ -47,12 +49,13 @@ public class MissingInjectTest {
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Missing1.json");
             NoiseReport report = new NoiseReport(spec);
             new MissingInjector().inject(spec, profile, report);
-            List<Pair<Pair<Integer, Integer>, String>> logBook = report.getLogBook();
+            List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
+                    report.getLogBook();
             double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
             int changedItem = (int)(perc * profile.getLength());
-            for (Pair<Pair<Integer, Integer>, String> pair : logBook) {
-                Pair<Integer, Integer> index = pair.getLeft();
-                String value = profile.getCell(index.getLeft(), index.getRight());
+            for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
+                Pair<Integer, Integer> index = log.getValue1();
+                String value = profile.getCell(index.getValue0(), index.getValue1());
                 Assert.assertEquals(null, value);
             }
             Assert.assertEquals(logBook.size(), changedItem);
@@ -68,12 +71,13 @@ public class MissingInjectTest {
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Missing2.json");
             NoiseReport report = new NoiseReport(spec);
             new MissingInjector().inject(spec, profile, report);
-            List<Pair<Pair<Integer, Integer>, String>> logBook = report.getLogBook();
+            List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
+                    report.getLogBook();
             double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
-            int changedItem = (int)(perc * profile.getLength()) * profile.getWidth();
-            for (Pair<Pair<Integer, Integer>, String> pair : logBook) {
-                Pair<Integer, Integer> index = pair.getLeft();
-                String value = profile.getCell(index.getLeft(), index.getRight());
+            int changedItem = (int)(perc * profile.getLength());
+            for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
+                Pair<Integer, Integer> index = log.getValue1();
+                String value = profile.getCell(index.getValue0(), index.getValue1());
                 Assert.assertEquals(null, value);
             }
             Assert.assertEquals(logBook.size(), changedItem);

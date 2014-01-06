@@ -1,11 +1,13 @@
 {
-    "source" : "examples/dumptest.csv",
+    "source" : {
+        "path" : "examples/dumptest.csv"
+    },
     "noise" : {
         "noisetype" : "d",
         "granularity" : "row",
         "NumberOfSeed" : 0.2,
         "percentage" : 0.3,
-        "distant" : 20.0,
+        "distance" : 0.2,
         "model" : "r"
     }
 }

@@ -5,6 +5,7 @@
 
 package qa.qcri.qnoise;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import org.json.simple.JSONObject;
 
@@ -27,7 +28,8 @@ public class NoiseSpec {
         Column,
         NumberOfSeed,
         Distance,
-        Constraint;
+        Constraint,
+        LogFile;
 
         public static SpecEntry fromString(String v) {
             SpecEntry[] dict = SpecEntry.values();
@@ -65,7 +67,16 @@ public class NoiseSpec {
     }
 
     @SuppressWarnings("unchecked")
+    public <T> T getValue(SpecEntry entry, T defaultValue) {
+        if (!entries.containsKey(entry)) {
+            return defaultValue;
+        }
+        return (T)entries.get(entry);
+    }
+
+    @SuppressWarnings("unchecked")
     public static NoiseSpec valueOf(JSONObject jsonObject) {
+        Preconditions.checkNotNull(jsonObject);
         NoiseSpec spec = new NoiseSpec();
 
         JSONObject sourceObj = (JSONObject)jsonObject.get("source");

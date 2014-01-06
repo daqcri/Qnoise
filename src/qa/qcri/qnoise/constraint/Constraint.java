@@ -6,6 +6,7 @@
 package qa.qcri.qnoise.constraint;
 
 import qa.qcri.qnoise.DataProfile;
+import qa.qcri.qnoise.NoiseReport;
 
 /**
  * Constraint class for inconsistency.
@@ -15,5 +16,5 @@ public abstract class Constraint {
 
     public abstract boolean isValid(DataProfile profile, int index);
 
-    public abstract int messIt(DataProfile profile, int index, double distance);
+    public abstract int messIt(DataProfile profile, int index, double distance, NoiseReport report);
 }

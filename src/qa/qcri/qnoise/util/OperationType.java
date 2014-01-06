@@ -3,14 +3,12 @@
  * Licensed under the MIT license <http://www.opensource.org/licenses/MIT>.
  */
 
-package qa.qcri.qnoise.sql;
+package qa.qcri.qnoise.util;
 
 /**
- * Common dialect enum.
  */
-public enum SQLDialect {
-    POSTGRES,
-    MYSQL,
-    DERBY,
-    DERBYMEMORY
+public enum OperationType {
+    Create,
+    Update,
+    Delete
 }

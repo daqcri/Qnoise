@@ -10,14 +10,17 @@
     <property name="build.root" value="out" />
     <property name="build.dir" value="${build.root}/production" />
     <property name="test.dir" value="${build.root}/test" />
-    <property name="testresult.dir" value="${build.root}/testresult" />
+    <property name="testresult.dir" value="${test.dir}/testresult" />
     <property name="vendor.dir" value="vendors" />
-
     <property name="qnoise.class" value="qa.qcri.qnoise.Qnoise" />
 
     <!-- Common used paths -->
     <path id="jar.deps">
         <fileset dir="vendors" includes="*.jar" />
+    </path>
+
+    <path id="test.deps">
+        <fileset dir="${build.root}/bin" includes="*.jar" />
     </path>
 
     <!-- JDK 1.7 check -->
@@ -78,14 +81,14 @@
         </javac>
     </target>
 
-    <target name="test" depends="compile">
-        <mkdir dir="${test.dir}" />
+    <target name="test" depends="compile, jar">
         <fail message="JDK 1.7 required" unless="version1.7" />
+        <mkdir dir="${test.dir}" />
         <javac includeantruntime="false"
                fork="true"
                srcdir="test/src"
-               destdir="${build.dir}"
-               classpathref="jar.deps"
+               destdir="${test.dir}"
+               classpathref="test.deps"
                encoding="utf-8">
         </javac>
     </target>
@@ -112,23 +115,24 @@
     </path>
 
     <target name="unittest" depends="qnoise, test">
-        <mkdir dir="${build.root}/testresult" />
+        <mkdir dir="${testresult.dir}" />
+        <mkdir dir="${testresult.dir}/testreports" />
         <junit printsummary="yes" haltonfailure="no" showoutput="no">
             <classpath refid="test.classpath" />
             <formatter type="plain" />
             <formatter type="xml" />
 
-            <batchtest fork="yes" todir="${build.root}/testresult">
+            <batchtest fork="yes" todir="${testresult.dir}">
                 <fileset dir="${test.dir}">
-                    <include name="**/*Test*.class" />
+                    <include name="**/*Test.class" />
                 </fileset>
             </batchtest>
         </junit>
-        <junitreport todir="${build.root}/testresult/testreports">
+        <junitreport todir="${testresult.dir}/testreports">
             <fileset dir="${build.root}/testresult">
                 <include name="TEST-*.xml"/>
             </fileset>
-            <report todir="${build.root}/testresult/testreports"/>
+            <report todir="${testresult.dir}/testreports"/>
         </junitreport>
     </target>
 </project>

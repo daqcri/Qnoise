@@ -7,6 +7,7 @@ package qa.qcri.qnoise.constraint;
 
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.DataType;
+import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.Tracer;
@@ -76,7 +77,7 @@ public class PredicateConstraint extends Constraint {
     }
 
     @Override
-    public int messIt(DataProfile profile, int index, double distance)
+    public int messIt(DataProfile profile, int index, double distance, NoiseReport report)
             throws IllegalArgumentException {
         String[] tuple = profile.getTuple(index);
         int columnIndex = profile.getColumnIndex(leftHand);
@@ -158,6 +159,7 @@ public class PredicateConstraint extends Constraint {
                 result
             )
         );
+        report.logChange(index, columnIndex, tuple[columnIndex], result);
         tuple[columnIndex] = result;
         return columnIndex;
     }

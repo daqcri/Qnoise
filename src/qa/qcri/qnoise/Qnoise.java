@@ -14,10 +14,8 @@ import qa.qcri.qnoise.inject.InconsistencyInjector;
 import qa.qcri.qnoise.inject.MissingInjector;
 import qa.qcri.qnoise.util.Tracer;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -46,12 +44,18 @@ public class Qnoise {
                 throw new FileNotFoundException("Input file " + fileName + " does not exist.");
             }
 
-            JSONObject input = (JSONObject)JSONValue.parse(new FileReader(fileName));
+            JSONObject input =
+                (JSONObject)JSONValue.parse(
+                    new InputStreamReader(
+                        new FileInputStream(fileName),
+                        Charset.forName("UTF-8")
+                    )
+                );
+
             if (input == null) {
                 throw new IllegalArgumentException("Input file is not a valid JSON file.");
             }
 
-            JSONObject source = (JSONObject)input.get("source");
             NoiseSpec spec = NoiseSpec.valueOf(input);
 
             NoiseReport report = new NoiseReport(spec);
@@ -63,13 +67,13 @@ public class Qnoise {
             DataProfile profile =
                 DataProfile.readData(
                     reader,
-                    (List<String>)spec.getValue(NoiseSpec.SpecEntry.Schema)
+                    spec.<List<String>>getValue(NoiseSpec.SpecEntry.Schema)
                 );
 
             report.addMetric(NoiseReport.Metric.InputRow, profile.getLength());
             NoiseType noiseType =
                 NoiseType.fromString(
-                    (String) spec.getValue(NoiseSpec.SpecEntry.NoiseType)
+                    spec.<String>getValue(NoiseSpec.SpecEntry.NoiseType)
                 );
             switch (noiseType) {
                 case Missing:
@@ -81,6 +85,8 @@ public class Qnoise {
                 case Inconsistency:
                     new InconsistencyInjector().inject(spec, profile, report);
                     break;
+                default:
+                    throw new UnsupportedOperationException("Unknown noise type.");
             }
 
             fileName = line.getOptionValue("o");
@@ -89,6 +95,12 @@ public class Qnoise {
             report.appendMetric(NoiseReport.Metric.OutputFilePath, fileName);
             report.addMetric(NoiseReport.Metric.OutputRow, profile.getLength());
 
+            report.saveToFile(
+                spec.getValue(
+                    NoiseSpec.SpecEntry.LogFile,
+                    "log" + System.currentTimeMillis() + ".txt"
+                )
+            );
             report.print();
 
         } catch (MissingOptionException me) {
@@ -123,6 +135,7 @@ public class Qnoise {
         );
     }
 
+    @SuppressWarnings("all")
     private static Options createQnoiseOption() {
         Options options = new Options();
         options.addOption(OptionBuilder.withDescription("Print this message.").create("help"));

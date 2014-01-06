@@ -6,6 +6,7 @@
 package qa.qcri.qnoise.constraint;
 
 import qa.qcri.qnoise.DataProfile;
+import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.NoiseHelper;
@@ -42,7 +43,7 @@ public class FunctionDependencyConstraint extends Constraint {
     }
 
     @Override
-    public int messIt(DataProfile profile, int index, double distance) {
+    public int messIt(DataProfile profile, int index, double distance, NoiseReport report) {
         int leftColumnIndex = profile.getColumnIndex(leftHand);
         int rightColumnIndex = profile.getColumnIndex(rightHand);
 
@@ -80,7 +81,7 @@ public class FunctionDependencyConstraint extends Constraint {
             )
         );
         tuple[rightColumnIndex] = nv;
-        NoiseHelper.playTheJazz(distance, rightHand, profile, index);
+        NoiseHelper.playTheJazz(distance, rightHand, profile, index, report);
         return rightColumnIndex;
     }
 }

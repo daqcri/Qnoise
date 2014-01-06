@@ -7,6 +7,8 @@ package qa.qcri.qnoise.test.inject;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.google.common.collect.Lists;
+import org.javatuples.Pair;
+import org.javatuples.Quartet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +17,7 @@ import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.inject.DuplicateInjector;
 import qa.qcri.qnoise.test.TestDataRepository;
-import qa.qcri.qnoise.util.Pair;
+import qa.qcri.qnoise.util.OperationType;
 
 import java.io.FileReader;
 import java.util.List;
@@ -55,7 +57,8 @@ public class DuplicateInjectTest {
             int changedItem = nseed * ntime * profile.getWidth();
 
             new DuplicateInjector().inject(spec, profile, report);
-            List<Pair<Pair<Integer, Integer>, String>> logBook = report.getLogBook();
+            List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
+                report.getLogBook();
 
             Assert.assertEquals(changedItem, logBook.size());
         } catch (Exception ex) {
@@ -76,12 +79,12 @@ public class DuplicateInjectTest {
             int nseed = (int)(Math.ceil(profile.getLength() * seedperc));
             int ntime = (int)(Math.ceil(profile.getLength() * timeperc));
 
-            int changedItem = nseed * ntime * profile.getWidth();
             int size = profile.getLength();
             new DuplicateInjector().inject(spec, profile, report);
-            List<Pair<Pair<Integer, Integer>, String>> logBook = report.getLogBook();
+            List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
+                report.getLogBook();
 
-            Assert.assertEquals(changedItem, logBook.size());
+            Assert.assertEquals(72, logBook.size());
             Assert.assertEquals(size + nseed * ntime, profile.getLength());
         } catch (Exception ex) {
             ex.printStackTrace();

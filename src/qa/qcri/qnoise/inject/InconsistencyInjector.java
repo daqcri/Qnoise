@@ -15,12 +15,15 @@ import qa.qcri.qnoise.constraint.Constraint;
 import qa.qcri.qnoise.constraint.ConstraintFactory;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
+import qa.qcri.qnoise.util.Tracer;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class InconsistencyInjector extends InjectorBase {
+    private Tracer tracer = Tracer.getTracer(this.getClass());
+
     /** {@inheritDoc */
     @Override
     public InjectorBase inject(NoiseSpec spec, DataProfile profile, NoiseReport report) {
@@ -48,15 +51,13 @@ public class InconsistencyInjector extends InjectorBase {
                 .messIt(
                     profile,
                     filteredResult[index],
-                    distance
+                    distance,
+                    report
                 );
 
-            if (columnIndex != -1) {
-                report.logChange(
-                    index,
-                    columnIndex,
-                    profile.getCell(index, columnIndex)
-                );
+            // TODO; where is the old value
+            if (columnIndex == -1) {
+                tracer.info("No possible element is found.");
             }
         }
 
@@ -65,6 +66,7 @@ public class InconsistencyInjector extends InjectorBase {
             NoiseReport.Metric.InjectionTime,
             stopwatch.elapsed(TimeUnit.MILLISECONDS)
         );
+
         stopwatch.stop();
         return this;
     }

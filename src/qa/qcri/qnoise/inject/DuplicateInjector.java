@@ -51,18 +51,27 @@ public class DuplicateInjector extends InjectorBase {
                 }
 
                 profile.append(newData);
-                NoiseHelper.playTheJazz(distance, columns, profile, profile.getLength() - 1);
                 if (Tracer.isVerboseOn()) {
-                    StringBuilder sb = new StringBuilder();
+                    StringBuilder sb = new StringBuilder("Add ");
+                    sb.append('[').append(profile.getLength() - 1).append("] [ ");
                     for (String cell : newData) {
                         sb.append('\'').append(cell).append("\' ");
                     }
-                    tracer.verbose("Adds " + sb.toString());
+                    sb.append(']');
+                    tracer.verbose(sb.toString());
                 }
 
                 for (int j = 0; j < profile.getWidth(); j ++) {
-                    report.logChange(profile.getLength() - 1, j, profile.getCell(i, j));
+                    report.logInsert(profile.getLength() - 1, j, profile.getCell(i, j));
                 }
+
+                NoiseHelper.playTheJazz(
+                    distance,
+                    columns,
+                    profile,
+                    profile.getLength() - 1,
+                    report
+                );
             }
             count ++;
         }

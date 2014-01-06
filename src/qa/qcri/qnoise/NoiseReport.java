@@ -9,9 +9,13 @@ import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import qa.qcri.qnoise.util.Pair;
+import org.javatuples.Pair;
+import org.javatuples.Quartet;
+import qa.qcri.qnoise.util.OperationType;
 import qa.qcri.qnoise.util.Tracer;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -19,8 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 public class NoiseReport {
-    private static Map<Metric, List<Object>> stats = Maps.newHashMap();
-    private List<Pair<Pair<Integer, Integer>, String>> logBook = Lists.newArrayList();
+    private Map<Metric, List<Object>> stats = Maps.newHashMap();
+    private List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
+            Lists.newArrayList();
 
     public enum Metric {
         Type,
@@ -49,12 +54,19 @@ public class NoiseReport {
         appendMetric(Metric.InputFilePath, spec.getValue(NoiseSpec.SpecEntry.InputFile));
     }
 
-    public synchronized void logChange(int i, int j, String value) {
-        Pair<Integer, Integer> pair = new Pair<>(i, j);
-        logBook.add(new Pair<>(pair, value));
+    public synchronized void logChange(int i, int j, String oldValue, String newValue) {
+        Quartet<OperationType, Pair<Integer, Integer>, String, String> log =
+            new Quartet<>(OperationType.Update, new Pair<>(i, j), oldValue, newValue);
+        logBook.add(log);
     }
 
-    public List<Pair<Pair<Integer, Integer>, String>> getLogBook() {
+    public synchronized void logInsert(int i, int j, String value) {
+        Quartet<OperationType, Pair<Integer, Integer>, String, String> log =
+            new Quartet<>(OperationType.Create, new Pair<>(i, j), null, value);
+        logBook.add(log);
+    }
+
+    public List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> getLogBook() {
         return logBook;
     }
 
@@ -110,6 +122,28 @@ public class NoiseReport {
         }
     }
 
+    public void saveToFile(String fileName) {
+        OutputStreamWriter writer = null;
+        try {
+            writer = new OutputStreamWriter(new FileOutputStream(fileName));
+            for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
+                writer.write(log.toString());
+                writer.write(System.lineSeparator());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.flush();
+                    writer.close();
+                }
+            } catch (Exception ex) {
+                // ignore
+            }
+        }
+    }
+
     /**
      * Print Noise generation result.
      */
@@ -134,11 +168,11 @@ public class NoiseReport {
         tracer.info("----------------------------------------------------------------");
     }
 
-    private static String formatMetric(Metric type, String title) {
+    private String formatMetric(Metric type, String title) {
         return formatMetric(type, title, "");
     }
 
-    private static String formatMetric(Metric type, String title, String suffix) {
+    private String formatMetric(Metric type, String title, String suffix) {
         String result;
         if (!stats.containsKey(type)) {
             result = null;

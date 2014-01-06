@@ -7,6 +7,7 @@ package qa.qcri.qnoise.inject;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
+import org.javatuples.Pair;
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.NoiseGranularity;
 import qa.qcri.qnoise.NoiseReport;
@@ -14,7 +15,6 @@ import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.model.NoiseModel;
-import qa.qcri.qnoise.util.Pair;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.util.HashSet;
@@ -66,8 +66,8 @@ public class MissingInjector extends InjectorBase {
                     continue;
                 }
 
+                report.logChange(index, cellIndex, rowData[cellIndex], null);
                 rowData[cellIndex] = null;
-                report.logChange(index, cellIndex, "null");
                 tracer.verbose(String.format("[%d, %d] <- null", index, cellIndex));
                 log.add(record);
             } else {
@@ -80,7 +80,7 @@ public class MissingInjector extends InjectorBase {
                         continue;
                     }
 
-                    report.logChange(index, i, "null");
+                    report.logChange(index, i, rowData[i], null);
                     rowData[i] = null;
                     tracer.verbose(String.format("[%d, %d] <- null", index, i));;
                     log.add(record);

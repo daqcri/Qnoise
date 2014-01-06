@@ -39,6 +39,7 @@ public class CSVTools {
 
         Connection conn = null;
         Statement stat = null;
+        BufferedReader reader = null;
         int result = 0;
         try {
             conn = DBTools.createConnection(dbConfig, true);
@@ -48,7 +49,7 @@ public class CSVTools {
             }
 
             // create table based on the header
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader = new BufferedReader(new FileReader(file));
             String header = reader.readLine();
             String[] columns = header.split(Character.toString(delimiter));
             StringBuilder schemaSql = new StringBuilder("CREATE TABLE " + tableName + " (");
@@ -78,6 +79,10 @@ public class CSVTools {
 
                 if (conn != null) {
                     conn.close();
+                }
+
+                if (reader != null) {
+                    reader.close();
                 }
             } catch (Exception ex) {}
         }

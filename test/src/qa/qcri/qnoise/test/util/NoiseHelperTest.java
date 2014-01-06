@@ -11,7 +11,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import qa.qcri.qnoise.DataProfile;
+import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.test.TestDataRepository;
+import qa.qcri.qnoise.test.TestSpecFactory;
 import qa.qcri.qnoise.util.NoiseHelper;
 
 import java.io.FileReader;
@@ -39,9 +41,10 @@ public class NoiseHelperTest {
 
     @Test
     public void testNumerical() {
+        NoiseReport report = new NoiseReport(TestSpecFactory.createDummySpec());
         double oldVal = Double.parseDouble(profile.getCell(0, 4));
         double std = profile.getStandardDeviationOn("D");
-        NoiseHelper.playTheJazz(50.0, "D", profile, 0);
+        NoiseHelper.playTheJazz(50.0, "D", profile, 0, report);
         double newVal = Double.parseDouble(profile.getCell(0, 4));
         double diff = Math.abs(newVal - oldVal);
         Assert.assertTrue(diff < 0.5 * std + 0.001f);
@@ -49,14 +52,14 @@ public class NoiseHelperTest {
 
         oldVal = Double.parseDouble(profile.getCell(10, 4));
         std = profile.getStandardDeviationOn("D");
-        NoiseHelper.playTheJazz(90.0, "D", profile, 10);
+        NoiseHelper.playTheJazz(90.0, "D", profile, 10, report);
         newVal = Double.parseDouble(profile.getCell(10, 4));
         diff = Math.abs(newVal - oldVal);
         Assert.assertTrue(diff < 0.9 * std + 0.001f);
         profile.setDirty();
 
         oldVal = Double.parseDouble(profile.getCell(11, 4));
-        NoiseHelper.playTheJazz(0.0, "D", profile, 11);
+        NoiseHelper.playTheJazz(0.0, "D", profile, 11, report);
         newVal = Double.parseDouble(profile.getCell(11, 4));
         diff = Math.abs(newVal - oldVal);
         Assert.assertTrue(diff == 0);
@@ -65,23 +68,24 @@ public class NoiseHelperTest {
     @Test
     public void testTextDistance() {
         try {
+            NoiseReport report = new NoiseReport(TestSpecFactory.createDummySpec());
             String oldVal = profile.getCell(0, 1);
-            NoiseHelper.playTheJazz(50.0, "C", profile, 0);
+            NoiseHelper.playTheJazz(50.0, "C", profile, 0, report);
             String newVal = profile.getCell(0, 1);
             Assert.assertEquals(1, calcDist(oldVal, newVal));
 
             oldVal = profile.getCell(7, 2);
-            NoiseHelper.playTheJazz(100.0, "A", profile, 7);
+            NoiseHelper.playTheJazz(100.0, "A", profile, 7, report);
             newVal = profile.getCell(7, 2);
             Assert.assertEquals(2, calcDist(oldVal, newVal));
 
             oldVal = profile.getCell(7, 3);
-            NoiseHelper.playTheJazz(100.0, "B", profile, 7);
+            NoiseHelper.playTheJazz(100.0, "B", profile, 7, report);
             newVal = profile.getCell(7, 3);
             Assert.assertEquals(2, calcDist(oldVal, newVal));
 
             oldVal = profile.getCell(7, 1);
-            NoiseHelper.playTheJazz(10.0, "C", profile, 7);
+            NoiseHelper.playTheJazz(10.0, "C", profile, 7, report);
             newVal = profile.getCell(7, 1);
             Assert.assertEquals(0, calcDist(oldVal, newVal));
         } catch (Exception ex) {

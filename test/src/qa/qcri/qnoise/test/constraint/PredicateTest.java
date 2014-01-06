@@ -11,8 +11,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import qa.qcri.qnoise.DataProfile;
+import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.constraint.PredicateConstraint;
 import qa.qcri.qnoise.test.TestDataRepository;
+import qa.qcri.qnoise.test.TestSpecFactory;
 
 import java.io.FileReader;
 import java.util.List;
@@ -51,6 +53,7 @@ public class PredicateTest {
 
     @Test
     public void messTest() {
+        NoiseReport report = new NoiseReport(TestSpecFactory.createDummySpec());
         PredicateConstraint predicate = new PredicateConstraint().parse("D >= 50");
         int index = 0;
         for (int i = 0; i < profile.getLength(); i ++) {
@@ -60,7 +63,7 @@ public class PredicateTest {
             }
         }
 
-        predicate.messIt(profile, index, 0);
+        predicate.messIt(profile, index, 0, report);
         double val = Double.parseDouble(profile.getCell(index, 4));
         Assert.assertEquals(true, val < 50.0);
     }
