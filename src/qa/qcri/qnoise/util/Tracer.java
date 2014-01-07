@@ -9,9 +9,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 import java.io.PrintStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class Tracer {
 
@@ -19,8 +16,6 @@ public class Tracer {
     private static boolean infoFlag;
     private static boolean verboseFlag;
     private static String logFileName;
-    private static Calendar calendar;
-    private static DateFormat dateFormat;
     private Class classType;
     private PrintStream logger = System.out;
 
@@ -29,15 +24,11 @@ public class Tracer {
     static {
         infoFlag = true;
         verboseFlag = false;
-        calendar = Calendar.getInstance();
-        dateFormat = new SimpleDateFormat("MMddHHmmss");
-        logFileName = dateFormat.format(calendar.getTime()) + ".txt";
     }
 
     //<editor-fold desc="Tracer creation">
     private Tracer(Class classType) {
         this.classType = Preconditions.checkNotNull(classType);
-        // logger = Logger.getLogger(classType);
     }
 
     /**

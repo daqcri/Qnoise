@@ -8,5 +8,5 @@ package qa.qcri.qnoise;
 public enum DataType {
     NUMERICAL,
     TEXT,
-    ENUM
+    ENUM;
 }

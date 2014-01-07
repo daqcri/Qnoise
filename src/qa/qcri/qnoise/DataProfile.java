@@ -235,7 +235,7 @@ public class DataProfile {
             if (typeList == null) {
                 types[i] = DataType.TEXT;
             } else {
-                types[i] = DataType.valueOf(typeList.get(i));
+                types[i] = DataType.valueOf(typeList.get(i).toUpperCase());
             }
         }
         return new DataProfile(entries, header, types);

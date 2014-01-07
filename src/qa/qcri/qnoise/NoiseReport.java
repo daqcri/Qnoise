@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.javatuples.Pair;
 import org.javatuples.Quartet;
+import org.javatuples.Tuple;
 import qa.qcri.qnoise.util.OperationType;
 import qa.qcri.qnoise.util.Tracer;
 
@@ -126,8 +127,10 @@ public class NoiseReport {
         OutputStreamWriter writer = null;
         try {
             writer = new OutputStreamWriter(new FileOutputStream(fileName));
+            writer.write("operation;row;column;oldvalue;newvalue");
+            writer.write(System.lineSeparator());
             for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
-                writer.write(log.toString());
+                writer.write(formatTuple(log));
                 writer.write(System.lineSeparator());
             }
         } catch (Exception ex) {
@@ -198,5 +201,23 @@ public class NoiseReport {
             result = String.format("%-40s %s", title, result);
         }
         return result;
+    }
+
+    private String formatTuple(Tuple tuple) {
+        StringBuffer buf = new StringBuffer();
+        int size = tuple.getSize();
+        for (int i = 0; i < size; i ++) {
+            if (i != 0) {
+                buf.append(';');
+            }
+
+            Object obj = tuple.getValue(i);
+            if (obj instanceof Tuple) {
+                buf.append(formatTuple((Tuple)obj));
+            } else {
+                buf.append(tuple.getValue(i));
+            }
+        }
+        return buf.toString();
     }
 }

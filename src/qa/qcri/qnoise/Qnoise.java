@@ -18,6 +18,9 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -61,7 +64,8 @@ public class Qnoise {
             NoiseReport report = new NoiseReport(spec);
             reader =
                 new CSVReader(
-                    new FileReader(spec.<String>getValue(NoiseSpec.SpecEntry.InputFile))
+                    new FileReader(spec.<String>getValue(NoiseSpec.SpecEntry.InputFile)),
+                    spec.getValue(NoiseSpec.SpecEntry.CSVSeparator, ';')
                 );
 
             DataProfile profile =
@@ -95,11 +99,12 @@ public class Qnoise {
             report.appendMetric(NoiseReport.Metric.OutputFilePath, fileName);
             report.addMetric(NoiseReport.Metric.OutputRow, profile.getLength());
 
+            Calendar calendar = Calendar.getInstance();
+            DateFormat dateFormat = new SimpleDateFormat("MMddHHmmss");
+            String logFileName = "log" + dateFormat.format(calendar.getTime()) + ".csv";
+
             report.saveToFile(
-                spec.getValue(
-                    NoiseSpec.SpecEntry.LogFile,
-                    "log" + System.currentTimeMillis() + ".txt"
-                )
+                spec.getValue(NoiseSpec.SpecEntry.LogFile, logFileName)
             );
             report.print();
 

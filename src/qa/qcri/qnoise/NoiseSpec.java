@@ -6,6 +6,7 @@
 package qa.qcri.qnoise;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import org.json.simple.JSONObject;
 
@@ -29,6 +30,7 @@ public class NoiseSpec {
         NumberOfSeed,
         Distance,
         Constraint,
+        CSVSeparator,
         LogFile;
 
         public static SpecEntry fromString(String v) {
@@ -82,11 +84,20 @@ public class NoiseSpec {
         JSONObject sourceObj = (JSONObject)jsonObject.get("source");
         String inputFile = (String)sourceObj.get("path");
         spec.entries.put(SpecEntry.InputFile, inputFile);
+
         if (sourceObj.containsKey("type")) {
             spec.entries.put(SpecEntry.Schema, sourceObj.get("type"));
         } else {
             // TODO: remove the trick
             spec.entries.put(SpecEntry.Schema, null);
+        }
+
+        if (sourceObj.containsKey("csvseparator")) {
+            String separator = (String)sourceObj.get("csvseparator");
+            if (Strings.isNullOrEmpty(separator) || separator.length() > 1) {
+                throw new IllegalArgumentException("Invalid CSV separator.");
+            }
+            spec.entries.put(SpecEntry.CSVSeparator, separator.charAt(0));
         }
 
         JSONObject noise = (JSONObject)jsonObject.get("noise");
