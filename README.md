@@ -29,12 +29,12 @@ A simple example of generating duplication spec. is as following
 ```
 {
     "source" : "test/src/input/dumptest.csv",
-    "noises" : [{
+    "noises" : {
         "type" : "m",
         "granularity" : "cell",
         "percentage" : 0.2,
         "model" : "r"
-    }]
+    }
 }
 ```
 
