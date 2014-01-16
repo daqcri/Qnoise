@@ -59,7 +59,7 @@ public class PredicateConstraint extends Constraint {
                 result = value < rightValue;
                 break;
             case "=":
-                result = value == rightValue;
+                result = value.equals(rightValue);
                 break;
             case ">=":
                 result = value >= rightValue;
@@ -68,7 +68,7 @@ public class PredicateConstraint extends Constraint {
                 result = value <= rightValue;
                 break;
             case "!=":
-                result = value != rightValue;
+                result = !value.equals(rightValue);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown operator " + operator);

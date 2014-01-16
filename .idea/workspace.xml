@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="916940ec-6a39-4e19-867d-b879966c2822" name="Default" comment="p">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/OperationType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/TestSpecFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_javatuples_javatuples_1_2.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Pair.java" afterPath="" />
+    <list default="true" id="916940ec-6a39-4e19-867d-b879966c2822" name="Default" comment="Adds support for change logging, and minor bug fixes (missing jar file).">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/Constraint.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/Constraint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Duplicate1.json" afterPath="$PROJECT_DIR$/examples/Duplicate1.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/DuplicateInjectTest.java" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/DuplicateInjectTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/DuplicateInjector.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/DuplicateInjector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/FunctionDependencyConstraint.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/FunctionDependencyConstraint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/InconsistencyInjector.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/InconsistencyInjector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/InconsistencyTest.java" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/InconsistencyTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/MissingInjector.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/MissingInjector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/NoiseHelper.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/util/NoiseHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/util/NoiseHelperTest.java" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/util/NoiseHelperTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/DataProfile.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/DataProfile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Inconsist1.json" afterPath="$PROJECT_DIR$/examples/Inconsist1.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/PredicateConstraint.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/PredicateConstraint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/constraint/PredicateTest.java" afterPath="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/constraint/PredicateTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialect.java" afterPath="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qnoise.iml" afterPath="$PROJECT_DIR$/qnoise.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test.iml" afterPath="$PROJECT_DIR$/test/test.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/findbugs-idea.xml" afterPath="$PROJECT_DIR$/.idea/findbugs-idea.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="qnoise.iws" />
@@ -88,7 +68,7 @@
       </breakpoint>
     </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/util/NoiseHelperTest.java" line="39" class="qa.qcri.qnoise.test.util.NoiseHelperTest" package="qa.qcri.qnoise.test.util">
+      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/util/NoiseHelperTest.java" line="42" class="qa.qcri.qnoise.test.util.NoiseHelperTest" package="qa.qcri.qnoise.test.util">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -103,7 +83,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java" line="73" class="qa.qcri.qnoise.test.inject.MissingInjectTest" package="qa.qcri.qnoise.test.inject">
+      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java" line="72" class="qa.qcri.qnoise.test.inject.MissingInjectTest" package="qa.qcri.qnoise.test.inject">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -163,21 +143,6 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" line="158" class="qa.qcri.qnoise.NoiseReport" package="qa.qcri.qnoise">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/DuplicateInjectTest.java" line="86" class="qa.qcri.qnoise.test.inject.DuplicateInjectTest" package="qa.qcri.qnoise.test.inject">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
@@ -223,7 +188,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java" line="83" class="qa.qcri.qnoise.test.inject.MissingInjectTest" package="qa.qcri.qnoise.test.inject">
+      <breakpoint url="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java" line="82" class="qa.qcri.qnoise.test.inject.MissingInjectTest" package="qa.qcri.qnoise.test.inject">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -248,108 +213,7 @@
     <favorites_list name="qnoise" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="PredicateTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/constraint/PredicateTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="0" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1309">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PredicateConstraint.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/PredicateConstraint.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="33" selection-start="3971" selection-end="3971" vertical-scroll-proportion="0.0" vertical-offset="1972" max-vertical-offset="2924">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NoiseReport.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="41" selection-start="4557" selection-end="4565" vertical-scroll-proportion="0.7533235" vertical-offset="1343" max-vertical-offset="3196">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MissingInjectTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="63" selection-start="2954" selection-end="2954" vertical-scroll-proportion="0.0" vertical-offset="1309" max-vertical-offset="1632">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MissingInjector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/inject/MissingInjector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="0" selection-start="1857" selection-end="1857" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1751">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestSpecFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/TestSpecFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="24" selection-start="342" selection-end="342" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="578">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DuplicateInjectTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/DuplicateInjectTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="86" selection-start="2552" selection-end="2552" vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="1700">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="60" selection-start="4620" selection-end="4620" vertical-scroll-proportion="0.0" vertical-offset="1711" max-vertical-offset="2448">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Qnoise.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="16" selection-start="2550" selection-end="2550" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="2703">
-              <folding>
-                <element signature="e#2044#2052#0" expanded="true" />
-                <element signature="e#2238#2252#0" expanded="true" />
-                <element signature="e#2486#2494#0" expanded="true" />
-                <element signature="e#4532#4556#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NoiseSpec.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="35" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1717">
-              <folding>
-                <element signature="e#1363#1393#0" expanded="true" />
-                <element signature="e#1614#1644#0" expanded="true" />
-                <element signature="e#1739#1769#0" expanded="true" />
-                <element signature="e#1966#1996#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -382,19 +246,16 @@
         <option value="$PROJECT_DIR$/examples/Missing2.json" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/examples/Duplicate1.json" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/OperationType.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/NoiseHelper.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/FunctionDependencyConstraint.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/InconsistencyInjector.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/PredicateConstraint.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/Constraint.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/sql/SQLDialect.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/MissingInjector.java" />
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/TestspecFactory.java" />
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/util/NoiseHelperTest.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/inject/DuplicateInjector.java" />
-        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java" />
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/InconsistencyTest.java" />
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/constraint/PredicateTest.java" />
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/TestSpecFactory.java" />
@@ -402,16 +263,22 @@
         <option value="$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/DuplicateInjectTest.java" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/DataType.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java" />
+        <option value="$PROJECT_DIR$/examples/Ocean1.json" />
         <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/PredicateConstraint.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java" />
+        <option value="$PROJECT_DIR$/src/qa/qcri/qnoise/DataProfile.java" />
+        <option value="$PROJECT_DIR$/examples/Inconsist1.json" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1919" />
-    <option name="y" value="24" />
     <option name="width" value="1922" />
-    <option name="height" value="1153" />
+    <option name="height" value="1201" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -494,8 +361,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -824,6 +689,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -836,7 +703,7 @@
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.sourceCode.General" />
+    <property name="options.lastSelected" value="org.twodividedbyzero.idea.findbugs" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/vendors/json-simple-1.1.1.jar!/" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeJavaFiles" value="false" />
@@ -865,7 +732,7 @@
       <recent name="qa.qcri.qnoise.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Qnoise - Duplicate 1">
+  <component name="RunManager" selected="Application.Qnoise - Inconsistency 1">
     <configuration default="false" name="PredicateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1036,6 +903,26 @@
       <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -1108,6 +995,25 @@
       </option>
       <envs />
       <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
@@ -1300,7 +1206,30 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="12">
+    <configuration default="false" name="Qnoise - Ocean 1" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="qa.qcri.qnoise.Qnoise" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="-f examples/Ocean1.json -o test.csv" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="qnoise" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <list size="13">
       <item index="0" class="java.lang.String" itemvalue="Application.Qnoise - Duplicate 1" />
       <item index="1" class="java.lang.String" itemvalue="Application.Qnoise - Inconsistency 1" />
       <item index="2" class="java.lang.String" itemvalue="Application.Qnoise - Inconsistency 3" />
@@ -1308,11 +1237,12 @@
       <item index="4" class="java.lang.String" itemvalue="Application.Qnoise - Missing 2" />
       <item index="5" class="java.lang.String" itemvalue="Application.Qnoise - Inconsistency 2" />
       <item index="6" class="java.lang.String" itemvalue="Application.Qnoise - Duplicate 2" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.PredicateTest" />
-      <item index="8" class="java.lang.String" itemvalue="JUnit.DuplicateInjectTest" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.CSVImportTest" />
-      <item index="10" class="java.lang.String" itemvalue="JUnit.qa.qcri.qnoise.test in test" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.MissingInjectTest" />
+      <item index="7" class="java.lang.String" itemvalue="Application.Qnoise - Ocean 1" />
+      <item index="8" class="java.lang.String" itemvalue="JUnit.PredicateTest" />
+      <item index="9" class="java.lang.String" itemvalue="JUnit.DuplicateInjectTest" />
+      <item index="10" class="java.lang.String" itemvalue="JUnit.CSVImportTest" />
+      <item index="11" class="java.lang.String" itemvalue="JUnit.qa.qcri.qnoise.test in test" />
+      <item index="12" class="java.lang.String" itemvalue="JUnit.MissingInjectTest" />
     </list>
     <recent_temporary>
       <list size="5">
@@ -1339,7 +1269,10 @@
       <workItem from="1388647354301" duration="4613000" />
       <workItem from="1388661579876" duration="2598000" />
       <workItem from="1388905085821" duration="13046000" />
-      <workItem from="1388928533100" duration="1298000" />
+      <workItem from="1388928533100" duration="2031000" />
+      <workItem from="1389096556026" duration="3151000" />
+      <workItem from="1389854658804" duration="89000" />
+      <workItem from="1389854762010" duration="789000" />
     </task>
     <task id="LOCAL-00001" summary="Adds CSV import to DB (by default DerbyDB is used).">
       <created>1382275255858</created>
@@ -1381,36 +1314,48 @@
       <created>1386750834686</created>
       <updated>1386750834686</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Adds support for change logging, and minor bug fixes.">
+      <created>1388991653031</created>
+      <updated>1388991653031</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Adds support for change logging, and minor bug fixes (missing jar file).">
+      <created>1388991741027</created>
+      <updated>1388991741027</updated>
+    </task>
+    <task id="LOCAL-00013" summary="- Better Logging into CSV file.&#10;- Support separator when reading CSV input.">
+      <created>1389099327785</created>
+      <updated>1389099327785</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22555000" />
+    <option name="totallyTimeSpent" value="27317000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1919" y="24" width="1922" height="1153" extended-state="6" />
+    <frame x="1919" y="0" width="1922" height="1201" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3122568" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31040892" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.32976654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="438" y="15" width="1040" height="504" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.32976654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="438" y="24" width="1040" height="504" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30352047" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.302974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976654" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949513" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806692" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258755" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.40021345" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.23212379" sideWeight="0.47103512" order="0" side_tool="false" content_ui="combo" x="1485" y="13" width="435" height="1163" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.23212379" sideWeight="0.47103512" order="0" side_tool="false" content_ui="combo" x="1485" y="24" width="435" height="1152" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27626458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="2036" y="141" width="1722" height="1001" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1418,6 +1363,7 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32757053" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258755" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1447,7 +1393,10 @@
     <MESSAGE value="- Adds Approximate duplication." />
     <MESSAGE value="- Adds Inconsistency constraint." />
     <MESSAGE value="- Adds support for predicate and FD.&#10;- Adds unittests.&#10;- Adds noise examples." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Adds support for predicate and FD.&#10;- Adds unittests.&#10;- Adds noise examples." />
+    <MESSAGE value="Adds support for change logging, and minor bug fixes." />
+    <MESSAGE value="Adds support for change logging, and minor bug fixes (missing jar file)." />
+    <MESSAGE value="- Better Logging into CSV file.&#10;- Support separator when reading CSV input." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Better Logging into CSV file.&#10;- Support separator when reading CSV input." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1458,38 +1407,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/Missing2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="40" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="306">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/dumptest.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="176" selection-end="176" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="323" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="0" selection-end="225" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="272" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseGranularity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="231" selection-end="231" vertical-scroll-proportion="0.27530363" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/personal.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="6" selection-start="134" selection-end="143" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/dumptest.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="176" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/dumptest.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="176" selection-end="176" vertical-scroll-proportion="0.20673527" vertical-offset="0" max-vertical-offset="1069" />
@@ -1507,19 +1424,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/DataType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="12" selection-start="180" selection-end="180" vertical-scroll-proportion="0.11131899" vertical-offset="0" max-vertical-offset="1069">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="45" column="16" selection-start="1153" selection-end="1153" vertical-scroll-proportion="-19.448277" vertical-offset="201" max-vertical-offset="986" />
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Inconsist1.json">
@@ -1527,40 +1437,9 @@
         <state line="8" column="25" selection-start="240" selection-end="240" vertical-scroll-proportion="0.1303931" vertical-offset="0" max-vertical-offset="1043" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Inconsist2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Inconsist3.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="760" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="0" selection-end="225" vertical-scroll-proportion="0.08149569" vertical-offset="0" max-vertical-offset="1043" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/Missing1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="199" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="759">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/Inconsist1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="2" selection-start="306" selection-end="306" vertical-scroll-proportion="0.23379175" vertical-offset="0" max-vertical-offset="1018">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/Missing2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="8" selection-start="292" selection-end="292" vertical-scroll-proportion="0.20039293" vertical-offset="0" max-vertical-offset="1018">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/NoiseHelper.java">
@@ -1580,13 +1459,6 @@
     <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="107" column="19" selection-start="3638" selection-end="3638" vertical-scroll-proportion="0.3328336" vertical-offset="1036" max-vertical-offset="52292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/inject/InconsistencyInjector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="8" selection-start="2441" selection-end="2441" vertical-scroll-proportion="0.0" vertical-offset="247" max-vertical-offset="1343">
           <folding />
         </state>
       </provider>
@@ -1619,26 +1491,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/Constraint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="557" selection-end="557" vertical-scroll-proportion="0.30937216" vertical-offset="0" max-vertical-offset="1099">
-          <folding>
-            <element signature="e#0#557#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/util/NoiseHelperTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="36" selection-start="2451" selection-end="2536" vertical-scroll-proportion="0.0" vertical-offset="626" max-vertical-offset="1700">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="23" selection-start="1638" selection-end="1638" vertical-scroll-proportion="0.0" vertical-offset="275" max-vertical-offset="1445">
           <folding />
         </state>
       </provider>
@@ -1660,18 +1515,6 @@
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/inject/DuplicateInjector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="19" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Duplicate1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="65" selection-start="37" selection-end="84" vertical-scroll-proportion="0.03168686" vertical-offset="0" max-vertical-offset="1073" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/Duplicate1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="1" selection-start="254" selection-end="254" vertical-scroll-proportion="0.19012116" vertical-offset="0" max-vertical-offset="1073">
           <folding />
         </state>
       </provider>
@@ -1698,56 +1541,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/TestSpecFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="24" selection-start="342" selection-end="342" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+        <state line="9" column="3" selection-start="210" selection-end="210" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="493">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="20" selection-start="0" selection-end="318" vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="306" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/MissingInjectTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="63" selection-start="2954" selection-end="2954" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1309">
+        <state line="76" column="63" selection-start="2923" selection-end="2923" vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="1615">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/inject/DuplicateInjectTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="86" selection-start="2552" selection-end="2552" vertical-scroll-proportion="0.0" vertical-offset="657" max-vertical-offset="1394">
+        <state line="74" column="55" selection-start="2552" selection-end="2552" vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="1700">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="60" selection-start="4620" selection-end="4620" vertical-scroll-proportion="0.0" vertical-offset="1711" max-vertical-offset="2448">
+        <state line="138" column="0" selection-start="4620" selection-end="4620" vertical-scroll-proportion="0.0" vertical-offset="1711" max-vertical-offset="2448">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/constraint/PredicateTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="0" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.0" vertical-offset="301" max-vertical-offset="1258">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/PredicateConstraint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="33" selection-start="3971" selection-end="3971" vertical-scroll-proportion="0.0" vertical-offset="1823" max-vertical-offset="2737">
+        <state line="58" column="0" selection-start="1834" selection-end="1834" vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="1292">
           <folding />
         </state>
       </provider>
@@ -1764,33 +1588,174 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/personal.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="16" selection-start="2550" selection-end="2550" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="2703">
-          <folding>
-            <element signature="e#2044#2052#0" expanded="true" />
-            <element signature="e#2238#2252#0" expanded="true" />
-            <element signature="e#2486#2494#0" expanded="true" />
-            <element signature="e#4532#4556#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="14" column="6" selection-start="134" selection-end="143" vertical-scroll-proportion="-8.206897" vertical-offset="0" max-vertical-offset="544" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseSpec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="35" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1717">
+        <state line="97" column="21" selection-start="2778" selection-end="2778" vertical-scroll-proportion="0.5" vertical-offset="1122" max-vertical-offset="1836">
           <folding>
-            <element signature="e#1363#1393#0" expanded="true" />
-            <element signature="e#1614#1644#0" expanded="true" />
-            <element signature="e#1739#1769#0" expanded="true" />
-            <element signature="e#1966#1996#0" expanded="true" />
+            <element signature="e#1348#1378#0" expanded="true" />
+            <element signature="e#1599#1629#0" expanded="true" />
+            <element signature="e#1724#1754#0" expanded="true" />
+            <element signature="e#1951#1981#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/DataType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0952381" vertical-offset="0" max-vertical-offset="714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/Tracer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="69" selection-start="655" selection-end="655" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="2040">
+          <folding>
+            <element signature="e#0#2915#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/Constraint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="24" selection-start="478" selection-end="478" vertical-scroll-proportion="0.44412193" vertical-offset="0" max-vertical-offset="689">
+          <folding>
+            <element signature="e#0#557#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/inject/InconsistencyInjector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="30" selection-start="1825" selection-end="1825" vertical-scroll-proportion="0.36834735" vertical-offset="247" max-vertical-offset="1343">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="235" column="0" selection-start="8058" selection-end="8058" vertical-scroll-proportion="0.35714287" vertical-offset="3281" max-vertical-offset="3995" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/vendors/javatuples-1.2.jar!/org/javatuples/Quartet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="163" selection-end="163" vertical-scroll-proportion="0.12573965" vertical-offset="0" max-vertical-offset="3434" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/NoiseReport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="41" selection-start="4557" selection-end="4565" vertical-scroll-proportion="0.7533235" vertical-offset="1343" max-vertical-offset="3196">
+        <state line="133" column="16" selection-start="4555" selection-end="4555" vertical-scroll-proportion="0.0" vertical-offset="2312" max-vertical-offset="3604">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/constraint/PredicateConstraint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="26" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2737">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/util/CSVTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="37" selection-start="2278" selection-end="2278" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1479">
+          <folding>
+            <marker date="1389099551807" expanded="true" signature="-1:-1" placeholder="DROP TABLE m..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Missing2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="8" selection-start="292" selection-end="292" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Duplicate1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="1" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/Qnoise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2737">
+          <folding>
+            <element signature="e#2101#2109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qa/qcri/qnoise/DataProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="8" selection-start="2157" selection-end="2157" vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="4029">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Duplicate2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1046">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Duplicate1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="65" selection-start="37" selection-end="84" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="323">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="12" selection-start="0" selection-end="225" vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="272">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Missing2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="20" selection-start="0" selection-end="318" vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/qa/qcri/qnoise/test/input/Inconsist2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="323">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Ocean1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="16" selection-start="432" selection-end="461" vertical-scroll-proportion="-12.423077" vertical-offset="0" max-vertical-offset="595">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Missing1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="199" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="759">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Inconsist1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="19" selection-start="336" selection-end="336" vertical-scroll-proportion="0.3717201" vertical-offset="0" max-vertical-offset="686">
           <folding />
         </state>
       </provider>

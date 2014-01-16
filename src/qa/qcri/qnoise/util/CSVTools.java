@@ -6,6 +6,7 @@
 package qa.qcri.qnoise.util;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import qa.qcri.qnoise.sql.DBConfig;
 import qa.qcri.qnoise.sql.DBTools;
 import qa.qcri.qnoise.sql.SQLDialect;
@@ -51,25 +52,27 @@ public class CSVTools {
             // create table based on the header
             reader = new BufferedReader(new FileReader(file));
             String header = reader.readLine();
-            String[] columns = header.split(Character.toString(delimiter));
-            StringBuilder schemaSql = new StringBuilder("CREATE TABLE " + tableName + " (");
-            boolean isFirst = true;
-            for (String column : columns) {
-                if (!isFirst) {
-                    schemaSql.append(",");
+            if (!Strings.isNullOrEmpty(header)) {
+                String[] columns = header.split(Character.toString(delimiter));
+                StringBuilder schemaSql = new StringBuilder("CREATE TABLE " + tableName + " (");
+                boolean isFirst = true;
+                for (String column : columns) {
+                    if (!isFirst) {
+                        schemaSql.append(",");
+                    }
+                    isFirst = false;
+                    schemaSql.append(column).append(" VARCHAR(10240) ");
                 }
-                isFirst = false;
-                schemaSql.append(column).append(" VARCHAR(10240) ");
-            }
-            schemaSql.append(")");
-            stat.execute(schemaSql.toString());
+                schemaSql.append(")");
+                stat.execute(schemaSql.toString());
 
-            SQLDialect dialect = dbConfig.getDialect();
-            SQLDialectBase dialectBase = SQLDialectBase.createDialectBaseInstance(dialect);
-            if (dialectBase.supportBulkLoad()) {
-                result = dialectBase.bulkLoad(dbConfig, tableName, file, delimiter);
-            } else {
-                throw new UnsupportedOperationException("Non-bulk loading is not yet implemented.");
+                SQLDialect dialect = dbConfig.getDialect();
+                SQLDialectBase dialectBase = SQLDialectBase.createDialectBaseInstance(dialect);
+                if (dialectBase.supportBulkLoad()) {
+                    result = dialectBase.bulkLoad(dbConfig, tableName, file, delimiter);
+                } else {
+                    throw new UnsupportedOperationException("Non-bulk loading is not yet implemented.");
+                }
             }
         } finally {
             try {

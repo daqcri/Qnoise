@@ -17,6 +17,7 @@ import qa.qcri.qnoise.util.Tracer;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -126,7 +127,11 @@ public class NoiseReport {
     public void saveToFile(String fileName) {
         OutputStreamWriter writer = null;
         try {
-            writer = new OutputStreamWriter(new FileOutputStream(fileName));
+            writer =
+                new OutputStreamWriter(
+                    new FileOutputStream(fileName),
+                    Charset.forName("UTF-8")
+                );
             writer.write("operation;row;column;oldvalue;newvalue");
             writer.write(System.lineSeparator());
             for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {

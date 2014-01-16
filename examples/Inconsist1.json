@@ -1,7 +1,8 @@
 {
     "source" : {
         "path" : "examples/personal.csv",
-        "type" : ["TEXT", "NUMERICAL", "TEXT"]
+        "type" : ["TEXT", "NUMERICAL", "TEXT"],
+        "csvseparator" : ","
     },
     "noise" : {
         "noisetype" : "i",

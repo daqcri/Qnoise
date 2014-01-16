@@ -53,6 +53,7 @@ public class DataProfile {
     }
 
     public List<String[]> getData() {
+
         return data;
     }
 
@@ -69,6 +70,9 @@ public class DataProfile {
     }
 
     public int getColumnIndex(String columnName) {
+        if (!indexes.containsKey(columnName)) {
+            throw new IllegalArgumentException(columnName + " cannot be found.");
+        }
         return indexes.get(columnName);
     }
 
