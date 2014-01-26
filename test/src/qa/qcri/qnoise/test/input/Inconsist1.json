@@ -1,7 +1,8 @@
 {
     "source" : {
         "path" : "test/src/qa/qcri/qnoise/test/input/personal.csv",
-        "type" : ["TEXT", "NUMERICAL", "TEXT"]
+        "type" : ["TEXT", "NUMERICAL", "TEXT"],
+        "csvseparator" : ","
     },
     "noise" : {
         "noisetype" : "i",

@@ -94,7 +94,12 @@ public class Qnoise {
             }
 
             fileName = line.getOptionValue("o");
-            writer = new CSVWriter(new FileWriter(fileName));
+            writer = new CSVWriter(
+                new FileWriter(fileName),
+                spec.getValue(NoiseSpec.SpecEntry.CSVSeparator, ';'),
+                CSVWriter.NO_QUOTE_CHARACTER,
+                CSVWriter.NO_ESCAPE_CHARACTER
+            );
             profile.writeData(writer);
             report.appendMetric(NoiseReport.Metric.OutputFilePath, fileName);
             report.addMetric(NoiseReport.Metric.OutputRow, profile.getLength());
