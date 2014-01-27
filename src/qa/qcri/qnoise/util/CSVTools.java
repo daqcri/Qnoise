@@ -87,7 +87,9 @@ public class CSVTools {
                 if (reader != null) {
                     reader.close();
                 }
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         return result;
     }

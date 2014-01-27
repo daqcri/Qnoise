@@ -59,11 +59,12 @@ public class OutlierInjector extends InjectorBase {
         ModelBase randomModal = ModelFactory.createRandomModel();
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         int index = randomModal.nextIndexWithoutReplacement(0, profile.getLength(), true);
+        Random random = new Random();
         for (int i = 0; i < len; i ++) {
             // TODO: should we ignore the point already in the outlier region
             // how to deal with small deviation data?
             double u = Math.random() * (rmax - lmax) + lmax;
-            double v = new Random().nextGaussian() + u;
+            double v = random.nextGaussian() + u;
             tracer.verbose(String.format("[%d, %d] <- %f", index, columnIndex, v));
             report.logChange(
                 index, columnIndex, profile.getCell(index, columnIndex), Double.toString(v)
