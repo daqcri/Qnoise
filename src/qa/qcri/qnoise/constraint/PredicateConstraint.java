@@ -45,7 +45,7 @@ public class PredicateConstraint extends Constraint {
         String[] tuple = profile.getTuple(index);
         int columnIndex = profile.getColumnIndex(leftHand);
         DataType type = profile.getType(columnIndex);
-        if (type != DataType.NUMERICAL) {
+        if (type != DataType.Numerical) {
             throw new IllegalArgumentException("The given index is not a numerical type.");
         }
 
@@ -82,7 +82,7 @@ public class PredicateConstraint extends Constraint {
         String[] tuple = profile.getTuple(index);
         int columnIndex = profile.getColumnIndex(leftHand);
         DataType type = profile.getType(columnIndex);
-        if (type != DataType.NUMERICAL) {
+        if (type != DataType.Numerical) {
             throw new IllegalArgumentException("The given index is not a numerical type.");
         }
         ModelBase indexGen = ModelFactory.createRandomModel();

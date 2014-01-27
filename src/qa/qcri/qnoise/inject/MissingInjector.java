@@ -9,7 +9,7 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
 import org.javatuples.Pair;
 import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseGranularity;
+import qa.qcri.qnoise.GranularityType;
 import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.model.ModelBase;
@@ -33,19 +33,18 @@ public class MissingInjector extends InjectorBase {
     ) {
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
-        NoiseModel model =
-            NoiseModel.fromString(spec.<String>getValue(NoiseSpec.SpecEntry.Model));
+        NoiseModel model = spec.model;
         ModelBase randomModel = ModelFactory.createRandomModel();
 
         ModelBase indexGen;
         if (model == NoiseModel.Random) {
             indexGen = ModelFactory.createRandomModel();
         } else {
-            String columnName = spec.getValue(NoiseSpec.SpecEntry.Column);
+            String columnName = spec.filteredColumns.get(0);
             indexGen = ModelFactory.createHistogramModel(dataProfile, columnName);
         }
 
-        double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+        double perc = spec.percentage;
         List<String[]> data = dataProfile.getData();
 
         int len = (int)Math.floor(perc * data.size());
@@ -53,12 +52,8 @@ public class MissingInjector extends InjectorBase {
         int count = 0;
         while(count < len) {
             int index = indexGen.nextIndex(0, data.size());
-            NoiseGranularity granularity =
-                NoiseGranularity.fromString(
-                    (String)spec.getValue(NoiseSpec.SpecEntry.Granularity)
-                );
-
-            if (granularity == NoiseGranularity.CELL) {
+            GranularityType granularity = spec.granularity;
+            if (granularity == GranularityType.Cell) {
                 String[] rowData = data.get(index);
                 int cellIndex = randomModel.nextIndex(0, rowData.length);
                 Pair<Integer, Integer> record = new Pair<>(index, cellIndex);

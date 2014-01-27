@@ -1,11 +1,11 @@
 {
     "source" : {
         "path" : "examples/personal.csv",
-        "type" : ["TEXT", "NUMERICAL", "TEXT"],
-        "csvseparator" : ","
+        "type" : ["Text", "Numerical", "Text"],
+        "csvSeparator" : ","
     },
     "noise" : {
-        "noisetype" : "i",
+        "noiseType" : "i",
         "granularity" : "row",
         "constraint" : "age>40",
         "percentage" : 0.2,

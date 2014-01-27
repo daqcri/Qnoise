@@ -4,9 +4,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/vendors/javatuples-1.2.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/vendors/javatuples-1.2-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

@@ -43,17 +43,19 @@ public class NoiseReport {
         InjectionTimestamp,
         InputFilePath,
         OutputFilePath,
-        Schema
+        Schema,
+        LogFile
     }
 
     public NoiseReport(NoiseSpec spec) {
-        appendMetric(Metric.Type, spec.getValue(NoiseSpec.SpecEntry.NoiseType));
-        appendMetric(Metric.Model, spec.getValue(NoiseSpec.SpecEntry.Model));
-        appendMetric(Metric.Percentage, spec.getValue(NoiseSpec.SpecEntry.Percentage));
-        appendMetric(Metric.Granularity, spec.getValue(NoiseSpec.SpecEntry.Granularity));
-        appendMetric(Metric.PercentageOfSeed, spec.getValue(NoiseSpec.SpecEntry.NumberOfSeed));
+        appendMetric(Metric.Type, spec.noiseType);
+        appendMetric(Metric.Model, spec.model);
+        appendMetric(Metric.Percentage, spec.percentage);
+        appendMetric(Metric.Granularity, spec.granularity);
+        appendMetric(Metric.PercentageOfSeed, spec.numberOfSeed);
         appendMetric(Metric.InjectionTimestamp, new Timestamp(new Date().getTime()).toString());
-        appendMetric(Metric.InputFilePath, spec.getValue(NoiseSpec.SpecEntry.InputFile));
+        appendMetric(Metric.InputFilePath, spec.inputFile);
+        appendMetric(Metric.LogFile, spec.logFile);
     }
 
     public synchronized void logChange(int i, int j, String oldValue, String newValue) {
@@ -173,6 +175,7 @@ public class NoiseReport {
         tracer.info(formatMetric(Metric.InputFilePath, "Input file path"));
         tracer.info(formatMetric(Metric.OutputFilePath, "Output file path"));
         tracer.info(formatMetric(Metric.Schema, "Schema"));
+        tracer.info(formatMetric(Metric.LogFile, "LogFile"));
         tracer.info("----------------------------------------------------------------");
     }
 
@@ -194,6 +197,8 @@ public class NoiseReport {
                     outputBuilder.append(String.format("%-9d", metric));
                 } else if (metric instanceof Double) {
                     outputBuilder.append(String.format("%-9.2f", metric));
+                } else {
+                    outputBuilder.append(metric.toString());
                 }
             }
             result = outputBuilder.toString();

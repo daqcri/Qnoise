@@ -1,10 +1,10 @@
 {
     "source" : {
         "path" : "examples/dumptest.csv",
-        "type" : ["NUMERICAL", "TEXT", "TEXT", "TEXT", "NUMERICAL"]
+        "type" : ["Numerical", "Text", "Text", "Text", "Numerical"]
     },
     "noise" : {
-        "NoiseType" : "m",
+        "noiseType" : "m",
         "granularity" : "cell",
         "percentage" : 0.5,
         "model" : "h",

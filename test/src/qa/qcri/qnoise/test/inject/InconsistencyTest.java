@@ -31,9 +31,9 @@ public class InconsistencyTest {
         try {
             CSVReader reader = new CSVReader(new FileReader(TestDataRepository.PERSONALDATA));
             List<String> types = Lists.newArrayList();
-            types.add("TEXT");
-            types.add("NUMERICAL");
-            types.add("TEXT");
+            types.add("Text");
+            types.add("Numerical");
+            types.add("Text");
             profile = DataProfile.readData(reader, types);
             Tracer.setVerbose(true);
         } catch (Exception ex) {
@@ -53,7 +53,7 @@ public class InconsistencyTest {
             new InconsistencyInjector().inject(spec, profile, report);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
                 report.getLogBook();
-            double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+            double perc = spec.percentage;
             int changedItem = (int)(Math.ceil(perc * profile.getLength()));
             Assert.assertEquals(changedItem, logBook.size());
         } catch (Exception ex) {
@@ -73,7 +73,7 @@ public class InconsistencyTest {
             new InconsistencyInjector().inject(spec, profile, report);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
                 report.getLogBook();
-            double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+            double perc = spec.percentage;
             int changedItem = (int)(Math.ceil(perc * profile.getLength()));
             Assert.assertEquals(changedItem, logBook.size());
         } catch (Exception ex) {
@@ -92,20 +92,20 @@ public class InconsistencyTest {
 
             CSVReader reader =
                 new CSVReader(
-                    new FileReader(spec.<String>getValue(NoiseSpec.SpecEntry.InputFile))
+                    new FileReader(spec.inputFile)
                 );
 
             DataProfile profile =
                 DataProfile.readData(
                     reader,
-                    (List<String>)spec.getValue(NoiseSpec.SpecEntry.Schema)
+                    spec.schema
                 );
 
             NoiseReport report = new NoiseReport(spec);
             new InconsistencyInjector().inject(spec, profile, report);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
                 report.getLogBook();
-            double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+            double perc = spec.percentage;
             int changedItem = (int)(Math.ceil(perc * profile.getLength()));
             Assert.assertEquals(changedItem, logBook.size());
         } catch (Exception ex) {

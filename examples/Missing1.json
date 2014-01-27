@@ -3,7 +3,7 @@
         "path" : "examples/dumptest.csv"
     },
     "noise" : {
-        "NoiseType" : "m",
+        "noiseType" : "m",
         "granularity" : "cell",
         "percentage" : 0.5,
         "model" : "r"

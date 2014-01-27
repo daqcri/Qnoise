@@ -30,11 +30,11 @@ public class DuplicateInjectTest {
         try {
             CSVReader reader = new CSVReader(new FileReader(TestDataRepository.DUMPTEST));
             List<String> schema = Lists.newArrayList();
-            schema.add("NUMERICAL");
-            schema.add("TEXT");
-            schema.add("TEXT");
-            schema.add("TEXT");
-            schema.add("NUMERICAL");
+            schema.add("Numerical");
+            schema.add("Text");
+            schema.add("Text");
+            schema.add("Text");
+            schema.add("Numerical");
             profile = DataProfile.readData(reader, schema);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -48,8 +48,8 @@ public class DuplicateInjectTest {
             NoiseSpec spec =
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Duplicate1.json");
             NoiseReport report = new NoiseReport(spec);
-            double seedperc = spec.getValue(NoiseSpec.SpecEntry.NumberOfSeed);
-            double timeperc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+            double seedperc = spec.numberOfSeed;
+            double timeperc = spec.percentage;
 
             int nseed = (int)(Math.ceil(profile.getLength() * seedperc));
             int ntime = (int)(Math.ceil(profile.getLength() * timeperc));
@@ -73,8 +73,8 @@ public class DuplicateInjectTest {
             NoiseSpec spec =
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Duplicate2.json");
             NoiseReport report = new NoiseReport(spec);
-            double seedperc = spec.getValue(NoiseSpec.SpecEntry.NumberOfSeed);
-            double timeperc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+            double seedperc = spec.numberOfSeed;
+            double timeperc = spec.percentage;
 
             int nseed = (int)(Math.ceil(profile.getLength() * seedperc));
             int ntime = (int)(Math.ceil(profile.getLength() * timeperc));

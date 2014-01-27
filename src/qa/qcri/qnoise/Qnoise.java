@@ -6,22 +6,20 @@ package qa.qcri.qnoise;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import org.apache.commons.cli.*;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import qa.qcri.qnoise.inject.DuplicateInjector;
 import qa.qcri.qnoise.inject.InconsistencyInjector;
 import qa.qcri.qnoise.inject.MissingInjector;
+import qa.qcri.qnoise.inject.OutlierInjector;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * Qnoise launcher.
@@ -47,39 +45,25 @@ public class Qnoise {
                 throw new FileNotFoundException("Input file " + fileName + " does not exist.");
             }
 
-            JSONObject input =
-                (JSONObject)JSONValue.parse(
+            JsonReader jsonReader =
+                new JsonReader(
                     new InputStreamReader(
                         new FileInputStream(fileName),
                         Charset.forName("UTF-8")
                     )
                 );
 
-            if (input == null) {
-                throw new IllegalArgumentException("Input file is not a valid JSON file.");
-            }
-
-            NoiseSpec spec = NoiseSpec.valueOf(input);
-
+            GsonBuilder gson = new GsonBuilder();
+            gson.registerTypeAdapter(NoiseSpec.class, new NoiseSpecDeserializer());
+            gson.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+            NoiseSpec spec = gson.create().fromJson(jsonReader, NoiseSpec.class);
             NoiseReport report = new NoiseReport(spec);
             reader =
-                new CSVReader(
-                    new FileReader(spec.<String>getValue(NoiseSpec.SpecEntry.InputFile)),
-                    spec.getValue(NoiseSpec.SpecEntry.CSVSeparator, ';')
-                );
+                new CSVReader(new FileReader(spec.inputFile), spec.csvSeparator);
 
-            DataProfile profile =
-                DataProfile.readData(
-                    reader,
-                    spec.<List<String>>getValue(NoiseSpec.SpecEntry.Schema)
-                );
-
+            DataProfile profile = DataProfile.readData(reader, spec.schema);
             report.addMetric(NoiseReport.Metric.InputRow, profile.getLength());
-            NoiseType noiseType =
-                NoiseType.fromString(
-                    spec.<String>getValue(NoiseSpec.SpecEntry.NoiseType)
-                );
-            switch (noiseType) {
+            switch (spec.noiseType) {
                 case Missing:
                     new MissingInjector().inject(spec, profile, report);
                     break;
@@ -89,6 +73,9 @@ public class Qnoise {
                 case Inconsistency:
                     new InconsistencyInjector().inject(spec, profile, report);
                     break;
+                case Outlier:
+                    new OutlierInjector().inject(spec, profile, report);
+                    break;
                 default:
                     throw new UnsupportedOperationException("Unknown noise type.");
             }
@@ -96,21 +83,14 @@ public class Qnoise {
             fileName = line.getOptionValue("o");
             writer = new CSVWriter(
                 new FileWriter(fileName),
-                spec.getValue(NoiseSpec.SpecEntry.CSVSeparator, ';'),
+                spec.csvSeparator,
                 CSVWriter.NO_QUOTE_CHARACTER,
                 CSVWriter.NO_ESCAPE_CHARACTER
             );
             profile.writeData(writer);
             report.appendMetric(NoiseReport.Metric.OutputFilePath, fileName);
             report.addMetric(NoiseReport.Metric.OutputRow, profile.getLength());
-
-            Calendar calendar = Calendar.getInstance();
-            DateFormat dateFormat = new SimpleDateFormat("MMddHHmmss");
-            String logFileName = "log" + dateFormat.format(calendar.getTime()) + ".csv";
-
-            report.saveToFile(
-                spec.getValue(NoiseSpec.SpecEntry.LogFile, logFileName)
-            );
+            report.saveToFile(spec.logFile);
             report.print();
 
         } catch (MissingOptionException me) {

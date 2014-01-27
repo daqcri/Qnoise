@@ -25,8 +25,8 @@ public class DuplicateInjector extends InjectorBase {
         Stopwatch stopwatch = new Stopwatch().start();
         ModelBase indexGen =
             ModelFactory.createRandomModel();
-        double seedperc = spec.getValue(NoiseSpec.SpecEntry.NumberOfSeed);
-        double timeperc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+        double seedperc = spec.numberOfSeed;
+        double timeperc = spec.percentage;
 
         int nseed = (int)(Math.ceil(profile.getLength() * seedperc));
         int ntime = (int)(Math.ceil(profile.getLength() * timeperc));
@@ -38,10 +38,10 @@ public class DuplicateInjector extends InjectorBase {
             for (int i = 0; i < ntime; i ++) {
                 String[] oldData = profile.getTuple(index);
                 String[] newData = oldData.clone();
-                double distance = spec.getValue(NoiseSpec.SpecEntry.Distance);
+                double distance = spec.distance;
                 String[] columns = null;
-                if (spec.hasEntry(NoiseSpec.SpecEntry.Column)) {
-                    List<String> tmp = spec.getValue(NoiseSpec.SpecEntry.Column);
+                if (spec.filteredColumns != null) {
+                    List<String> tmp = spec.filteredColumns;
                     columns = new String[tmp.size()];
                     for (int j = 0; j < columns.length; j ++) {
                         columns[j] = tmp.get(j);

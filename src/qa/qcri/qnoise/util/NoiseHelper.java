@@ -83,7 +83,7 @@ public class NoiseHelper {
             String newValue = "";
 
             switch (type) {
-                case TEXT:
+                case Text:
                     StringBuilder sb = new StringBuilder(currentValue);
                     int len = (int)Math.floor(distance * sb.length() * 0.01);
                     // TODO: currently we start to mess the text from the 1st char.
@@ -99,13 +99,13 @@ public class NoiseHelper {
                     }
                     newValue = sb.toString();
                     break;
-                case NUMERICAL:
+                case Numerical:
                     double std = profile.getStandardDeviationOn(columnName);
                     double nvalue =
                         distance * 0.01 * std * getRandomSign() + Double.parseDouble(currentValue);
                     newValue = Double.toString(nvalue);
                     break;
-                case ENUM:
+                case Categorical:
                     for (int j = 0; j < profile.getLength(); j ++) {
                         String t = profile.getCell(j, columnIndex);
                         if (!t.equals(currentValue)) {

@@ -5,22 +5,22 @@
 
 package qa.qcri.qnoise;
 
-public enum NoiseGranularity {
-    COLUMN,
-    ROW,
-    CELL;
+public enum GranularityType {
+    Column,
+    Row,
+    Cell;
 
-    public static NoiseGranularity fromString(String granularity) {
+    public static GranularityType fromString(String granularity) {
         if (granularity.equalsIgnoreCase("row")) {
-            return NoiseGranularity.ROW;
+            return GranularityType.Row;
         }
 
         if (granularity.equalsIgnoreCase("cell")) {
-            return NoiseGranularity.CELL;
+            return GranularityType.Cell;
         }
 
         if (granularity.equalsIgnoreCase("column")) {
-            return NoiseGranularity.COLUMN;
+            return GranularityType.Column;
         }
 
         throw new IllegalArgumentException("Unknown granularity string " + granularity);

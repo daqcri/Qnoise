@@ -27,11 +27,11 @@ public class PredicateTest {
         try {
             CSVReader reader = new CSVReader(new FileReader(TestDataRepository.DUMPTEST));
             List<String> schema = Lists.newArrayList();
-            schema.add("NUMERICAL");
-            schema.add("TEXT");
-            schema.add("TEXT");
-            schema.add("TEXT");
-            schema.add("NUMERICAL");
+            schema.add("Numerical");
+            schema.add("Text");
+            schema.add("Text");
+            schema.add("Text");
+            schema.add("Numerical");
             profile = DataProfile.readData(reader, schema);
         } catch (Exception ex) {
             ex.printStackTrace();

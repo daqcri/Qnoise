@@ -12,7 +12,6 @@ import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.constraint.Constraint;
-import qa.qcri.qnoise.constraint.ConstraintFactory;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.Tracer;
@@ -31,12 +30,9 @@ public class InconsistencyInjector extends InjectorBase {
         Stopwatch stopwatch = new Stopwatch().start();
         ModelBase indexGen =
             ModelFactory.createRandomModel();
-        Constraint constraint =
-            ConstraintFactory.createConstraintFromString(
-                (String)spec.getValue(NoiseSpec.SpecEntry.Constraint)
-            );
-        double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
-        double distance = spec.getValue(NoiseSpec.SpecEntry.Distance);
+        Constraint constraint = spec.constraint;
+        double perc = spec.percentage;
+        double distance = spec.distance;
         int[] filteredResult = filter(profile, constraint);
         int nseed = (int)(Math.ceil(perc * profile.getLength()));
         int size = Math.min(nseed, filteredResult.length);

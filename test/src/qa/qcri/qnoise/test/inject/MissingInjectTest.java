@@ -30,11 +30,11 @@ public class MissingInjectTest {
         try {
             CSVReader reader = new CSVReader(new FileReader(TestDataRepository.DUMPTEST));
             List<String> types = Lists.newArrayList();
-            types.add("NUMERICAL");
-            types.add("TEXT");
-            types.add("TEXT");
-            types.add("TEXT");
-            types.add("NUMERICAL");
+            types.add("Numerical");
+            types.add("Text");
+            types.add("Text");
+            types.add("Text");
+            types.add("Numerical");
             profile = DataProfile.readData(reader, types);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -51,7 +51,7 @@ public class MissingInjectTest {
             new MissingInjector().inject(spec, profile, report);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
                     report.getLogBook();
-            double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+            double perc = spec.percentage;
             int changedItem = (int)(perc * profile.getLength());
             for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
                 Pair<Integer, Integer> index = log.getValue1();
@@ -73,7 +73,7 @@ public class MissingInjectTest {
             new MissingInjector().inject(spec, profile, report);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
                     report.getLogBook();
-            double perc = spec.getValue(NoiseSpec.SpecEntry.Percentage);
+            double perc = spec.percentage;
             int changedItem = (int)(perc * profile.getLength());
             for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
                 Pair<Integer, Integer> index = log.getValue1();

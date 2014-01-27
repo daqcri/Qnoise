@@ -117,7 +117,7 @@ public class DataProfile {
 
     public double getDouble(int rowIndex, int columnIndex) {
         DataType type = getType(columnIndex);
-        Preconditions.checkArgument(type == DataType.NUMERICAL);
+        Preconditions.checkArgument(type == DataType.Numerical);
         String[] tuple = getTuple(rowIndex);
         return Double.parseDouble(tuple[columnIndex]);
     }
@@ -135,7 +135,7 @@ public class DataProfile {
     public double getMean(String column) {
         if (!mean.containsKey(column)) {
             DataType type = types.get(column);
-            if (type != DataType.NUMERICAL) {
+            if (type != DataType.Numerical) {
                 throw new IllegalArgumentException("Cannot get mean on non-numerical data");
             }
 
@@ -155,7 +155,7 @@ public class DataProfile {
     public double getVariance(String column) {
         if (!var.containsKey(column)) {
             DataType type = types.get(column);
-            if (type != DataType.NUMERICAL) {
+            if (type != DataType.Numerical) {
                 throw new IllegalArgumentException("Cannot get mean on non-numerical data");
             }
 
@@ -177,7 +177,7 @@ public class DataProfile {
     public double getMin(String column) {
         if (!min.containsKey(column)) {
             DataType type = types.get(column);
-            if (type != DataType.NUMERICAL) {
+            if (type != DataType.Numerical) {
                 throw new IllegalArgumentException("Cannot get mean on non-numerical data");
             }
 
@@ -197,7 +197,7 @@ public class DataProfile {
     public double getMax(String column) {
         if (!max.containsKey(column)) {
             DataType type = types.get(column);
-            if (type != DataType.NUMERICAL) {
+            if (type != DataType.Numerical) {
                 throw new IllegalArgumentException("Cannot get mean on non-numerical data");
             }
 
@@ -237,9 +237,9 @@ public class DataProfile {
 
         for (int i = 0; i < types.length; i ++) {
             if (typeList == null) {
-                types[i] = DataType.TEXT;
+                types[i] = DataType.Text;
             } else {
-                types[i] = DataType.valueOf(typeList.get(i).toUpperCase());
+                types[i] = DataType.fromString(typeList.get(i).toUpperCase());
             }
         }
         return new DataProfile(entries, header, types);

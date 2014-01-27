@@ -3,7 +3,7 @@
         "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
     },
     "noise" : {
-        "NoiseType" : "m",
+        "noiseType" : "m",
         "granularity" : "cell",
         "percentage" : 0.5,
         "model" : "r"

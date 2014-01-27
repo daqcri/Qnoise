@@ -3,9 +3,9 @@
         "path" : "examples/dumptest.csv"
     },
     "noise" : {
-        "noisetype" : "d",
+        "noiseType" : "d",
         "granularity" : "row",
-        "NumberOfSeed" : 0.2,
+        "numberOfSeed" : 0.2,
         "percentage" : 0.3,
         "distance" : 0.2,
         "model" : "r"

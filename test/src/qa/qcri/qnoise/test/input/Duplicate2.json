@@ -3,9 +3,9 @@
         "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
     },
     "noise" : {
-        "NoiseType" : "d",
+        "noiseType" : "d",
         "granularity" : "row",
-        "NumberOfSeed" : 0.2,
+        "numberOfSeed" : 0.2,
         "percentage" : 0.3,
         "distance" : 70.0,
         "column" : ["ID"],

@@ -5,11 +5,10 @@
         "csvSeparator" : ","
     },
     "noise" : {
-        "noiseType" : "i",
-        "granularity" : "row",
-        "constraint" : "age>40",
+        "noiseType" : "o",
+        "granularity" : "cell",
         "percentage" : 0.2,
-        "model" : "r",
-        "distance" : 0.0
+        "column" : ["age"],
+        "logFile" : "log.txt"
     }
 }

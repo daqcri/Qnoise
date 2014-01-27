@@ -24,6 +24,10 @@ public enum NoiseType {
             return Inconsistency;
         }
 
+        if (model.equalsIgnoreCase("o")) {
+            return Outlier;
+        }
+
         throw new IllegalArgumentException("Unknown model string " + model);
     }
 }

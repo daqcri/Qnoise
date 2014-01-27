@@ -1,9 +1,10 @@
 {
     "source" : {
-        "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
+        "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv",
+        "csvSeparator" : ","
     },
     "noise" : {
-        "noisetype" : "i",
+        "noiseType" : "i",
         "granularity" : "row",
         "constraint" : "C | B",
         "percentage" : 0.20,

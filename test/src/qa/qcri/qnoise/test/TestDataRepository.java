@@ -5,12 +5,15 @@
 
 package qa.qcri.qnoise.test;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import qa.qcri.qnoise.NoiseSpec;
+import qa.qcri.qnoise.NoiseSpecDeserializer;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -26,12 +29,17 @@ public class TestDataRepository {
             throw new FileNotFoundException("Input file " + fileName + " does not exist.");
         }
 
-        JSONObject input = (JSONObject) JSONValue.parse(new FileReader(fileName));
-        if (input == null) {
-            throw new IllegalArgumentException("Input file is not a valid JSON file.");
-        }
+        JsonReader jsonReader =
+            new JsonReader(
+                new InputStreamReader(
+                    new FileInputStream(fileName),
+                    Charset.forName("UTF-8")
+                )
+            );
 
-        NoiseSpec spec = NoiseSpec.valueOf(input);
+        GsonBuilder gson = new GsonBuilder();
+        gson.registerTypeAdapter(NoiseSpec.class, new NoiseSpecDeserializer());
+        NoiseSpec spec = gson.create().fromJson(jsonReader, NoiseSpec.class);
         return spec;
     }
 }
