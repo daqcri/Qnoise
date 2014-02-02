@@ -26,7 +26,7 @@ public class NoiseSpec {
     public String[] filteredColumns;
     public Double numberOfSeed;
     public double[] distance;
-    public Constraint constraint;
+    public Constraint[] constraint;
     public String logFile;
 
     NoiseSpec() {}

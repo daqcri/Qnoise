@@ -19,15 +19,13 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class NoiseReport {
     private Map<Metric, List<Object>> stats = Maps.newHashMap();
     private List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
             Lists.newArrayList();
+    private HashSet<Pair<Integer, Integer>> logCell;
 
     public enum Metric {
         Type,
@@ -56,21 +54,32 @@ public class NoiseReport {
         appendMetric(Metric.InjectionTimestamp, new Timestamp(new Date().getTime()).toString());
         appendMetric(Metric.InputFilePath, spec.inputFile);
         appendMetric(Metric.LogFile, spec.logFile);
+
+        logCell = new HashSet<>();
+    }
+
+    public synchronized boolean isNoisyCell(int i, int j) {
+        return logCell.contains(new Pair<>(i, j));
     }
 
     public synchronized void logChange(int i, int j, String oldValue, String newValue) {
+        Pair<Integer, Integer> pair = new Pair<>(i, j);
         Quartet<OperationType, Pair<Integer, Integer>, String, String> log =
-            new Quartet<>(OperationType.Update, new Pair<>(i, j), oldValue, newValue);
+            new Quartet<>(OperationType.Update, pair, oldValue, newValue);
         logBook.add(log);
+        logCell.add(pair);
     }
 
     public synchronized void logInsert(int i, int j, String value) {
+        Pair<Integer, Integer> pair = new Pair<>(i, j);
         Quartet<OperationType, Pair<Integer, Integer>, String, String> log =
-            new Quartet<>(OperationType.Create, new Pair<>(i, j), null, value);
+            new Quartet<>(OperationType.Create, pair, null, value);
         logBook.add(log);
+        logCell.add(pair);
     }
 
-    public List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> getLogBook() {
+    public List<Quartet<OperationType, Pair<Integer, Integer>, String, String>>
+        getLogBook() {
         return logBook;
     }
 

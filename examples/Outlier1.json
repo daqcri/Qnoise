@@ -6,7 +6,6 @@
     },
     "noise" : {
         "noiseType" : "o",
-        "granularity" : "cell",
         "percentage" : 0.2,
         "column" : ["age"],
         "logFile" : "log.txt"

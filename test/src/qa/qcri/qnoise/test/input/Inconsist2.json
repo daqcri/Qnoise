@@ -6,7 +6,6 @@
     },
     "noise" : {
         "noiseType" : "i",
-        "granularity" : "row",
         "constraint" : "age<=20",
         "percentage" : 0.2,
         "model" : "r",

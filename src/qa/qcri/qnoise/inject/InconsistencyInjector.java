@@ -30,7 +30,7 @@ public class InconsistencyInjector extends InjectorBase {
         Stopwatch stopwatch = new Stopwatch().start();
         ModelBase indexGen =
             ModelFactory.createRandomModel();
-        Constraint constraint = spec.constraint;
+        Constraint[] constraint = spec.constraint;
         double perc = spec.percentage;
         double[] distances = spec.distance;
         int[] filteredResult = filter(profile, constraint);
@@ -43,12 +43,9 @@ public class InconsistencyInjector extends InjectorBase {
             } while (log.contains(index));
 
             log.add(index);
-            int columnIndex = constraint
+            int columnIndex = constraint[0]
                 .messIt(
-                    profile,
-                    filteredResult[index],
-                    distances[0],
-                    report
+                    profile, filteredResult[index], distances[0], report
                 );
 
             // TODO; where is the old value
@@ -67,13 +64,19 @@ public class InconsistencyInjector extends InjectorBase {
         return this;
     }
 
-    private int[] filter(DataProfile profile, Constraint constraint) {
+    private int[] filter(DataProfile profile, Constraint[] constraint) {
         List<Integer> result = Lists.newArrayList();
         List<String[]> data = profile.getData();
-
+        boolean isValid;
         for (int i = 0; i < data.size(); i ++) {
-            if (constraint.isValid(profile, i)) {
-                result.add(i);
+            isValid = true;
+            for (int j = 0; j < constraint.length; j ++)
+                if (!constraint[j].isValid(profile, i)) {
+                    isValid = false;
+                    break;
+                }
+            if (isValid) {
+                result.add(i);                
             }
         }
 

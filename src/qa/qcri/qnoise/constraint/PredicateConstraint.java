@@ -96,8 +96,9 @@ public class PredicateConstraint extends Constraint {
                     indexGen.nextIndexWithoutReplacement(0, profile.getLength(), true);
                 while (true) {
                     if (genIndex == Integer.MIN_VALUE) {
-                        nv = Integer.MIN_VALUE;
-                        break;
+                        throw new RuntimeException(
+                            "Cannot find solution given the specification."
+                        );
                     }
 
                     nv = profile.getDouble(genIndex, columnIndex);

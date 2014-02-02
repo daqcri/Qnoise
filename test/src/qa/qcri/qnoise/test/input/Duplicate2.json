@@ -4,7 +4,6 @@
     },
     "noise" : {
         "noiseType" : "d",
-        "granularity" : "row",
         "numberOfSeed" : 0.2,
         "percentage" : 0.3,
         "distance" : [0.7],

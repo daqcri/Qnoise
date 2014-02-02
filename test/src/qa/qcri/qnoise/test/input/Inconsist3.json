@@ -5,7 +5,6 @@
     },
     "noise" : {
         "noiseType" : "i",
-        "granularity" : "row",
         "constraint" : "C | B",
         "percentage" : 0.20,
         "model" : "r",

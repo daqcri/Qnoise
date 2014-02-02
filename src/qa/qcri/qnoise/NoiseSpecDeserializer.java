@@ -8,6 +8,7 @@ package qa.qcri.qnoise;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.gson.*;
+import qa.qcri.qnoise.constraint.Constraint;
 import qa.qcri.qnoise.constraint.ConstraintFactory;
 import qa.qcri.qnoise.model.NoiseModel;
 
@@ -57,15 +58,17 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
             spec.granularity = GranularityType.fromString(granularity.getAsString());
         } else {
             // assign default granularity
-            if (spec.noiseType == NoiseType.Simple)
-                spec.granularity = GranularityType.Cell;
-            else
+            if (spec.noiseType == NoiseType.Duplicate)
                 spec.granularity = GranularityType.Row;
+            else
+                spec.granularity = GranularityType.Cell;
         }
 
         JsonPrimitive percentage = noiseObj.getAsJsonPrimitive("percentage");
-        Preconditions.checkArgument(percentage != null);
-        spec.percentage = percentage.getAsDouble();
+        if (percentage != null)
+            spec.percentage = percentage.getAsDouble();
+        else
+            throw new IllegalArgumentException("Percentage cannot be null.");
 
         JsonPrimitive model = noiseObj.getAsJsonPrimitive("model");
         if (model != null) {
@@ -94,9 +97,18 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
         } else if (spec.filteredColumns != null)
             spec.distance = new double[spec.filteredColumns.length];
 
-        JsonPrimitive constraint = noiseObj.getAsJsonPrimitive("constraint");
-        if (constraint != null) {
-            spec.constraint =
+        JsonArray domain = noiseObj.getAsJsonArray("domain");
+        if (domain != null) {
+            spec.distance = new double[domain.size()];
+            for (int i = 0; i < domain.size(); i ++)
+                spec.distance[i] = domain.get(i).getAsDouble();
+        } else if (spec.filteredColumns != null)
+            spec.distance = new double[spec.filteredColumns.length];
+
+        JsonArray constraints = noiseObj.getAsJsonArray("constraint");
+        if (constraints != null) {
+            spec.constraint = new Constraint[constraints.size()];
+            for (JsonElement constraint : constraints)
                 ConstraintFactory.createConstraintFromString(constraint.getAsString());
         }
 
