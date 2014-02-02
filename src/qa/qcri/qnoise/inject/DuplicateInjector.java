@@ -14,7 +14,6 @@ import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.NoiseHelper;
 import qa.qcri.qnoise.util.Tracer;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DuplicateInjector extends InjectorBase {
@@ -38,16 +37,23 @@ public class DuplicateInjector extends InjectorBase {
             for (int i = 0; i < ntime; i ++) {
                 String[] oldData = profile.getTuple(index);
                 String[] newData = oldData.clone();
-                double distance = spec.distance;
+                double[] distance;
                 String[] columns = null;
                 if (spec.filteredColumns != null) {
-                    List<String> tmp = spec.filteredColumns;
-                    columns = new String[tmp.size()];
-                    for (int j = 0; j < columns.length; j ++) {
-                        columns[j] = tmp.get(j);
-                    }
+                    columns = spec.filteredColumns;
                 } else {
                     columns = profile.getColumnNames();
+                }
+
+                if (spec.distance != null) {
+                    distance = spec.distance;
+                    if (distance.length != columns.length) {
+                        throw new IllegalArgumentException(
+                            "Distance has missing or incorrect number of columns."
+                        );
+                    }
+                } else {
+                    distance = new double[columns.length];
                 }
 
                 profile.append(newData);

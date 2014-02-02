@@ -1,0 +1,14 @@
+{
+    "source" : {
+        "path" : "test/src/qa/qcri/qnoise/test/input/personal.csv",
+        "type" : ["Text", "Numerical", "Text"],
+        "csvSeparator" : ","
+    },
+    "noise" : {
+        "noiseType" : "s",
+        "percentage" : 1.0,
+        "column" : ["name", "age"],
+        "distance" : [1.0, 0.2],
+        "logFile" : "log.txt"
+    }
+}

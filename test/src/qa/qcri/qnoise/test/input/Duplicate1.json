@@ -1,13 +1,14 @@
 {
     "source" : {
-        "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv"
+        "path" : "test/src/qa/qcri/qnoise/test/input/dumptest.csv",
+        "csvSeparator" : ","
     },
     "noise" : {
         "noiseType" : "d",
         "granularity" : "row",
         "numberOfSeed" : 0.2,
         "percentage" : 0.3,
-        "distance" : 0.0,
-        "model" : "r"
+        "model" : "r",
+        "distance" : [0.88, 0.98, 0.3, 0.5, 0.0]
     }
 }

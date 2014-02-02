@@ -56,7 +56,11 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
         if (granularity != null) {
             spec.granularity = GranularityType.fromString(granularity.getAsString());
         } else {
-            spec.granularity = GranularityType.Row;
+            // assign default granularity
+            if (spec.noiseType == NoiseType.Simple)
+                spec.granularity = GranularityType.Cell;
+            else
+                spec.granularity = GranularityType.Row;
         }
 
         JsonPrimitive percentage = noiseObj.getAsJsonPrimitive("percentage");
@@ -72,10 +76,9 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
 
         JsonArray column = noiseObj.getAsJsonArray("column");
         if (column != null) {
-            spec.filteredColumns = Lists.newArrayList();
-            for (JsonElement element : column) {
-                spec.filteredColumns.add(element.getAsString());
-            }
+            spec.filteredColumns = new String[column.size()];
+            for (int i = 0; i < column.size(); i ++)
+                spec.filteredColumns[i] = column.get(i).getAsString();
         }
 
         JsonPrimitive numberOfSeed = noiseObj.getAsJsonPrimitive("numberOfSeed");
@@ -83,10 +86,13 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
             spec.numberOfSeed = numberOfSeed.getAsDouble();
         }
 
-        JsonPrimitive distance = noiseObj.getAsJsonPrimitive("distance");
+        JsonArray distance = noiseObj.getAsJsonArray("distance");
         if (distance != null) {
-            spec.distance = distance.getAsDouble();
-        }
+            spec.distance = new double[distance.size()];
+            for (int i = 0; i < distance.size(); i ++)
+                spec.distance[i] = distance.get(i).getAsDouble();
+        } else if (spec.filteredColumns != null)
+            spec.distance = new double[spec.filteredColumns.length];
 
         JsonPrimitive constraint = noiseObj.getAsJsonPrimitive("constraint");
         if (constraint != null) {
@@ -105,10 +111,20 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
 
         // input rules
         if (spec.noiseType == NoiseType.Inconsistency)
-            Preconditions.checkArgument(constraint != null);
+            Preconditions.checkArgument(spec.constraint != null);
 
         if (spec.noiseType == NoiseType.Duplicate)
-            Preconditions.checkArgument(numberOfSeed != null);
+            Preconditions.checkArgument(
+                spec.numberOfSeed != null,
+                spec.distance
+            );
+
+        if (spec.noiseType == NoiseType.Simple)
+            Preconditions.checkArgument(
+                spec.granularity == GranularityType.Cell &&
+                spec.distance != null,
+                "Input value is missing or incorrect."
+            );
 
         return spec;
     }

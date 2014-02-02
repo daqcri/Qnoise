@@ -23,9 +23,9 @@ public class NoiseSpec {
     public GranularityType granularity;
     public Double percentage;
     public NoiseModel model;
-    public List<String> filteredColumns;
+    public String[] filteredColumns;
     public Double numberOfSeed;
-    public Double distance;
+    public double[] distance;
     public Constraint constraint;
     public String logFile;
 

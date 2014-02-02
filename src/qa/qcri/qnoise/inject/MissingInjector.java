@@ -40,7 +40,7 @@ public class MissingInjector extends InjectorBase {
         if (model == NoiseModel.Random) {
             indexGen = ModelFactory.createRandomModel();
         } else {
-            String columnName = spec.filteredColumns.get(0);
+            String columnName = spec.filteredColumns[0];
             indexGen = ModelFactory.createHistogramModel(dataProfile, columnName);
         }
 
@@ -77,7 +77,7 @@ public class MissingInjector extends InjectorBase {
 
                     report.logChange(index, i, rowData[i], null);
                     rowData[i] = null;
-                    tracer.verbose(String.format("[%d, %d] <- null", index, i));;
+                    tracer.verbose(String.format("[%d, %d] <- null", index, i));
                     log.add(record);
                 }
             }

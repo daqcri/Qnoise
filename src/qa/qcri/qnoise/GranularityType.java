@@ -6,7 +6,6 @@
 package qa.qcri.qnoise;
 
 public enum GranularityType {
-    Column,
     Row,
     Cell;
 
@@ -17,10 +16,6 @@ public enum GranularityType {
 
         if (granularity.equalsIgnoreCase("cell")) {
             return GranularityType.Cell;
-        }
-
-        if (granularity.equalsIgnoreCase("column")) {
-            return GranularityType.Column;
         }
 
         throw new IllegalArgumentException("Unknown granularity string " + granularity);

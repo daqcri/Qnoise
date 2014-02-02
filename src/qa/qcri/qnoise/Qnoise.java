@@ -10,10 +10,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.cli.*;
-import qa.qcri.qnoise.inject.DuplicateInjector;
-import qa.qcri.qnoise.inject.InconsistencyInjector;
-import qa.qcri.qnoise.inject.MissingInjector;
-import qa.qcri.qnoise.inject.OutlierInjector;
+import qa.qcri.qnoise.inject.*;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.io.*;
@@ -75,6 +72,9 @@ public class Qnoise {
                     break;
                 case Outlier:
                     new OutlierInjector().inject(spec, profile, report);
+                    break;
+                case Simple:
+                    new SimpleNoiseInjector().inject(spec, profile, report);
                     break;
                 default:
                     throw new UnsupportedOperationException("Unknown noise type.");

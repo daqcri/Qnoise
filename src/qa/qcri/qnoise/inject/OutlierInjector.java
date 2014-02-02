@@ -18,7 +18,6 @@ import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -32,13 +31,13 @@ public class OutlierInjector extends InjectorBase {
         NoiseReport report
     ) {
         Stopwatch stopwatch = new Stopwatch().start();
-        List<String> selectedColumns = spec.filteredColumns;
+        String[] selectedColumns = spec.filteredColumns;
         Preconditions.checkArgument(
-            selectedColumns.size() == 1,
+            selectedColumns.length == 1,
             "Outlier currently only supports one column (univariable)."
         );
 
-        String selectedColumn = selectedColumns.get(0);
+        String selectedColumn = selectedColumns[0];
         DataType type = profile.getType(selectedColumn);
         int columnIndex = profile.getColumnIndex(selectedColumn);
 

@@ -9,6 +9,6 @@
         "constraint" : "C | B",
         "percentage" : 0.20,
         "model" : "r",
-        "distance" : 80.0
+        "distance" : [0.8]
     }
 }

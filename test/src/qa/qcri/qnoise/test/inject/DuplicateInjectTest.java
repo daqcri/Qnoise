@@ -54,7 +54,8 @@ public class DuplicateInjectTest {
             int nseed = (int)(Math.ceil(profile.getLength() * seedperc));
             int ntime = (int)(Math.ceil(profile.getLength() * timeperc));
 
-            int changedItem = nseed * ntime * profile.getWidth();
+            // first insert, then modify it
+            int changedItem = nseed * ntime * profile.getWidth() * 2;
 
             new DuplicateInjector().inject(spec, profile, report);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =

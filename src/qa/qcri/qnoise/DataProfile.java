@@ -57,6 +57,7 @@ public class DataProfile {
         return data;
     }
 
+    public String getColumnName(int index) { return columnNames[index]; }
     public String[] getColumnNames() {
         return columnNames;
     }

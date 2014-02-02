@@ -32,7 +32,7 @@ public class InconsistencyInjector extends InjectorBase {
             ModelFactory.createRandomModel();
         Constraint constraint = spec.constraint;
         double perc = spec.percentage;
-        double distance = spec.distance;
+        double[] distances = spec.distance;
         int[] filteredResult = filter(profile, constraint);
         int nseed = (int)(Math.ceil(perc * profile.getLength()));
         int size = Math.min(nseed, filteredResult.length);
@@ -47,7 +47,7 @@ public class InconsistencyInjector extends InjectorBase {
                 .messIt(
                     profile,
                     filteredResult[index],
-                    distance,
+                    distances[0],
                     report
                 );
 

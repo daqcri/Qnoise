@@ -10,6 +10,6 @@
         "constraint" : "age<=20",
         "percentage" : 0.2,
         "model" : "r",
-        "distance" : 1.0
+        "distance" : [1.0]
     }
 }

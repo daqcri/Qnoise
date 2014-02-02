@@ -19,11 +19,10 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="guava-14.0.1" level="project" />
-    <orderEntry type="library" name="derby" level="project" />
     <orderEntry type="library" name="net.sf.opencsv:opencsv:2.3" level="project" />
-    <orderEntry type="library" name="org.apache.commons:commons-math3:3.2" level="project" />
     <orderEntry type="library" name="org.javatuples:javatuples:1.2" level="project" />
     <orderEntry type="library" name="gson-2.2.4" level="project" />
+    <orderEntry type="library" name="annotations" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

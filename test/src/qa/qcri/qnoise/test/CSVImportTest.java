@@ -7,6 +7,7 @@ package qa.qcri.qnoise.test;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import qa.qcri.qnoise.sql.DBConfig;
 import qa.qcri.qnoise.sql.DBTools;
@@ -30,6 +31,7 @@ public class CSVImportTest {
     }
 
     @Test
+    @Ignore
     public void goodTest() {
         Connection conn = null;
         Statement stat = null;

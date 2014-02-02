@@ -8,6 +8,7 @@ package qa.qcri.qnoise.util;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
+import org.jetbrains.annotations.NotNull;
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.DataType;
 import qa.qcri.qnoise.NoiseReport;
@@ -29,17 +30,23 @@ public class NoiseHelper {
         int rowIndex,
         NoiseReport report
     ) {
-        playTheJazz(distance, new String[] { column }, profile, rowIndex, report);
+        playTheJazz(
+            new double[] { distance },
+            new String[] { column },
+            profile,
+            rowIndex,
+            report
+        );
     }
 
     public static void playTheJazz(
-            Optional<Double> distance,
+            Optional<double[]> distance,
             Optional<String[]> columns,
             DataProfile profile,
             int rowIndex,
             NoiseReport report
     ) {
-        double d = distance.isPresent() ? distance.get() : 0.0;
+        double[] d = distance.isPresent() ? distance.get() : new double[] { 0.0 };
         String[] selectedColumns;
         if (!columns.isPresent()) {
             HashMap<String, DataType> types = profile.getTypes();
@@ -53,23 +60,19 @@ public class NoiseHelper {
 
     /**
      * Change cell value based on distance.
-     * @param distance the distance from the new value.
+     * @param distances the distance from the new value.
      * @param selectedColumns changed column names.
      * @param profile data profile.
      * @param rowIndex tuple index.
      */
     public static void playTheJazz(
-        double distance,
-        String[] selectedColumns,
+        @NotNull double[] distances,
+        @NotNull String[] selectedColumns,
         DataProfile profile,
         int rowIndex,
         NoiseReport report
     ) {
-        Preconditions.checkNotNull(selectedColumns);
-        Preconditions.checkArgument(distance >= 0.0);
-        if (distance == 0.0) {
-            return;
-        }
+        Preconditions.checkArgument(distances.length > 0);
 
         String[] tuple = profile.getTuple(rowIndex);
         BiMap<String, Integer> indexes = profile.getIndexes();
@@ -78,6 +81,7 @@ public class NoiseHelper {
         for (int i = 0; i < selectedColumns.length; i ++) {
             String columnName = selectedColumns[i];
             int columnIndex = indexes.get(columnName);
+            double distance = distances[i];
             DataType type = types.get(columnName);
             String currentValue = tuple[columnIndex];
             String newValue = "";
@@ -85,7 +89,7 @@ public class NoiseHelper {
             switch (type) {
                 case Text:
                     StringBuilder sb = new StringBuilder(currentValue);
-                    int len = (int)Math.floor(distance * sb.length() * 0.01);
+                    int len = (int)Math.floor(distance * sb.length());
                     // TODO: currently we start to mess the text from the 1st char.
                     // It might be more reasonable to use a random gen. again to pick
                     // the char to change.
@@ -102,7 +106,7 @@ public class NoiseHelper {
                 case Numerical:
                     double std = profile.getStandardDeviationOn(columnName);
                     double nvalue =
-                        distance * 0.01 * std * getRandomSign() + Double.parseDouble(currentValue);
+                        distance * std * getRandomSign() + Double.parseDouble(currentValue);
                     newValue = Double.toString(nvalue);
                     break;
                 case Categorical:
