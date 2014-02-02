@@ -8,6 +8,7 @@ package qa.qcri.qnoise.inject;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.GranularityType;
 import qa.qcri.qnoise.NoiseReport;
@@ -27,9 +28,9 @@ public class MissingInjector extends InjectorBase {
     /** {@inheritDoc */
     @Override
     public MissingInjector inject(
-        NoiseSpec spec,
-        DataProfile dataProfile,
-        NoiseReport report
+        @NotNull NoiseSpec spec,
+        @NotNull DataProfile dataProfile,
+        @NotNull NoiseReport report
     ) {
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();

@@ -6,6 +6,7 @@
 package qa.qcri.qnoise.inject;
 
 import com.google.common.base.Stopwatch;
+import org.jetbrains.annotations.NotNull;
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.NoiseSpec;
@@ -20,7 +21,11 @@ public class DuplicateInjector extends InjectorBase {
     private Tracer tracer = Tracer.getTracer(this.getClass());
 
     @Override
-    public InjectorBase inject(NoiseSpec spec, DataProfile profile, NoiseReport report) {
+    public InjectorBase inject(
+        @NotNull NoiseSpec spec,
+        @NotNull DataProfile profile,
+        @NotNull NoiseReport report
+    ) {
         Stopwatch stopwatch = new Stopwatch().start();
         ModelBase indexGen =
             ModelFactory.createRandomModel();

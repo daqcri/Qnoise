@@ -9,6 +9,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.DataType;
 import qa.qcri.qnoise.NoiseReport;
@@ -26,9 +27,9 @@ public class OutlierInjector extends InjectorBase {
 
     @Override
     public InjectorBase inject(
-        NoiseSpec spec,
-        DataProfile profile,
-        NoiseReport report
+        @NotNull NoiseSpec spec,
+        @NotNull DataProfile profile,
+        @NotNull NoiseReport report
     ) {
         Stopwatch stopwatch = new Stopwatch().start();
         String[] selectedColumns = spec.filteredColumns;

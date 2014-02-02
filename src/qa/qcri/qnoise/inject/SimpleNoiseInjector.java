@@ -8,6 +8,7 @@ package qa.qcri.qnoise.inject;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 import qa.qcri.qnoise.DataProfile;
 import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.NoiseSpec;
@@ -26,9 +27,9 @@ public class SimpleNoiseInjector extends InjectorBase {
 
     @Override
     public InjectorBase inject(
-        NoiseSpec spec,
-        DataProfile profile,
-        NoiseReport report
+        @NotNull NoiseSpec spec,
+        @NotNull DataProfile profile,
+        @NotNull NoiseReport report
     ) {
         HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
