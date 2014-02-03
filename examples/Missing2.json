@@ -8,6 +8,6 @@
         "granularity" : "cell",
         "percentage" : 0.5,
         "model" : "h",
-        "column" : "B"
+        "column" : ["B"]
     }
 }

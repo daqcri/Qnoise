@@ -9,7 +9,7 @@ public enum NoiseType {
     Missing,
     Inconsistency,
     Outlier,
-    Simple,
+    Error,
     Duplicate;
 
     public static NoiseType fromString(String model) {
@@ -30,7 +30,7 @@ public enum NoiseType {
         }
 
         if (model.equalsIgnoreCase("s")) {
-            return Simple;
+            return Error;
         }
 
         throw new IllegalArgumentException("Unknown model string " + model);

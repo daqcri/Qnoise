@@ -73,8 +73,8 @@ public class Qnoise {
                 case Outlier:
                     new OutlierInjector().inject(spec, profile, report);
                     break;
-                case Simple:
-                    new SimpleNoiseInjector().inject(spec, profile, report);
+                case Error:
+                    new ErrorNoiseInjector().inject(spec, profile, report);
                     break;
                 default:
                     throw new UnsupportedOperationException("Unknown noise type.");

@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Simple Predicate constraint (
+ * Error Predicate constraint (
  */
 public class PredicateConstraint extends Constraint {
     private String leftHand;

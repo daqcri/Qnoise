@@ -4,6 +4,6 @@ type -P javac > /dev/null 2>&1 || { echo "JDK cannot be found, please check your
 if ! [ -d "out" ]; then
     echo Qnoise is not yet compiled, please first run 'ant' to build it.
 else
-    cmd='java -d64 -cp out/bin/*:. qa.qcri.qnoise.Qnoise'
+    cmd='java -cp out/bin/*:. qa.qcri.qnoise.Qnoise'
     exec $cmd $@
 fi

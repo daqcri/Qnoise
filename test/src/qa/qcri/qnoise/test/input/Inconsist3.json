@@ -5,9 +5,9 @@
     },
     "noise" : {
         "noiseType" : "i",
-        "constraint" : "C | B",
+        "constraint" : ["C | B"],
         "percentage" : 0.20,
         "model" : "r",
-        "distance" : [0.8]
+        "domain" : [0.8]
     }
 }

@@ -108,8 +108,11 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
         JsonArray constraints = noiseObj.getAsJsonArray("constraint");
         if (constraints != null) {
             spec.constraint = new Constraint[constraints.size()];
-            for (JsonElement constraint : constraints)
-                ConstraintFactory.createConstraintFromString(constraint.getAsString());
+            for (int i = 0; i < constraints.size(); i ++)
+                spec.constraint[i] =
+                    ConstraintFactory.createConstraintFromString(
+                        constraints.get(i).getAsString()
+                    );
         }
 
         JsonPrimitive logFile = noiseObj.getAsJsonPrimitive("logFile");
@@ -131,7 +134,7 @@ public class NoiseSpecDeserializer implements JsonDeserializer<NoiseSpec> {
                 spec.distance
             );
 
-        if (spec.noiseType == NoiseType.Simple)
+        if (spec.noiseType == NoiseType.Error)
             Preconditions.checkArgument(
                 spec.granularity == GranularityType.Cell &&
                 spec.distance != null,

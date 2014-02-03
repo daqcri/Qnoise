@@ -6,9 +6,9 @@
     },
     "noise" : {
         "noiseType" : "i",
-        "constraint" : "age>40",
+        "constraint" : ["age>40", "age<50"],
         "percentage" : 0.2,
         "model" : "r",
-        "distance" : [0.0]
+        "domain" : [0.0]
     }
 }

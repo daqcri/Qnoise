@@ -53,9 +53,7 @@ public class InconsistencyTest {
             new InconsistencyInjector().inject(spec, profile, report);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
                 report.getLogBook();
-            double perc = spec.percentage;
-            int changedItem = (int)(Math.ceil(perc * profile.getLength()));
-            Assert.assertEquals(changedItem, logBook.size());
+            Assert.assertEquals(2, logBook.size());
         } catch (Exception ex) {
             ex.printStackTrace();
             Assert.fail(ex.getMessage());

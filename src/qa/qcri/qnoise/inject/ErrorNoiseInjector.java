@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class SimpleNoiseInjector extends InjectorBase {
+public class ErrorNoiseInjector extends InjectorBase {
     private Tracer tracer = Tracer.getTracer(this.getClass());
 
     @Override
