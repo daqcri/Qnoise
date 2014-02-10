@@ -9,7 +9,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import qa.qcri.qnoise.DataProfile;
+import qa.qcri.qnoise.internal.DataProfile;
 import qa.qcri.qnoise.model.HistogramModel;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.test.TestDataRepository;

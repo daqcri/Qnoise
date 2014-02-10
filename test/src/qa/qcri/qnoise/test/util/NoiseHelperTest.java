@@ -10,10 +10,9 @@ import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.test.TestDataRepository;
-import qa.qcri.qnoise.test.TestSpecFactory;
 import qa.qcri.qnoise.util.NoiseHelper;
 
 import java.io.FileReader;
@@ -41,7 +40,7 @@ public class NoiseHelperTest {
 
     @Test
     public void testNumerical() {
-        NoiseReport report = new NoiseReport(TestSpecFactory.createDummySpec());
+        NoiseReport report = new NoiseReport();
         double oldVal = Double.parseDouble(profile.getCell(0, 4));
         double std = profile.getStandardDeviationOn("D");
         NoiseHelper.playTheJazz(0.5, "D", profile, 0, report);
@@ -68,7 +67,7 @@ public class NoiseHelperTest {
     @Test
     public void testTextDistance() {
         try {
-            NoiseReport report = new NoiseReport(TestSpecFactory.createDummySpec());
+            NoiseReport report = new NoiseReport();
             String oldVal = profile.getCell(0, 1);
             NoiseHelper.playTheJazz(0.5, "C", profile, 0, report);
             String newVal = profile.getCell(0, 1);

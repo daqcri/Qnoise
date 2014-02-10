@@ -10,11 +10,10 @@ import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
 import qa.qcri.qnoise.constraint.PredicateConstraint;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.test.TestDataRepository;
-import qa.qcri.qnoise.test.TestSpecFactory;
 
 import java.io.FileReader;
 import java.util.List;
@@ -53,7 +52,7 @@ public class PredicateTest {
 
     @Test
     public void messTest() {
-        NoiseReport report = new NoiseReport(TestSpecFactory.createDummySpec());
+        NoiseReport report = new NoiseReport();
         PredicateConstraint predicate = new PredicateConstraint().parse("D >= 50");
         int index = 0;
         for (int i = 0; i < profile.getLength(); i ++) {

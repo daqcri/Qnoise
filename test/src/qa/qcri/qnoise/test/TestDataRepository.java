@@ -7,8 +7,9 @@ package qa.qcri.qnoise.test;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import qa.qcri.qnoise.NoiseSpec;
-import qa.qcri.qnoise.NoiseSpecDeserializer;
+import qa.qcri.qnoise.internal.NoiseSpec;
+import qa.qcri.qnoise.util.NoiseJsonAdapter;
+import qa.qcri.qnoise.util.NoiseJsonAdapterDeserializer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,8 +24,11 @@ public class TestDataRepository {
     public static final String PERSONALDATA =
             "test/src/qa/qcri/qnoise/test/input/personal.csv";
 
-
     public static NoiseSpec getSpec(String fileName) throws FileNotFoundException{
+        return getAdapter(fileName).getSpecs().get(0);
+    }
+
+    public static NoiseJsonAdapter getAdapter(String fileName) throws FileNotFoundException{
         if (Files.notExists(Paths.get(fileName))) {
             throw new FileNotFoundException("Input file " + fileName + " does not exist.");
         }
@@ -38,8 +42,8 @@ public class TestDataRepository {
             );
 
         GsonBuilder gson = new GsonBuilder();
-        gson.registerTypeAdapter(NoiseSpec.class, new NoiseSpecDeserializer());
-        NoiseSpec spec = gson.create().fromJson(jsonReader, NoiseSpec.class);
-        return spec;
+        gson.registerTypeAdapter(NoiseJsonAdapter.class, new NoiseJsonAdapterDeserializer());
+        NoiseJsonAdapter adapter = gson.create().fromJson(jsonReader, NoiseJsonAdapter.class);
+        return adapter;
     }
 }

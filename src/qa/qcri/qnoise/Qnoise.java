@@ -10,13 +10,17 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.cli.*;
-import qa.qcri.qnoise.inject.*;
+import qa.qcri.qnoise.inject.InjectorFactory;
+import qa.qcri.qnoise.internal.*;
+import qa.qcri.qnoise.util.NoiseJsonAdapter;
+import qa.qcri.qnoise.util.NoiseJsonAdapterDeserializer;
 import qa.qcri.qnoise.util.Tracer;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
 /**
  * Qnoise launcher.
@@ -37,62 +41,65 @@ public class Qnoise {
                 Tracer.setVerbose(true);
             }
 
-            String fileName = line.getOptionValue("f");
-            if (Files.notExists(Paths.get(fileName))) {
-                throw new FileNotFoundException("Input file " + fileName + " does not exist.");
+            final String inputFileName = line.getOptionValue("f");
+            if (Files.notExists(Paths.get(inputFileName))) {
+                throw new FileNotFoundException("Input file " + inputFileName + " does not exist.");
             }
 
             JsonReader jsonReader =
                 new JsonReader(
                     new InputStreamReader(
-                        new FileInputStream(fileName),
+                        new FileInputStream(inputFileName),
                         Charset.forName("UTF-8")
                     )
                 );
 
             GsonBuilder gson = new GsonBuilder();
-            gson.registerTypeAdapter(NoiseSpec.class, new NoiseSpecDeserializer());
+            gson.registerTypeAdapter(NoiseJsonAdapter.class, new NoiseJsonAdapterDeserializer());
             gson.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-            NoiseSpec spec = gson.create().fromJson(jsonReader, NoiseSpec.class);
-            NoiseReport report = new NoiseReport(spec);
+            NoiseJsonAdapter adapter = gson.create().fromJson(jsonReader, NoiseJsonAdapter.class);
+
             reader =
-                new CSVReader(new FileReader(spec.inputFile), spec.csvSeparator);
+                new CSVReader(new FileReader(adapter.getInputFile()), adapter.getCsvSeparator());
+            DataProfile profile = DataProfile.readData(reader, adapter.getSchema());
 
-            DataProfile profile = DataProfile.readData(reader, spec.schema);
-            report.addMetric(NoiseReport.Metric.InputRow, profile.getLength());
-            switch (spec.noiseType) {
-                case Missing:
-                    new MissingInjector().inject(spec, profile, report);
-                    break;
-                case Duplicate:
-                    new DuplicateInjector().inject(spec, profile, report);
-                    break;
-                case Inconsistency:
-                    new InconsistencyInjector().inject(spec, profile, report);
-                    break;
-                case Outlier:
-                    new OutlierInjector().inject(spec, profile, report);
-                    break;
-                case Error:
-                    new ErrorNoiseInjector().inject(spec, profile, report);
-                    break;
-                default:
-                    throw new UnsupportedOperationException("Unknown noise type.");
-            }
-
-            fileName = line.getOptionValue("o");
+            final String outputFileName = line.getOptionValue("o");
             writer = new CSVWriter(
-                new FileWriter(fileName),
-                spec.csvSeparator,
+                new FileWriter(outputFileName),
+                adapter.getCsvSeparator(),
                 CSVWriter.NO_QUOTE_CHARACTER,
                 CSVWriter.NO_ESCAPE_CHARACTER
             );
-            profile.writeData(writer);
-            report.appendMetric(NoiseReport.Metric.OutputFilePath, fileName);
-            report.addMetric(NoiseReport.Metric.OutputRow, profile.getLength());
-            report.saveToFile(spec.logFile);
-            report.print();
 
+            for (NoiseSpec spec : adapter.getSpecs()) {
+                new DataProcess(
+                    new NoiseContextBuilder()
+                        .profile(profile)
+                        .spec(spec)
+                        .build()
+                    ).process(InjectorFactory.createInjector(spec.noiseType))
+                    .after(new IAction<NoiseContext>() {
+                        @Override
+                        public void act(
+                            NoiseContext context,
+                            HashMap<String, Object> extras
+                        ) {
+                            context.report.appendMetric(
+                                NoiseReport.Metric.InputFilePath,
+                                inputFileName
+                            );
+
+                            context.report.appendMetric(
+                                NoiseReport.Metric.OutputFilePath,
+                                outputFileName
+                            );
+                            context.report.saveToFile(context.spec.logFile);
+                            context.report.print();
+                        }
+                    });
+            }
+
+            profile.writeData(writer);
         } catch (MissingOptionException me) {
             printHelp();
         } catch (ParseException ex) {

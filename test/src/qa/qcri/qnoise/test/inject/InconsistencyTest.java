@@ -12,11 +12,13 @@ import org.javatuples.Quartet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.inject.InconsistencyInjector;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.NoiseContext;
+import qa.qcri.qnoise.internal.NoiseContextBuilder;
+import qa.qcri.qnoise.internal.NoiseSpec;
 import qa.qcri.qnoise.test.TestDataRepository;
+import qa.qcri.qnoise.util.NoiseJsonAdapter;
 import qa.qcri.qnoise.util.OperationType;
 import qa.qcri.qnoise.util.Tracer;
 
@@ -49,10 +51,11 @@ public class InconsistencyTest {
                 TestDataRepository.getSpec(
                     "test/src/qa/qcri/qnoise/test/input/Inconsist1.json"
                 );
-            NoiseReport report = new NoiseReport(spec);
-            new InconsistencyInjector().inject(spec, profile, report);
+            NoiseContext context =
+                new NoiseContextBuilder().spec(spec).profile(profile).build();
+            new InconsistencyInjector().act(context, null);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
-                report.getLogBook();
+                context.report.getLogBook();
             Assert.assertEquals(2, logBook.size());
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -67,10 +70,11 @@ public class InconsistencyTest {
                 TestDataRepository.getSpec(
                     "test/src/qa/qcri/qnoise/test/input/Inconsist2.json"
                 );
-            NoiseReport report = new NoiseReport(spec);
-            new InconsistencyInjector().inject(spec, profile, report);
+            NoiseContext context =
+                new NoiseContextBuilder().spec(spec).profile(profile).build();
+            new InconsistencyInjector().act(context, null);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
-                report.getLogBook();
+                context.report.getLogBook();
             double perc = spec.percentage;
             int changedItem = (int)(Math.ceil(perc * profile.getLength()));
             Assert.assertEquals(changedItem, logBook.size());
@@ -83,26 +87,28 @@ public class InconsistencyTest {
     @Test
     public void inconsistencyTest3() {
         try {
-            NoiseSpec spec =
-                TestDataRepository.getSpec(
+            NoiseJsonAdapter adapter =
+                TestDataRepository.getAdapter(
                     "test/src/qa/qcri/qnoise/test/input/Inconsist3.json"
                 );
 
             CSVReader reader =
                 new CSVReader(
-                    new FileReader(spec.inputFile)
+                    new FileReader(adapter.getInputFile())
                 );
 
             DataProfile profile =
                 DataProfile.readData(
                     reader,
-                    spec.schema
+                    adapter.getSchema()
                 );
+            NoiseSpec spec = adapter.getSpecs().get(0);
+            NoiseContext context =
+                new NoiseContextBuilder().spec(spec).profile(profile).build();
 
-            NoiseReport report = new NoiseReport(spec);
-            new InconsistencyInjector().inject(spec, profile, report);
+            new InconsistencyInjector().act(context, null);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
-                report.getLogBook();
+                context.report.getLogBook();
             double perc = spec.percentage;
             int changedItem = (int)(Math.ceil(perc * profile.getLength()));
             Assert.assertEquals(changedItem, logBook.size());

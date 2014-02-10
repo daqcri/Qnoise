@@ -12,10 +12,11 @@ import org.javatuples.Quartet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.inject.DuplicateInjector;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.NoiseContext;
+import qa.qcri.qnoise.internal.NoiseContextBuilder;
+import qa.qcri.qnoise.internal.NoiseSpec;
 import qa.qcri.qnoise.test.TestDataRepository;
 import qa.qcri.qnoise.util.OperationType;
 
@@ -47,7 +48,9 @@ public class DuplicateInjectTest {
         try {
             NoiseSpec spec =
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Duplicate1.json");
-            NoiseReport report = new NoiseReport(spec);
+            NoiseContext context =
+                new NoiseContextBuilder().spec(spec).profile(profile).build();
+
             double seedperc = spec.numberOfSeed;
             double timeperc = spec.percentage;
 
@@ -57,9 +60,9 @@ public class DuplicateInjectTest {
             // first insert, then modify it
             int changedItem = nseed * ntime * profile.getWidth() * 2;
 
-            new DuplicateInjector().inject(spec, profile, report);
+            new DuplicateInjector().act(context, null);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
-                report.getLogBook();
+                context.report.getLogBook();
 
             Assert.assertEquals(changedItem, logBook.size());
         } catch (Exception ex) {
@@ -73,7 +76,9 @@ public class DuplicateInjectTest {
         try {
             NoiseSpec spec =
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Duplicate2.json");
-            NoiseReport report = new NoiseReport(spec);
+            NoiseContext context =
+                new NoiseContextBuilder().spec(spec).profile(profile).build();
+
             double seedperc = spec.numberOfSeed;
             double timeperc = spec.percentage;
 
@@ -81,9 +86,9 @@ public class DuplicateInjectTest {
             int ntime = (int)(Math.ceil(profile.getLength() * timeperc));
 
             int size = profile.getLength();
-            new DuplicateInjector().inject(spec, profile, report);
+            new DuplicateInjector().act(context, null);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
-                report.getLogBook();
+                context.report.getLogBook();
 
             Assert.assertEquals(72, logBook.size());
             Assert.assertEquals(size + nseed * ntime, profile.getLength());

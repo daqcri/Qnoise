@@ -7,7 +7,7 @@ package qa.qcri.qnoise.model;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import qa.qcri.qnoise.DataProfile;
+import qa.qcri.qnoise.internal.DataProfile;
 
 import java.util.HashMap;
 import java.util.List;

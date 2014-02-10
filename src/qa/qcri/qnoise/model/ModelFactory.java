@@ -5,7 +5,7 @@
 
 package qa.qcri.qnoise.model;
 
-import qa.qcri.qnoise.DataProfile;
+import qa.qcri.qnoise.internal.DataProfile;
 
 /**
  * Model Factory.

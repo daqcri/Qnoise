@@ -6,20 +6,14 @@
 package qa.qcri.qnoise.inject;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.Sets;
 import org.javatuples.Pair;
-import org.jetbrains.annotations.NotNull;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.GranularityType;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
+import qa.qcri.qnoise.internal.*;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.model.NoiseModel;
 import qa.qcri.qnoise.util.Tracer;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class MissingInjector extends InjectorBase {
@@ -27,13 +21,15 @@ public class MissingInjector extends InjectorBase {
 
     /** {@inheritDoc */
     @Override
-    public MissingInjector inject(
-        @NotNull NoiseSpec spec,
-        @NotNull DataProfile dataProfile,
-        @NotNull NoiseReport report
+    public void act(
+        NoiseContext context,
+        HashMap<String, Object> extras
     ) {
-        HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
+        NoiseSpec spec = context.spec;
+        DataProfile profile = context.profile;
+        NoiseReport report = context.report;
+
         NoiseModel model = spec.model;
         ModelBase randomModel = ModelFactory.createRandomModel();
 
@@ -42,44 +38,31 @@ public class MissingInjector extends InjectorBase {
             indexGen = ModelFactory.createRandomModel();
         } else {
             String columnName = spec.filteredColumns[0];
-            indexGen = ModelFactory.createHistogramModel(dataProfile, columnName);
+            indexGen = ModelFactory.createHistogramModel(profile, columnName);
         }
 
         double perc = spec.percentage;
-        List<String[]> data = dataProfile.getData();
 
-        int len = (int)Math.floor(perc * data.size());
+        int len = (int)Math.floor(perc * profile.getLength());
         report.addMetric(NoiseReport.Metric.ChangedItem, len);
         int count = 0;
         while(count < len) {
-            int index = indexGen.nextIndex(0, data.size());
+            int index = indexGen.nextIndex(0, profile.getLength());
             GranularityType granularity = spec.granularity;
             if (granularity == GranularityType.Cell) {
-                String[] rowData = data.get(index);
-                int cellIndex = randomModel.nextIndex(0, rowData.length);
+                int cellIndex = randomModel.nextIndex(0, profile.getWidth());
                 Pair<Integer, Integer> record = new Pair<>(index, cellIndex);
-                if (log.contains(record)) {
-                    continue;
-                }
-
-                report.logChange(index, cellIndex, rowData[cellIndex], null);
-                rowData[cellIndex] = null;
+                report.logChange(record, profile.getCell(record), null);
+                profile.set(record, null);
                 tracer.verbose(String.format("[%d, %d] <- null", index, cellIndex));
-                log.add(record);
             } else {
                 // set the whole tuple to missing
-                String[] rowData = data.get(index);
-                int width = dataProfile.getWidth();
+                int width = profile.getWidth();
                 for (int i = 0; i < width; i ++) {
                     Pair<Integer, Integer> record = new Pair<>(index, i);
-                    if (log.contains(record)) {
-                        continue;
-                    }
-
-                    report.logChange(index, i, rowData[i], null);
-                    rowData[i] = null;
+                    report.logChange(record, profile.getCell(record), null);
+                    profile.set(record, null);
                     tracer.verbose(String.format("[%d, %d] <- null", index, i));
-                    log.add(record);
                 }
             }
             count ++;
@@ -88,6 +71,5 @@ public class MissingInjector extends InjectorBase {
         long elapsedTime = stopwatch.elapsed(TimeUnit.MILLISECONDS);
         report.addMetric(NoiseReport.Metric.InjectionTime, elapsedTime);
         stopwatch.stop();
-        return this;
     }
 }

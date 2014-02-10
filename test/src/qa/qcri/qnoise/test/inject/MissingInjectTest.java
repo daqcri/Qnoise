@@ -12,10 +12,11 @@ import org.javatuples.Quartet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.inject.MissingInjector;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.NoiseContext;
+import qa.qcri.qnoise.internal.NoiseContextBuilder;
+import qa.qcri.qnoise.internal.NoiseSpec;
 import qa.qcri.qnoise.test.TestDataRepository;
 import qa.qcri.qnoise.util.OperationType;
 
@@ -47,10 +48,10 @@ public class MissingInjectTest {
         try {
             NoiseSpec spec =
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Missing1.json");
-            NoiseReport report = new NoiseReport(spec);
-            new MissingInjector().inject(spec, profile, report);
+            NoiseContext context = new NoiseContextBuilder().profile(profile).spec(spec).build();
+            new MissingInjector().act(context, null);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
-                    report.getLogBook();
+                    context.report.getLogBook();
             double perc = spec.percentage;
             int changedItem = (int)(perc * profile.getLength());
             for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
@@ -69,10 +70,10 @@ public class MissingInjectTest {
         try {
             NoiseSpec spec =
                 TestDataRepository.getSpec("test/src/qa/qcri/qnoise/test/input/Missing2.json");
-            NoiseReport report = new NoiseReport(spec);
-            new MissingInjector().inject(spec, profile, report);
+            NoiseContext context = new NoiseContextBuilder().profile(profile).spec(spec).build();
+            new MissingInjector().act(context, null);
             List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
-                    report.getLogBook();
+                    context.report.getLogBook();
             double perc = spec.percentage;
             int changedItem = (int)(perc * profile.getLength());
             for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {

@@ -3,7 +3,7 @@
  * Licensed under the MIT license <http://www.opensource.org/licenses/MIT>.
  */
 
-package qa.qcri.qnoise;
+package qa.qcri.qnoise.internal;
 
 public enum NoiseType {
     Missing,

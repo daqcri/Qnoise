@@ -5,9 +5,10 @@
 
 package qa.qcri.qnoise.constraint;
 
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.DataType;
-import qa.qcri.qnoise.NoiseReport;
+import org.javatuples.Pair;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.DataType;
+import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.Tracer;
@@ -160,7 +161,7 @@ public class PredicateConstraint extends Constraint {
                 result
             )
         );
-        report.logChange(index, columnIndex, tuple[columnIndex], result);
+        report.logChange(new Pair<>(index, columnIndex), tuple[columnIndex], result);
         tuple[columnIndex] = result;
         return columnIndex;
     }

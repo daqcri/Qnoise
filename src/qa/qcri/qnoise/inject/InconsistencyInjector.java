@@ -8,15 +8,16 @@ package qa.qcri.qnoise.inject;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import org.jetbrains.annotations.NotNull;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
 import qa.qcri.qnoise.constraint.Constraint;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.NoiseContext;
+import qa.qcri.qnoise.internal.NoiseReport;
+import qa.qcri.qnoise.internal.NoiseSpec;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.Tracer;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -26,13 +27,16 @@ public class InconsistencyInjector extends InjectorBase {
 
     /** {@inheritDoc */
     @Override
-    public InjectorBase inject(
-        @NotNull NoiseSpec spec,
-        @NotNull DataProfile profile,
-        @NotNull NoiseReport report
+    public void act(
+        NoiseContext context,
+        HashMap<String, Object> extras
     ) {
-        HashSet<Integer> log = Sets.newHashSet();
         Stopwatch stopwatch = new Stopwatch().start();
+        HashSet<Integer> log = Sets.newHashSet();
+        NoiseSpec spec = context.spec;
+        DataProfile profile = context.profile;
+        NoiseReport report = context.report;
+
         ModelBase indexGen =
             ModelFactory.createRandomModel();
         Constraint[] constraint = spec.constraint;
@@ -50,7 +54,10 @@ public class InconsistencyInjector extends InjectorBase {
             log.add(index);
             int columnIndex = constraint[0]
                 .messIt(
-                    profile, filteredResult[index], distances[0], report
+                    profile,
+                    filteredResult[index],
+                    distances[0],
+                    report
                 );
 
             // TODO; where is the old value
@@ -66,14 +73,12 @@ public class InconsistencyInjector extends InjectorBase {
         );
 
         stopwatch.stop();
-        return this;
     }
 
     private int[] filter(DataProfile profile, Constraint[] constraint) {
         List<Integer> result = Lists.newArrayList();
-        List<String[]> data = profile.getData();
         boolean isValid;
-        for (int i = 0; i < data.size(); i ++) {
+        for (int i = 0; i < profile.getLength(); i ++) {
             isValid = true;
             for (int j = 0; j < constraint.length; j ++)
                 if (!constraint[j].isValid(profile, i)) {

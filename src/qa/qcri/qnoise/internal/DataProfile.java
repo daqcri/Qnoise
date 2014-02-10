@@ -3,7 +3,7 @@
  * Licensed under the MIT license <http://www.opensource.org/licenses/MIT>.
  */
 
-package qa.qcri.qnoise;
+package qa.qcri.qnoise.internal;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
@@ -11,13 +11,17 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import org.javatuples.Pair;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class DataProfile {
     private List<String[]> data;
+    private HashSet<Pair<Integer, Integer>> mark;
     private String[] columnNames;
     private HashMap<String, DataType> types;
     private BiMap<String, Integer> indexes;
@@ -45,6 +49,7 @@ public class DataProfile {
         this.var = Maps.newHashMap();
         this.max = Maps.newHashMap();
         this.min = Maps.newHashMap();
+        this.mark = Sets.newHashSet();
     }
 
     public DataProfile append(String[] value) {
@@ -52,9 +57,18 @@ public class DataProfile {
         return this;
     }
 
-    public List<String[]> getData() {
+    public boolean set(Pair<Integer, Integer> index, String value) {
+        if (isDirty(index))
+            return false;
+        int rowIndex = index.getValue0();
+        int cellIndex = index.getValue1();
+        data.get(rowIndex)[cellIndex] = value;
+        mark.add(index);
+        return true;
+    }
 
-        return data;
+    public boolean isDirty(Pair<Integer, Integer> index) {
+        return mark.contains(index);
     }
 
     public String getColumnName(int index) { return columnNames[index]; }
@@ -114,6 +128,11 @@ public class DataProfile {
     public String getCell(int rowIndex, int columnIndex) {
         String[] tuple = getTuple(rowIndex);
         return tuple[columnIndex];
+    }
+
+    public String getCell(Pair<Integer, Integer> index) {
+        String[] tuple = getTuple(index.getValue0());
+        return tuple[index.getValue1()];
     }
 
     public double getDouble(int rowIndex, int columnIndex) {

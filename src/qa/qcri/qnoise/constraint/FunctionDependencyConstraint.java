@@ -5,8 +5,8 @@
 
 package qa.qcri.qnoise.constraint;
 
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.NoiseHelper;

@@ -7,18 +7,13 @@ package qa.qcri.qnoise.inject;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.Sets;
 import org.javatuples.Pair;
-import org.jetbrains.annotations.NotNull;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.DataType;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
+import qa.qcri.qnoise.internal.*;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.Tracer;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -26,12 +21,15 @@ public class OutlierInjector extends InjectorBase {
     private Tracer tracer = Tracer.getTracer(this.getClass());
 
     @Override
-    public InjectorBase inject(
-        @NotNull NoiseSpec spec,
-        @NotNull DataProfile profile,
-        @NotNull NoiseReport report
+    public void act(
+        NoiseContext context,
+        HashMap<String, Object> extras
     ) {
         Stopwatch stopwatch = new Stopwatch().start();
+        NoiseSpec spec = context.spec;
+        DataProfile profile = context.profile;
+        NoiseReport report = context.report;
+
         String[] selectedColumns = spec.filteredColumns;
         Preconditions.checkArgument(
             selectedColumns.length == 1,
@@ -57,7 +55,6 @@ public class OutlierInjector extends InjectorBase {
         Double rmax = mean + 5 * std; // (extra 3 * std)
 
         ModelBase randomModal = ModelFactory.createRandomModel();
-        HashSet<Pair<Integer, Integer>> log = Sets.newHashSet();
         int index = randomModal.nextIndexWithoutReplacement(0, profile.getLength(), true);
         Random random = new Random();
         for (int i = 0; i < len; i ++) {
@@ -65,15 +62,11 @@ public class OutlierInjector extends InjectorBase {
             // how to deal with small deviation data?
             double u = Math.random() * (rmax - lmax) + lmax;
             double v = random.nextGaussian() + u;
+            Pair<Integer, Integer> record = new Pair<>(index, columnIndex);
             tracer.verbose(String.format("[%d, %d] <- %f", index, columnIndex, v));
-            report.logChange(
-                index, columnIndex, profile.getCell(index, columnIndex), Double.toString(v)
-            );
-            log.add(new Pair<>(index, columnIndex));
-            String[] row = profile.getData().get(index);
-            row[columnIndex] = Double.toString(v);
-            index = randomModal.nextIndexWithoutReplacement(0, profile.getLength(), false);
-            while (log.contains(new Pair<>(index, columnIndex))) {
+            report.logChange(record, profile.getCell(index, columnIndex), Double.toString(v));
+
+            while (!profile.set(record, Double.toString(v))) {
                 index = randomModal.nextIndexWithoutReplacement(0, profile.getLength(), false);
             }
         }
@@ -81,6 +74,5 @@ public class OutlierInjector extends InjectorBase {
         long elapsedTime = stopwatch.elapsed(TimeUnit.MILLISECONDS);
         report.addMetric(NoiseReport.Metric.InjectionTime, elapsedTime);
         stopwatch.stop();
-        return this;
     }
 }

@@ -8,10 +8,11 @@ package qa.qcri.qnoise.util;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
+import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.DataType;
-import qa.qcri.qnoise.NoiseReport;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.DataType;
+import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 
@@ -131,7 +132,7 @@ public class NoiseHelper {
                     newValue
                 )
             );
-            report.logChange(rowIndex, columnIndex, tuple[columnIndex], newValue);
+            report.logChange(new Pair<>(rowIndex, columnIndex), tuple[columnIndex], newValue);
             tuple[columnIndex] = newValue;
         }
     }

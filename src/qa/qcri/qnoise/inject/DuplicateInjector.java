@@ -6,52 +6,52 @@
 package qa.qcri.qnoise.inject;
 
 import com.google.common.base.Stopwatch;
-import org.jetbrains.annotations.NotNull;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
+import org.javatuples.Pair;
+import qa.qcri.qnoise.internal.NoiseContext;
+import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.util.NoiseHelper;
 import qa.qcri.qnoise.util.Tracer;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class DuplicateInjector extends InjectorBase {
     private Tracer tracer = Tracer.getTracer(this.getClass());
 
     @Override
-    public InjectorBase inject(
-        @NotNull NoiseSpec spec,
-        @NotNull DataProfile profile,
-        @NotNull NoiseReport report
-    ) {
-        Stopwatch stopwatch = new Stopwatch().start();
+    public void act(
+        NoiseContext context, 
+        HashMap<String, Object> extras
+    ) {        
+        Stopwatch stopwatch = new Stopwatch().start();        
         ModelBase indexGen =
             ModelFactory.createRandomModel();
-        double seedperc = spec.numberOfSeed;
-        double timeperc = spec.percentage;
+        double seedperc = context.spec.numberOfSeed;
+        double timeperc = context.spec.percentage;
 
-        int nseed = (int)(Math.ceil(profile.getLength() * seedperc));
-        int ntime = (int)(Math.ceil(profile.getLength() * timeperc));
+        int nseed = (int)(Math.ceil(context.profile.getLength() * seedperc));
+        int ntime = (int)(Math.ceil(context.profile.getLength() * timeperc));
 
         int count = 0;
+
         while(count < nseed) {
-            int index = indexGen.nextIndex(0, profile.getLength());
+            int index = indexGen.nextIndex(0, context.profile.getLength());
 
             for (int i = 0; i < ntime; i ++) {
-                String[] oldData = profile.getTuple(index);
+                String[] oldData = context.profile.getTuple(index);
                 String[] newData = oldData.clone();
                 double[] distance;
                 String[] columns = null;
-                if (spec.filteredColumns != null) {
-                    columns = spec.filteredColumns;
+                if (context.spec.filteredColumns != null) {
+                    columns = context.spec.filteredColumns;
                 } else {
-                    columns = profile.getColumnNames();
+                    columns = context.profile.getColumnNames();
                 }
 
-                if (spec.distance != null) {
-                    distance = spec.distance;
+                if (context.spec.distance != null) {
+                    distance = context.spec.distance;
                     if (distance.length != columns.length) {
                         throw new IllegalArgumentException(
                             "Distance has missing or incorrect number of columns."
@@ -61,10 +61,10 @@ public class DuplicateInjector extends InjectorBase {
                     distance = new double[columns.length];
                 }
 
-                profile.append(newData);
+                context.profile.append(newData);
                 if (Tracer.isVerboseOn()) {
                     StringBuilder sb = new StringBuilder("Add ");
-                    sb.append('[').append(profile.getLength() - 1).append("] [ ");
+                    sb.append('[').append(context.profile.getLength() - 1).append("] [ ");
                     for (String cell : newData) {
                         sb.append('\'').append(cell).append("\' ");
                     }
@@ -72,28 +72,30 @@ public class DuplicateInjector extends InjectorBase {
                     tracer.verbose(sb.toString());
                 }
 
-                for (int j = 0; j < profile.getWidth(); j ++) {
-                    report.logInsert(profile.getLength() - 1, j, profile.getCell(i, j));
+                for (int j = 0; j < context.profile.getWidth(); j ++) {
+                    context.report.logInsert(
+                        new Pair<>(context.profile.getLength() - 1, j),
+                        context.profile.getCell(i, j)
+                    );
                 }
 
                 NoiseHelper.playTheJazz(
                     distance,
                     columns,
-                    profile,
-                    profile.getLength() - 1,
-                    report
+                    context.profile,
+                    context.profile.getLength() - 1,
+                    context.report
                 );
             }
             count ++;
         }
 
-        report.appendMetric(NoiseReport.Metric.ChangedItem, nseed * ntime);
-        report.appendMetric(NoiseReport.Metric.PercentageOfDuplicate, timeperc);
-        report.addMetric(
+        context.report.appendMetric(NoiseReport.Metric.ChangedItem, nseed * ntime);
+        context.report.appendMetric(NoiseReport.Metric.PercentageOfDuplicate, timeperc);
+        context.report.addMetric(
             NoiseReport.Metric.InjectionTime,
             stopwatch.elapsed(TimeUnit.MILLISECONDS)
         );
-        profile.setDirty();
-        return this;
+        context.profile.setDirty();
     }
 }

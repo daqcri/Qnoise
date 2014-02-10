@@ -5,15 +5,8 @@
 
 package qa.qcri.qnoise.inject;
 
-import org.jetbrains.annotations.NotNull;
-import qa.qcri.qnoise.DataProfile;
-import qa.qcri.qnoise.NoiseReport;
-import qa.qcri.qnoise.NoiseSpec;
+import qa.qcri.qnoise.internal.IAction;
+import qa.qcri.qnoise.internal.NoiseContext;
 
-public abstract class InjectorBase {
-    public abstract InjectorBase inject(
-        @NotNull NoiseSpec spec,
-        @NotNull DataProfile profile,
-        @NotNull NoiseReport report
-    );
+public abstract class InjectorBase implements IAction<NoiseContext> {
 }

@@ -3,7 +3,7 @@
  * Licensed under the MIT license <http://www.opensource.org/licenses/MIT>.
  */
 
-package qa.qcri.qnoise;
+package qa.qcri.qnoise.internal;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
@@ -18,14 +18,14 @@ import qa.qcri.qnoise.util.Tracer;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class NoiseReport {
     private Map<Metric, List<Object>> stats = Maps.newHashMap();
     private List<Quartet<OperationType, Pair<Integer, Integer>, String, String>> logBook =
             Lists.newArrayList();
-    private HashSet<Pair<Integer, Integer>> logCell;
 
     public enum Metric {
         Type,
@@ -45,37 +45,22 @@ public class NoiseReport {
         LogFile
     }
 
-    public NoiseReport(NoiseSpec spec) {
-        appendMetric(Metric.Type, spec.noiseType);
-        appendMetric(Metric.Model, spec.model);
-        appendMetric(Metric.Percentage, spec.percentage);
-        appendMetric(Metric.Granularity, spec.granularity);
-        appendMetric(Metric.PercentageOfSeed, spec.numberOfSeed);
-        appendMetric(Metric.InjectionTimestamp, new Timestamp(new Date().getTime()).toString());
-        appendMetric(Metric.InputFilePath, spec.inputFile);
-        appendMetric(Metric.LogFile, spec.logFile);
+    public NoiseReport() {}
 
-        logCell = new HashSet<>();
-    }
-
-    public synchronized boolean isNoisyCell(int i, int j) {
-        return logCell.contains(new Pair<>(i, j));
-    }
-
-    public synchronized void logChange(int i, int j, String oldValue, String newValue) {
-        Pair<Integer, Integer> pair = new Pair<>(i, j);
+    public synchronized void logChange(
+        Pair<Integer, Integer> index,
+        String oldValue,
+        String newValue
+    ) {
         Quartet<OperationType, Pair<Integer, Integer>, String, String> log =
-            new Quartet<>(OperationType.Update, pair, oldValue, newValue);
+            new Quartet<>(OperationType.Update, index, oldValue, newValue);
         logBook.add(log);
-        logCell.add(pair);
     }
 
-    public synchronized void logInsert(int i, int j, String value) {
-        Pair<Integer, Integer> pair = new Pair<>(i, j);
+    public synchronized void logInsert(Pair<Integer, Integer> index, String value) {
         Quartet<OperationType, Pair<Integer, Integer>, String, String> log =
-            new Quartet<>(OperationType.Create, pair, null, value);
+            new Quartet<>(OperationType.Create, index, null, value);
         logBook.add(log);
-        logCell.add(pair);
     }
 
     public List<Quartet<OperationType, Pair<Integer, Integer>, String, String>>
@@ -140,7 +125,7 @@ public class NoiseReport {
         try {
             writer =
                 new OutputStreamWriter(
-                    new FileOutputStream(fileName),
+                    new FileOutputStream(fileName, true),
                     Charset.forName("UTF-8")
                 );
             writer.write("operation;row;column;oldvalue;newvalue");
