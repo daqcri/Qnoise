@@ -77,7 +77,11 @@ public class ErrorNoiseInjector extends InjectorBase {
 
             // change the data.
             NoiseHelper.playTheJazz(
-                distance, profile.getColumnName(cellIndex), profile, index, report
+                distance,
+                profile.getColumnName(cellIndex),
+                profile,
+                index,
+                report
             );
             count ++;
         }

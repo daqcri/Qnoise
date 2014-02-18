@@ -5,6 +5,7 @@
 
 package qa.qcri.qnoise.constraint;
 
+import org.javatuples.Pair;
 import qa.qcri.qnoise.internal.DataProfile;
 import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.model.ModelBase;
@@ -47,8 +48,8 @@ public class FunctionDependencyConstraint extends Constraint {
         int leftColumnIndex = profile.getColumnIndex(leftHand);
         int rightColumnIndex = profile.getColumnIndex(rightHand);
 
-        String[] tuple = profile.getTuple(index);
-        String currentLeftValue = profile.getCell(index, leftColumnIndex);
+        Pair<Integer, Integer> indexPair = new Pair<>(index, leftColumnIndex);
+        String currentLeftValue = profile.getCell(indexPair);
 
         ModelBase indexGen =
             ModelFactory.createRandomModel();
@@ -71,17 +72,17 @@ public class FunctionDependencyConstraint extends Constraint {
             genIndex = indexGen.nextIndexWithoutReplacement(0, profile.getLength(), false);
         }
 
-        tracer.verbose(
-            String.format(
-                "[%d][%s] from %s to %s",
-                index,
-                rightHand,
-                tuple[rightColumnIndex],
-                nv
-            )
-        );
-        tuple[rightColumnIndex] = nv;
-        NoiseHelper.playTheJazz(distance, rightHand, profile, index, report);
+        boolean isSuccess = profile.set(indexPair, nv);
+        if (isSuccess) {
+            tracer.infoChange(indexPair, currentLeftValue, nv);
+        } else {
+            tracer.infoUnchange(indexPair);
+        }
+
+        profile.unmark(indexPair);
+        if (isSuccess)
+            NoiseHelper.playTheJazz(distance, rightHand, profile, index, report);
+        profile.mark(indexPair);
         return rightColumnIndex;
     }
 }

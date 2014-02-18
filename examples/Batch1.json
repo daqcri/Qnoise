@@ -1,0 +1,24 @@
+{
+    "source" : {
+        "path" : "examples/dumptest.csv",
+        "csvSeparator" : ","
+    },
+    "noise" : [{
+        "noiseType" : "i",
+        "constraint" : ["C | B"],
+        "percentage" : 0.20,
+        "model" : "r",
+        "domain" : [0.8]
+    },{
+        "noiseType" : "m",
+        "granularity" : "cell",
+        "percentage" : 0.5,
+        "model" : "r"
+    }, {
+        "noiseType" : "d",
+        "numberOfSeed" : 0.2,
+        "percentage" : 0.3,
+        "model" : "r",
+        "distance" : [0.88, 0.98, 0.3, 0.5, 0.0]
+    }]
+}

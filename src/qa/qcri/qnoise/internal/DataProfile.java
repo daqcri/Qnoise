@@ -57,6 +57,16 @@ public class DataProfile {
         return this;
     }
 
+    public void mark(Pair<Integer, Integer> index) {
+        if (!mark.contains(index))
+            mark.add(index);
+    }
+
+    public void unmark(Pair<Integer, Integer> index) {
+        if (mark.contains(index))
+            mark.remove(index);
+    }
+
     public boolean set(Pair<Integer, Integer> index, String value) {
         if (isDirty(index))
             return false;

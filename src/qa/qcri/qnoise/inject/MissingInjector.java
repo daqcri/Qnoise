@@ -53,8 +53,15 @@ public class MissingInjector extends InjectorBase {
                 int cellIndex = randomModel.nextIndex(0, profile.getWidth());
                 Pair<Integer, Integer> record = new Pair<>(index, cellIndex);
                 report.logChange(record, profile.getCell(record), null);
-                profile.set(record, null);
-                tracer.verbose(String.format("[%d, %d] <- null", index, cellIndex));
+                String oldValue = profile.getCell(index, cellIndex);
+                if (profile.set(record, null))
+                    tracer.infoChange(
+                        new Pair<>(index, cellIndex),
+                        oldValue,
+                        "null"
+                    );
+                else
+                    tracer.infoUnchange(new Pair<>(index, cellIndex));
             } else {
                 // set the whole tuple to missing
                 int width = profile.getWidth();

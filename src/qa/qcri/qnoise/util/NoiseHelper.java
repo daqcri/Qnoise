@@ -5,7 +5,6 @@
 
 package qa.qcri.qnoise.util;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import org.javatuples.Pair;
@@ -40,25 +39,6 @@ public class NoiseHelper {
         );
     }
 
-    public static void playTheJazz(
-            Optional<double[]> distance,
-            Optional<String[]> columns,
-            DataProfile profile,
-            int rowIndex,
-            NoiseReport report
-    ) {
-        double[] d = distance.isPresent() ? distance.get() : new double[] { 0.0 };
-        String[] selectedColumns;
-        if (!columns.isPresent()) {
-            HashMap<String, DataType> types = profile.getTypes();
-            selectedColumns = new String[types.size()];
-            types.keySet().toArray(selectedColumns);
-        } else {
-            selectedColumns = columns.get();
-        }
-        playTheJazz(d, selectedColumns, profile, rowIndex, report);
-    }
-
     /**
      * Change cell value based on distance.
      * @param distances the distance from the new value.
@@ -89,20 +69,22 @@ public class NoiseHelper {
 
             switch (type) {
                 case Text:
-                    StringBuilder sb = new StringBuilder(currentValue);
-                    int len = (int)Math.floor(distance * sb.length());
-                    // TODO: currently we start to mess the text from the 1st char.
-                    // It might be more reasonable to use a random gen. again to pick
-                    // the char to change.
-                    for (int j = 0; j < len; j ++) {
-                        char c = sb.charAt(j);
-                        char nc = getRandomChar();
-                        while (nc == c) {
-                            nc = getRandomChar();
+                    if (currentValue != null) {
+                        StringBuilder sb = new StringBuilder(currentValue);
+                        int len = (int)Math.floor(distance * sb.length());
+                        // TODO: currently we start to mess the text from the 1st char.
+                        // It might be more reasonable to use a random gen. again to pick
+                        // the char to change.
+                        for (int j = 0; j < len; j ++) {
+                            char c = sb.charAt(j);
+                            char nc = getRandomChar();
+                            while (nc == c) {
+                                nc = getRandomChar();
+                            }
+                            sb.setCharAt(j, nc);
                         }
-                        sb.setCharAt(j, nc);
+                        newValue = sb.toString();
                     }
-                    newValue = sb.toString();
                     break;
                 case Numerical:
                     double std = profile.getStandardDeviationOn(columnName);
@@ -123,17 +105,13 @@ public class NoiseHelper {
                     throw new UnsupportedOperationException("Unknown type " + type);
             }
 
-            tracer.verbose(
-                String.format(
-                    "[%d][%s] from %s to %s",
-                    rowIndex,
-                    columnName,
-                    tuple[columnIndex],
-                    newValue
-                )
-            );
-            report.logChange(new Pair<>(rowIndex, columnIndex), tuple[columnIndex], newValue);
-            tuple[columnIndex] = newValue;
+            Pair<Integer, Integer> index = new Pair<>(rowIndex, columnIndex);
+            if (profile.set(index, newValue)) {
+                tracer.infoChange(index, profile.getCell(index), newValue);
+                report.logChange(index, tuple[columnIndex], newValue);
+            } else {
+                tracer.infoUnchange(index);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ package qa.qcri.qnoise.util;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import org.javatuples.Pair;
 
 import java.io.PrintStream;
 
@@ -52,6 +53,28 @@ public class Tracer {
         if (isInfoOn() && msg != null) {
             logger.println(msg);
         }
+    }
+
+    public void infoUnchange(Pair<Integer, Integer> index) {
+        info(
+            String.format(
+                "[%d, %d] has been changed before, do skip.",
+                index.getValue0(),
+                index.getValue1()
+            )
+        );
+    }
+
+    public void infoChange(Pair<Integer, Integer> index, String oldValue, String newValue) {
+        info(
+            String.format(
+                "[%d, %d] from %s to %s",
+                index.getValue0(),
+                index.getValue1(),
+                oldValue,
+                newValue
+            )
+        );
     }
 
     /**
