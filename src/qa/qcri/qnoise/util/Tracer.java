@@ -16,7 +16,6 @@ public class Tracer {
     //<editor-fold desc="Private fields">
     private static boolean infoFlag;
     private static boolean verboseFlag;
-    private static String logFileName;
     private Class classType;
     private PrintStream logger = System.out;
 
@@ -56,23 +55,17 @@ public class Tracer {
     }
 
     public void infoUnchange(Pair<Integer, Integer> index) {
-        info(
+        verbose(
             String.format(
-                "[%d, %d] has been changed before, do skip.",
-                index.getValue0(),
-                index.getValue1()
+                "[%d, %d] has been changed before, do skip.", index.getValue0(), index.getValue1()
             )
         );
     }
 
     public void infoChange(Pair<Integer, Integer> index, String oldValue, String newValue) {
-        info(
+        verbose(
             String.format(
-                "[%d, %d] from %s to %s",
-                index.getValue0(),
-                index.getValue1(),
-                oldValue,
-                newValue
+                "[%d, %d] from %s to %s", index.getValue0(), index.getValue1(), oldValue, newValue
             )
         );
     }

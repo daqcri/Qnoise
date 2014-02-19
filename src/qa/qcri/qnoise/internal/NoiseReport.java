@@ -15,6 +15,7 @@ import org.javatuples.Tuple;
 import qa.qcri.qnoise.util.OperationType;
 import qa.qcri.qnoise.util.Tracer;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
@@ -122,13 +123,20 @@ public class NoiseReport {
 
     public void saveToFile(String fileName) {
         OutputStreamWriter writer = null;
+        File targetFile = null;
         try {
+            boolean writeHeader = true;
+            targetFile = new File(fileName);
+            if (targetFile.exists()) {
+                writeHeader = false;
+            }
             writer =
                 new OutputStreamWriter(
-                    new FileOutputStream(fileName, true),
+                    new FileOutputStream(targetFile, true),
                     Charset.forName("UTF-8")
                 );
-            writer.write("operation;row;column;oldvalue;newvalue");
+            if (writeHeader)
+                writer.write("operation;row;column;oldvalue;newvalue");
             writer.write(System.lineSeparator());
             for (Quartet<OperationType, Pair<Integer, Integer>, String, String> log : logBook) {
                 writer.write(formatTuple(log));
