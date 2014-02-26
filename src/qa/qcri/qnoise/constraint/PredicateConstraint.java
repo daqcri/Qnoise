@@ -43,7 +43,7 @@ public class PredicateConstraint extends Constraint {
 
     @Override
     public boolean isValid(DataProfile profile, int index) {
-        String[] tuple = profile.getTuple(index);
+        String[] tuple = profile.getReadOnlyTuple(index);
         int columnIndex = profile.getColumnIndex(leftHand);
         DataType type = profile.getType(columnIndex);
         if (type != DataType.Numerical) {
@@ -78,9 +78,8 @@ public class PredicateConstraint extends Constraint {
     }
 
     @Override
-    public int messIt(DataProfile profile, int index, double distance, NoiseReport report)
+    public int messIt(DataProfile profile, int rowIndex, double distance, NoiseReport report)
             throws IllegalArgumentException {
-        String[] tuple = profile.getTuple(index);
         int columnIndex = profile.getColumnIndex(leftHand);
         DataType type = profile.getType(columnIndex);
         if (type != DataType.Numerical) {
@@ -88,7 +87,7 @@ public class PredicateConstraint extends Constraint {
         }
         ModelBase indexGen = ModelFactory.createRandomModel();
 
-        double nv = 0.0;
+        double nv;
         int genIndex;
         switch (operator) {
             case ">":
@@ -152,17 +151,19 @@ public class PredicateConstraint extends Constraint {
         }
 
         String result = Double.toString(nv);
+        Pair<Integer, Integer> cellIndex = new Pair<>(rowIndex, columnIndex);
         tracer.verbose(
             String.format(
                 "[%d][%s] from %s to %s",
-                index,
+                rowIndex,
                 leftHand,
-                tuple[columnIndex],
+                profile.getCell(cellIndex),
                 result
             )
         );
-        report.logChange(new Pair<>(index, columnIndex), tuple[columnIndex], result);
-        tuple[columnIndex] = result;
+
+        report.logChange(cellIndex, profile.getCell(cellIndex), result);
+        profile.set(cellIndex, result);
         return columnIndex;
     }
 }

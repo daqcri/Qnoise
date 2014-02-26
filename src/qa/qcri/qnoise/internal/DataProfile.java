@@ -8,10 +8,7 @@ package qa.qcri.qnoise.internal;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
 import org.javatuples.Pair;
 
 import java.io.IOException;
@@ -20,9 +17,9 @@ import java.util.HashSet;
 import java.util.List;
 
 public class DataProfile {
-    private List<String[]> data;
+    private List<List<String>> data;
     private HashSet<Pair<Integer, Integer>> mark;
-    private String[] columnNames;
+    private List<String> columnNames;
     private HashMap<String, DataType> types;
     private BiMap<String, Integer> indexes;
     private HashMap<String, Double> mean;
@@ -30,19 +27,19 @@ public class DataProfile {
     private HashMap<String, Double> min;
     private HashMap<String, Double> max;
 
-    DataProfile(
-        List<String[]> data,
-        String[] columnNames,
-        DataType[] types
+    public DataProfile(
+        List<List<String>> data,
+        List<String> columnNames,
+        List<DataType> types
     ) {
         this.data = data;
-        this.columnNames = new String[columnNames.length];
+        this.columnNames = Lists.newArrayList();
         this.types = Maps.newHashMap();
         this.indexes = HashBiMap.create();
-        for (int i = 0; i < columnNames.length; i ++) {
-            this.columnNames[i] = columnNames[i].trim();
-            this.types.put(this.columnNames[i], types[i]);
-            this.indexes.put(this.columnNames[i], i);
+        for (int i = 0; i < columnNames.size(); i ++) {
+            this.columnNames.add(columnNames.get(i).trim());
+            this.types.put(this.columnNames.get(i), types.get(i));
+            this.indexes.put(this.columnNames.get(i), i);
         }
 
         this.mean = Maps.newHashMap();
@@ -52,8 +49,11 @@ public class DataProfile {
         this.mark = Sets.newHashSet();
     }
 
-    public DataProfile append(String[] value) {
-        data.add(value);
+    public DataProfile append(String[] values) {
+        List<String> newList = Lists.newArrayList();
+        for (String value : values)
+            newList.add(value);
+        data.add(newList);
         return this;
     }
 
@@ -72,7 +72,7 @@ public class DataProfile {
             return false;
         int rowIndex = index.getValue0();
         int cellIndex = index.getValue1();
-        data.get(rowIndex)[cellIndex] = value;
+        data.get(rowIndex).set(cellIndex, value);
         mark.add(index);
         return true;
     }
@@ -81,9 +81,18 @@ public class DataProfile {
         return mark.contains(index);
     }
 
-    public String getColumnName(int index) { return columnNames[index]; }
+    public String getColumnName(int index) {
+        return columnNames.get(index);
+    }
+
+    /**
+     * Immutable array.
+     */
     public String[] getColumnNames() {
-        return columnNames;
+        String[] result = new String[columnNames.size()];
+        for (int i = 0; i < columnNames.size(); i ++)
+            result[i] = columnNames.get(i);
+        return result;
     }
 
     public HashMap<String, DataType> getTypes() {
@@ -124,9 +133,11 @@ public class DataProfile {
      * @param index index number.
      * @return tuple in a String array.
      */
-    public String[] getTuple(int index) {
+    public String[] getReadOnlyTuple(int index) {
         Preconditions.checkArgument(index < getLength());
-        return data.get(index);
+        String[] tuple = new String[getWidth()];
+        data.get(index).toArray(tuple);
+        return tuple;
     }
 
     /**
@@ -136,20 +147,17 @@ public class DataProfile {
      * @return cell value.
      */
     public String getCell(int rowIndex, int columnIndex) {
-        String[] tuple = getTuple(rowIndex);
-        return tuple[columnIndex];
+        return data.get(rowIndex).get(columnIndex);
     }
 
     public String getCell(Pair<Integer, Integer> index) {
-        String[] tuple = getTuple(index.getValue0());
-        return tuple[index.getValue1()];
+        return getCell(index.getValue0(), index.getValue1());
     }
 
     public double getDouble(int rowIndex, int columnIndex) {
         DataType type = getType(columnIndex);
         Preconditions.checkArgument(type == DataType.Numerical);
-        String[] tuple = getTuple(rowIndex);
-        return Double.parseDouble(tuple[columnIndex]);
+        return Double.parseDouble(getCell(rowIndex, columnIndex));
     }
 
     /**
@@ -172,7 +180,7 @@ public class DataProfile {
             int index = indexes.get(column);
             double sum = 0;
             for (int i = 0; i < getLength(); i ++) {
-                String t = data.get(i)[index];
+                String t = data.get(i).get(index);
                 sum += Double.parseDouble(t);
             }
 
@@ -193,7 +201,7 @@ public class DataProfile {
             double sum = 0;
             double mean = getMean(column);
             for (int i = 0; i < getLength(); i ++) {
-                String t = data.get(i)[index];
+                String t = data.get(i).get(index);
                 double tmp = Double.parseDouble(t);
                 sum += (tmp - mean) * (tmp - mean);
             }
@@ -214,7 +222,7 @@ public class DataProfile {
             double cur = Double.MAX_VALUE;
             int index = indexes.get(column);
             for (int i = 0; i < getLength(); i ++) {
-                String t = data.get(i)[index];
+                String t = data.get(i).get(index);
                 Double tmp = Double.parseDouble(t);
                 if (cur > tmp)
                     cur = tmp;
@@ -234,7 +242,7 @@ public class DataProfile {
             double cur = Double.MIN_VALUE;
             int index = indexes.get(column);
             for (int i = 0; i < getLength(); i ++) {
-                String t = data.get(i)[index];
+                String t = data.get(i).get(index);
                 Double tmp = Double.parseDouble(t);
                 if (cur < tmp)
                     cur = tmp;
@@ -263,20 +271,35 @@ public class DataProfile {
         Preconditions.checkNotNull(reader);
         String[] header = reader.readNext();
         List<String[]> entries = reader.readAll();
-        DataType[] types = new DataType[header.length];
+        List<DataType> types = Lists.newArrayList();
+        List<List<String>> data = Lists.newArrayList();
 
-        for (int i = 0; i < types.length; i ++) {
+        Preconditions.checkArgument(entries != null && entries.size() > 0);
+
+        for (String[] entry : entries) {
+            data.add(Lists.newArrayList(entry));
+        }
+
+        for (int i = 0; i < entries.get(0).length; i ++) {
             if (typeList == null) {
-                types[i] = DataType.Text;
+                types.add(DataType.Text);
             } else {
-                types[i] = DataType.fromString(typeList.get(i).toUpperCase());
+                types.add(DataType.fromString(typeList.get(i).toUpperCase()));
             }
         }
-        return new DataProfile(entries, header, types);
+        return new DataProfile(data, Lists.newArrayList(header), types);
     }
 
     public void writeData(CSVWriter writer) throws IOException {
-        writer.writeAll(data);
+        List<String[]> csvData = Lists.newArrayList();
+        for (List<String> entry : data) {
+            csvData.add((String[])entry.toArray());
+        }
+        writer.writeAll(csvData);
         writer.flush();
+    }
+
+    public List<List<String>> getData() {
+        return data;
     }
 }

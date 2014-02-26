@@ -10,8 +10,10 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.cli.*;
-import qa.qcri.qnoise.inject.InjectorFactory;
-import qa.qcri.qnoise.internal.*;
+import qa.qcri.qnoise.internal.DataProfile;
+import qa.qcri.qnoise.internal.IAction;
+import qa.qcri.qnoise.internal.NoiseContext;
+import qa.qcri.qnoise.internal.NoiseReport;
 import qa.qcri.qnoise.util.NoiseJsonAdapter;
 import qa.qcri.qnoise.util.NoiseJsonAdapterDeserializer;
 import qa.qcri.qnoise.util.Tracer;
@@ -71,33 +73,29 @@ public class Qnoise {
                 CSVWriter.NO_ESCAPE_CHARACTER
             );
 
-            for (NoiseSpec spec : adapter.getSpecs()) {
-                new DataProcess(
-                    new NoiseContextBuilder()
-                        .profile(profile)
-                        .spec(spec)
-                        .build()
-                    ).process(InjectorFactory.createInjector(spec.noiseType))
-                    .after(new IAction<NoiseContext>() {
-                        @Override
-                        public void act(
-                            NoiseContext context,
-                            HashMap<String, Object> extras
-                        ) {
-                            context.report.appendMetric(
-                                NoiseReport.Metric.InputFilePath,
-                                inputFileName
-                            );
+            QnoiseFacade.inject(
+                profile,
+                adapter.getSpecs(),
+                new IAction<NoiseContext>() {
+                    @Override
+                    public void act(
+                        NoiseContext context,
+                        HashMap<String, Object> extras
+                    ) {
+                        context.report.appendMetric(
+                            NoiseReport.Metric.InputFilePath,
+                            inputFileName
+                        );
 
-                            context.report.appendMetric(
-                                NoiseReport.Metric.OutputFilePath,
-                                outputFileName
-                            );
-                            context.report.saveToFile(context.spec.logFile);
-                            context.report.print();
-                        }
-                    });
-            }
+                        context.report.appendMetric(
+                            NoiseReport.Metric.OutputFilePath,
+                            outputFileName
+                        );
+                        context.report.saveToFile(context.spec.logFile);
+                        context.report.print();
+                    }
+                }
+            );
 
             profile.writeData(writer);
         } catch (MissingOptionException me) {

@@ -40,7 +40,7 @@ public class DuplicateInjector extends InjectorBase {
             int index = indexGen.nextIndex(0, context.profile.getLength());
 
             for (int i = 0; i < ntime; i ++) {
-                String[] oldData = context.profile.getTuple(index);
+                String[] oldData = context.profile.getReadOnlyTuple(index);
                 String[] newData = oldData.clone();
                 double[] distance;
                 String[] columns = null;

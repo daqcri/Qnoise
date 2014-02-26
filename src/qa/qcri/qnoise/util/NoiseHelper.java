@@ -55,7 +55,7 @@ public class NoiseHelper {
     ) {
         Preconditions.checkArgument(distances.length > 0);
 
-        String[] tuple = profile.getTuple(rowIndex);
+        String[] tuple = profile.getReadOnlyTuple(rowIndex);
         BiMap<String, Integer> indexes = profile.getIndexes();
         HashMap<String, DataType> types = profile.getTypes();
 
