@@ -154,21 +154,9 @@ public class NoiseJsonAdapterDeserializer implements JsonDeserializer<NoiseJsonA
 
         // -------------- verify specifications ------------------- //
         for (NoiseSpec spec : adapter.specs) {
-            if (spec.noiseType == NoiseType.Inconsistency)
-                Preconditions.checkArgument(spec.constraint != null);
-
-            if (spec.noiseType == NoiseType.Duplicate)
-                Preconditions.checkArgument(
-                    spec.numberOfSeed != null,
-                    spec.distance
-                );
-
-            if (spec.noiseType == NoiseType.Error)
-                Preconditions.checkArgument(
-                    spec.granularity == GranularityType.Cell &&
-                    spec.distance != null,
-                    "Input value is missing or incorrect."
-                );
+            String errorMessage = NoiseHelper.verify(spec);
+            if (errorMessage != null)
+                throw new IllegalArgumentException(errorMessage);
         }
 
         return adapter;

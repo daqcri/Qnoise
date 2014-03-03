@@ -5,9 +5,7 @@
 
 package qa.qcri.qnoise.external;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import org.apache.thrift.TException;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
@@ -25,26 +23,48 @@ public class QNoiseThriftHandler implements TQnoise.Iface {
     private static TServer server;
 
     @Override
-    public List<List<String>> inject(TQnoiseInput param) throws TException {
+    public List<List<String>> inject(TQnoiseInput param) throws TInputException {
         List<List<String>> data = param.getData();
-        List<String> types = param.getType();
         List<TQnoiseSpec> specs = param.getSpecs();
-        List<String> header = param.getHeader();
 
-        Preconditions.checkArgument(data != null && data.size() > 0);
-        Preconditions.checkArgument(types != null && types.size() > 0);
-        Preconditions.checkArgument(specs != null && specs.size() > 0);
-        Preconditions.checkArgument(header != null && header.size() > 0);
+        if (data == null || data.size() == 0)
+            throw new TInputException("Input data cannot be null nor empty.");
 
-        List<DataType> dataTypes = Lists.newArrayList();
-        for (String type : types)
-            dataTypes.add(DataType.fromString(type));
-
-        DataProfile profile = new DataProfile(data, header, dataTypes);
+        if (specs == null || specs.size() == 0)
+            throw new TInputException("Specification cannot be null nor empty.");
 
         List<NoiseSpec> specList = Lists.newArrayList();
-        for (TQnoiseSpec spec : specs)
+        for (TQnoiseSpec spec : specs) {
+            NoiseSpec spec_ = TQnoiseSpecConverter.convert(spec);
+            String errorMessage = QnoiseFacade.verfiy(spec_);
+            if (errorMessage != null)
+                throw new TInputException(errorMessage);
             specList.add(TQnoiseSpecConverter.convert(spec));
+        }
+
+        DataProfile profile;
+        List<DataType> dataTypes = null;
+        List<String> header = null;
+        if (param.isSetHeader()) {
+            header = param.getHeader();
+        }
+
+        if (param.isSetType()) {
+            dataTypes = Lists.newArrayList();
+            for (String type : param.getType())
+                dataTypes.add(DataType.fromString(type));
+        }
+
+        if (dataTypes == null) {
+            if (header == null)
+                profile = new DataProfile(data);
+            else
+                profile = new DataProfile(data, header);
+        } else if (header == null)
+            profile = new DataProfile(data, dataTypes);
+        else
+            profile = new DataProfile(data, header, dataTypes);
+
         QnoiseFacade.inject(profile, specList);
         return profile.getData();
     }
@@ -62,8 +82,8 @@ public class QNoiseThriftHandler implements TQnoise.Iface {
                         .Args(serverTransport)
                         .processor(processor)
                 );
+            System.out.println("Let's make some noises...");
             server.serve();
-
         } catch (TTransportException e) {
             e.printStackTrace();
         }

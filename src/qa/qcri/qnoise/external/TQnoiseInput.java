@@ -23,9 +23,9 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TQnoiseInput");
 
   private static final org.apache.thrift.protocol.TField DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("data", org.apache.thrift.protocol.TType.LIST, (short)1);
-  private static final org.apache.thrift.protocol.TField HEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("header", org.apache.thrift.protocol.TType.LIST, (short)2);
-  private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.LIST, (short)3);
-  private static final org.apache.thrift.protocol.TField SPECS_FIELD_DESC = new org.apache.thrift.protocol.TField("specs", org.apache.thrift.protocol.TType.LIST, (short)4);
+  private static final org.apache.thrift.protocol.TField SPECS_FIELD_DESC = new org.apache.thrift.protocol.TField("specs", org.apache.thrift.protocol.TType.LIST, (short)2);
+  private static final org.apache.thrift.protocol.TField HEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("header", org.apache.thrift.protocol.TType.LIST, (short)3);
+  private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.LIST, (short)4);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -34,16 +34,16 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
   }
 
   private List<List<String>> data; // required
-  private List<String> header; // required
-  private List<String> type; // optional
   private List<TQnoiseSpec> specs; // required
+  private List<String> header; // optional
+  private List<String> type; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     DATA((short)1, "data"),
-    HEADER((short)2, "header"),
-    TYPE((short)3, "type"),
-    SPECS((short)4, "specs");
+    SPECS((short)2, "specs"),
+    HEADER((short)3, "header"),
+    TYPE((short)4, "type");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -60,12 +60,12 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       switch(fieldId) {
         case 1: // DATA
           return DATA;
-        case 2: // HEADER
-          return HEADER;
-        case 3: // TYPE
-          return TYPE;
-        case 4: // SPECS
+        case 2: // SPECS
           return SPECS;
+        case 3: // HEADER
+          return HEADER;
+        case 4: // TYPE
+          return TYPE;
         default:
           return null;
       }
@@ -106,7 +106,7 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
   }
 
   // isset id assignments
-  private _Fields optionals[] = {_Fields.TYPE};
+  private _Fields optionals[] = {_Fields.HEADER,_Fields.TYPE};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -114,15 +114,15 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
                 new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)))));
-    tmpMap.put(_Fields.HEADER, new org.apache.thrift.meta_data.FieldMetaData("header", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.SPECS, new org.apache.thrift.meta_data.FieldMetaData("specs", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TQnoiseSpec.class))));
+    tmpMap.put(_Fields.HEADER, new org.apache.thrift.meta_data.FieldMetaData("header", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     tmpMap.put(_Fields.TYPE, new org.apache.thrift.meta_data.FieldMetaData("type", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
-    tmpMap.put(_Fields.SPECS, new org.apache.thrift.meta_data.FieldMetaData("specs", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TQnoiseSpec.class))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TQnoiseInput.class, metaDataMap);
   }
@@ -132,12 +132,10 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
 
   public TQnoiseInput(
     List<List<String>> data,
-    List<String> header,
     List<TQnoiseSpec> specs)
   {
     this();
     this.data = data;
-    this.header = header;
     this.specs = specs;
   }
 
@@ -156,6 +154,13 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       }
       this.data = __this__data;
     }
+    if (other.isSetSpecs()) {
+      List<TQnoiseSpec> __this__specs = new ArrayList<TQnoiseSpec>();
+      for (TQnoiseSpec other_element : other.specs) {
+        __this__specs.add(new TQnoiseSpec(other_element));
+      }
+      this.specs = __this__specs;
+    }
     if (other.isSetHeader()) {
       List<String> __this__header = new ArrayList<String>();
       for (String other_element : other.header) {
@@ -170,13 +175,6 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       }
       this.type = __this__type;
     }
-    if (other.isSetSpecs()) {
-      List<TQnoiseSpec> __this__specs = new ArrayList<TQnoiseSpec>();
-      for (TQnoiseSpec other_element : other.specs) {
-        __this__specs.add(new TQnoiseSpec(other_element));
-      }
-      this.specs = __this__specs;
-    }
   }
 
   public TQnoiseInput deepCopy() {
@@ -186,9 +184,9 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
   @Override
   public void clear() {
     this.data = null;
+    this.specs = null;
     this.header = null;
     this.type = null;
-    this.specs = null;
   }
 
   public int getDataSize() {
@@ -227,6 +225,45 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
   public void setDataIsSet(boolean value) {
     if (!value) {
       this.data = null;
+    }
+  }
+
+  public int getSpecsSize() {
+    return (this.specs == null) ? 0 : this.specs.size();
+  }
+
+  public java.util.Iterator<TQnoiseSpec> getSpecsIterator() {
+    return (this.specs == null) ? null : this.specs.iterator();
+  }
+
+  public void addToSpecs(TQnoiseSpec elem) {
+    if (this.specs == null) {
+      this.specs = new ArrayList<TQnoiseSpec>();
+    }
+    this.specs.add(elem);
+  }
+
+  public List<TQnoiseSpec> getSpecs() {
+    return this.specs;
+  }
+
+  public TQnoiseInput setSpecs(List<TQnoiseSpec> specs) {
+    this.specs = specs;
+    return this;
+  }
+
+  public void unsetSpecs() {
+    this.specs = null;
+  }
+
+  /** Returns true if field specs is set (has been assigned a value) and false otherwise */
+  public boolean isSetSpecs() {
+    return this.specs != null;
+  }
+
+  public void setSpecsIsSet(boolean value) {
+    if (!value) {
+      this.specs = null;
     }
   }
 
@@ -308,45 +345,6 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
     }
   }
 
-  public int getSpecsSize() {
-    return (this.specs == null) ? 0 : this.specs.size();
-  }
-
-  public java.util.Iterator<TQnoiseSpec> getSpecsIterator() {
-    return (this.specs == null) ? null : this.specs.iterator();
-  }
-
-  public void addToSpecs(TQnoiseSpec elem) {
-    if (this.specs == null) {
-      this.specs = new ArrayList<TQnoiseSpec>();
-    }
-    this.specs.add(elem);
-  }
-
-  public List<TQnoiseSpec> getSpecs() {
-    return this.specs;
-  }
-
-  public TQnoiseInput setSpecs(List<TQnoiseSpec> specs) {
-    this.specs = specs;
-    return this;
-  }
-
-  public void unsetSpecs() {
-    this.specs = null;
-  }
-
-  /** Returns true if field specs is set (has been assigned a value) and false otherwise */
-  public boolean isSetSpecs() {
-    return this.specs != null;
-  }
-
-  public void setSpecsIsSet(boolean value) {
-    if (!value) {
-      this.specs = null;
-    }
-  }
-
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case DATA:
@@ -354,6 +352,14 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
         unsetData();
       } else {
         setData((List<List<String>>)value);
+      }
+      break;
+
+    case SPECS:
+      if (value == null) {
+        unsetSpecs();
+      } else {
+        setSpecs((List<TQnoiseSpec>) value);
       }
       break;
 
@@ -369,15 +375,7 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       if (value == null) {
         unsetType();
       } else {
-        setType((List<String>)value);
-      }
-      break;
-
-    case SPECS:
-      if (value == null) {
-        unsetSpecs();
-      } else {
-        setSpecs((List<TQnoiseSpec>)value);
+        setType((List<String>) value);
       }
       break;
 
@@ -389,14 +387,14 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
     case DATA:
       return getData();
 
+    case SPECS:
+      return getSpecs();
+
     case HEADER:
       return getHeader();
 
     case TYPE:
       return getType();
-
-    case SPECS:
-      return getSpecs();
 
     }
     throw new IllegalStateException();
@@ -411,12 +409,12 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
     switch (field) {
     case DATA:
       return isSetData();
+    case SPECS:
+      return isSetSpecs();
     case HEADER:
       return isSetHeader();
     case TYPE:
       return isSetType();
-    case SPECS:
-      return isSetSpecs();
     }
     throw new IllegalStateException();
   }
@@ -443,6 +441,15 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
         return false;
     }
 
+    boolean this_present_specs = true && this.isSetSpecs();
+    boolean that_present_specs = true && that.isSetSpecs();
+    if (this_present_specs || that_present_specs) {
+      if (!(this_present_specs && that_present_specs))
+        return false;
+      if (!this.specs.equals(that.specs))
+        return false;
+    }
+
     boolean this_present_header = true && this.isSetHeader();
     boolean that_present_header = true && that.isSetHeader();
     if (this_present_header || that_present_header) {
@@ -458,15 +465,6 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       if (!(this_present_type && that_present_type))
         return false;
       if (!this.type.equals(that.type))
-        return false;
-    }
-
-    boolean this_present_specs = true && this.isSetSpecs();
-    boolean that_present_specs = true && that.isSetSpecs();
-    if (this_present_specs || that_present_specs) {
-      if (!(this_present_specs && that_present_specs))
-        return false;
-      if (!this.specs.equals(that.specs))
         return false;
     }
 
@@ -496,6 +494,16 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetSpecs()).compareTo(typedOther.isSetSpecs());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSpecs()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.specs, typedOther.specs);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetHeader()).compareTo(typedOther.isSetHeader());
     if (lastComparison != 0) {
       return lastComparison;
@@ -512,16 +520,6 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
     }
     if (isSetType()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.type, typedOther.type);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetSpecs()).compareTo(typedOther.isSetSpecs());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetSpecs()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.specs, typedOther.specs);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -554,13 +552,23 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("header:");
-    if (this.header == null) {
+    sb.append("specs:");
+    if (this.specs == null) {
       sb.append("null");
     } else {
-      sb.append(this.header);
+      sb.append(this.specs);
     }
     first = false;
+    if (isSetHeader()) {
+      if (!first) sb.append(", ");
+      sb.append("header:");
+      if (this.header == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.header);
+      }
+      first = false;
+    }
     if (isSetType()) {
       if (!first) sb.append(", ");
       sb.append("type:");
@@ -571,14 +579,6 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       }
       first = false;
     }
-    if (!first) sb.append(", ");
-    sb.append("specs:");
-    if (this.specs == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.specs);
-    }
-    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -587,9 +587,6 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
     // check for required fields
     if (data == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'data' was not present! Struct: " + toString());
-    }
-    if (header == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'header' was not present! Struct: " + toString());
     }
     if (specs == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'specs' was not present! Struct: " + toString());
@@ -659,16 +656,35 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // HEADER
+          case 2: // SPECS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
                 org.apache.thrift.protocol.TList _list30 = iprot.readListBegin();
-                struct.header = new ArrayList<String>(_list30.size);
+                struct.specs = new ArrayList<TQnoiseSpec>(_list30.size);
                 for (int _i31 = 0; _i31 < _list30.size; ++_i31)
                 {
-                  String _elem32; // required
-                  _elem32 = iprot.readString();
-                  struct.header.add(_elem32);
+                  TQnoiseSpec _elem32; // required
+                  _elem32 = new TQnoiseSpec();
+                  _elem32.read(iprot);
+                  struct.specs.add(_elem32);
+                }
+                iprot.readListEnd();
+              }
+              struct.setSpecsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 3: // HEADER
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list33 = iprot.readListBegin();
+                struct.header = new ArrayList<String>(_list33.size);
+                for (int _i34 = 0; _i34 < _list33.size; ++_i34)
+                {
+                  String _elem35; // required
+                  _elem35 = iprot.readString();
+                  struct.header.add(_elem35);
                 }
                 iprot.readListEnd();
               }
@@ -677,39 +693,20 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // TYPE
+          case 4: // TYPE
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list33 = iprot.readListBegin();
-                struct.type = new ArrayList<String>(_list33.size);
-                for (int _i34 = 0; _i34 < _list33.size; ++_i34)
+                org.apache.thrift.protocol.TList _list36 = iprot.readListBegin();
+                struct.type = new ArrayList<String>(_list36.size);
+                for (int _i37 = 0; _i37 < _list36.size; ++_i37)
                 {
-                  String _elem35; // required
-                  _elem35 = iprot.readString();
-                  struct.type.add(_elem35);
+                  String _elem38; // required
+                  _elem38 = iprot.readString();
+                  struct.type.add(_elem38);
                 }
                 iprot.readListEnd();
               }
               struct.setTypeIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 4: // SPECS
-            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
-              {
-                org.apache.thrift.protocol.TList _list36 = iprot.readListBegin();
-                struct.specs = new ArrayList<TQnoiseSpec>(_list36.size);
-                for (int _i37 = 0; _i37 < _list36.size; ++_i37)
-                {
-                  TQnoiseSpec _elem38; // required
-                  _elem38 = new TQnoiseSpec();
-                  _elem38.read(iprot);
-                  struct.specs.add(_elem38);
-                }
-                iprot.readListEnd();
-              }
-              struct.setSpecsIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -748,24 +745,24 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
         }
         oprot.writeFieldEnd();
       }
-      if (struct.header != null) {
-        oprot.writeFieldBegin(HEADER_FIELD_DESC);
+      if (struct.specs != null) {
+        oprot.writeFieldBegin(SPECS_FIELD_DESC);
         {
-          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.header.size()));
-          for (String _iter41 : struct.header)
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.specs.size()));
+          for (TQnoiseSpec _iter41 : struct.specs)
           {
-            oprot.writeString(_iter41);
+            _iter41.write(oprot);
           }
           oprot.writeListEnd();
         }
         oprot.writeFieldEnd();
       }
-      if (struct.type != null) {
-        if (struct.isSetType()) {
-          oprot.writeFieldBegin(TYPE_FIELD_DESC);
+      if (struct.header != null) {
+        if (struct.isSetHeader()) {
+          oprot.writeFieldBegin(HEADER_FIELD_DESC);
           {
-            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.type.size()));
-            for (String _iter42 : struct.type)
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.header.size()));
+            for (String _iter42 : struct.header)
             {
               oprot.writeString(_iter42);
             }
@@ -774,17 +771,19 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
           oprot.writeFieldEnd();
         }
       }
-      if (struct.specs != null) {
-        oprot.writeFieldBegin(SPECS_FIELD_DESC);
-        {
-          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.specs.size()));
-          for (TQnoiseSpec _iter43 : struct.specs)
+      if (struct.type != null) {
+        if (struct.isSetType()) {
+          oprot.writeFieldBegin(TYPE_FIELD_DESC);
           {
-            _iter43.write(oprot);
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.type.size()));
+            for (String _iter43 : struct.type)
+            {
+              oprot.writeString(_iter43);
+            }
+            oprot.writeListEnd();
           }
-          oprot.writeListEnd();
+          oprot.writeFieldEnd();
         }
-        oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -817,24 +816,29 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
         }
       }
       {
-        oprot.writeI32(struct.header.size());
-        for (String _iter46 : struct.header)
-        {
-          oprot.writeString(_iter46);
-        }
-      }
-      {
         oprot.writeI32(struct.specs.size());
-        for (TQnoiseSpec _iter47 : struct.specs)
+        for (TQnoiseSpec _iter46 : struct.specs)
         {
-          _iter47.write(oprot);
+          _iter46.write(oprot);
         }
       }
       BitSet optionals = new BitSet();
-      if (struct.isSetType()) {
+      if (struct.isSetHeader()) {
         optionals.set(0);
       }
-      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetType()) {
+        optionals.set(1);
+      }
+      oprot.writeBitSet(optionals, 2);
+      if (struct.isSetHeader()) {
+        {
+          oprot.writeI32(struct.header.size());
+          for (String _iter47 : struct.header)
+          {
+            oprot.writeString(_iter47);
+          }
+        }
+      }
       if (struct.isSetType()) {
         {
           oprot.writeI32(struct.type.size());
@@ -870,30 +874,32 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       }
       struct.setDataIsSet(true);
       {
-        org.apache.thrift.protocol.TList _list55 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-        struct.header = new ArrayList<String>(_list55.size);
+        org.apache.thrift.protocol.TList _list55 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+        struct.specs = new ArrayList<TQnoiseSpec>(_list55.size);
         for (int _i56 = 0; _i56 < _list55.size; ++_i56)
         {
-          String _elem57; // required
-          _elem57 = iprot.readString();
-          struct.header.add(_elem57);
-        }
-      }
-      struct.setHeaderIsSet(true);
-      {
-        org.apache.thrift.protocol.TList _list58 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.specs = new ArrayList<TQnoiseSpec>(_list58.size);
-        for (int _i59 = 0; _i59 < _list58.size; ++_i59)
-        {
-          TQnoiseSpec _elem60; // required
-          _elem60 = new TQnoiseSpec();
-          _elem60.read(iprot);
-          struct.specs.add(_elem60);
+          TQnoiseSpec _elem57; // required
+          _elem57 = new TQnoiseSpec();
+          _elem57.read(iprot);
+          struct.specs.add(_elem57);
         }
       }
       struct.setSpecsIsSet(true);
-      BitSet incoming = iprot.readBitSet(1);
+      BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
+        {
+          org.apache.thrift.protocol.TList _list58 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.header = new ArrayList<String>(_list58.size);
+          for (int _i59 = 0; _i59 < _list58.size; ++_i59)
+          {
+            String _elem60; // required
+            _elem60 = iprot.readString();
+            struct.header.add(_elem60);
+          }
+        }
+        struct.setHeaderIsSet(true);
+      }
+      if (incoming.get(1)) {
         {
           org.apache.thrift.protocol.TList _list61 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
           struct.type = new ArrayList<String>(_list61.size);

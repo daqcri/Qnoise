@@ -8,6 +8,7 @@ package qa.qcri.qnoise;
 import com.google.common.base.Preconditions;
 import qa.qcri.qnoise.inject.InjectorFactory;
 import qa.qcri.qnoise.internal.*;
+import qa.qcri.qnoise.util.NoiseHelper;
 
 import java.util.List;
 
@@ -46,5 +47,9 @@ public class QnoiseFacade {
                 InjectorFactory.createInjector(spec.noiseType)
             ).after(after);
         }
+    }
+
+    public static String verfiy(NoiseSpec spec) {
+        return NoiseHelper.verify(spec);
     }
 }

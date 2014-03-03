@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
  * FD Constraint.
  */
 public class FunctionDependencyConstraint extends Constraint {
+    private final int MAXTRY = 100;
     private String leftHand;
     private String rightHand;
     private static final Pattern pattern =
@@ -45,11 +46,14 @@ public class FunctionDependencyConstraint extends Constraint {
 
     @Override
     public int messIt(DataProfile profile, int index, double distance, NoiseReport report) {
+        /*
+            For FD, we change the left column value to make sure the violations.
+         */
         int leftColumnIndex = profile.getColumnIndex(leftHand);
         int rightColumnIndex = profile.getColumnIndex(rightHand);
 
-        Pair<Integer, Integer> indexPair = new Pair<>(index, leftColumnIndex);
-        String currentLeftValue = profile.getCell(indexPair);
+        String currentLeftValue = profile.getCell(index, leftColumnIndex);
+        String currentRightValue = profile.getCell(index, rightColumnIndex);
 
         ModelBase indexGen =
             ModelFactory.createRandomModel();
@@ -57,31 +61,38 @@ public class FunctionDependencyConstraint extends Constraint {
         int genIndex =
             indexGen.nextIndexWithoutReplacement(0, profile.getLength(), true);
         String nv;
+        int tryCount = 0;
         while (true) {
             if (genIndex == Integer.MIN_VALUE) {
                 tracer.info("There is no extra data to use to make noise.");
                 return -1;
             }
 
-            String selectedLeftValue = profile.getCell(genIndex, leftColumnIndex);
             String selectedRightValue = profile.getCell(genIndex, rightColumnIndex);
-            if (!selectedLeftValue.equals(currentLeftValue)) {
+            if (!selectedRightValue.equals(currentRightValue)) {
                 nv = selectedRightValue;
+                break;
+            }
+            tryCount ++;
+            if (tryCount > MAXTRY) {
+                nv = currentLeftValue;
+                tracer.info("Cannot find possible replacement for FD.");
                 break;
             }
             genIndex = indexGen.nextIndexWithoutReplacement(0, profile.getLength(), false);
         }
 
+        Pair<Integer, Integer> indexPair = new Pair<>(index, rightColumnIndex);
         boolean isSuccess = profile.set(indexPair, nv);
         if (isSuccess) {
-            tracer.infoChange(indexPair, currentLeftValue, nv);
+            tracer.infoChange(indexPair, currentRightValue, nv);
         } else {
             tracer.infoUnchange(indexPair);
         }
 
         profile.unmark(indexPair);
         if (isSuccess)
-            NoiseHelper.playTheJazz(distance, rightHand, profile, index, report);
+            NoiseHelper.playTheJazz(distance, leftHand, profile, index, report);
         profile.mark(indexPair);
         return rightColumnIndex;
     }

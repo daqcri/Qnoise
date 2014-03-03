@@ -9,9 +9,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
-import qa.qcri.qnoise.internal.DataProfile;
-import qa.qcri.qnoise.internal.DataType;
-import qa.qcri.qnoise.internal.NoiseReport;
+import qa.qcri.qnoise.internal.*;
 import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 
@@ -113,6 +111,24 @@ public class NoiseHelper {
                 tracer.infoUnchange(index);
             }
         }
+    }
+
+    public static String verify(NoiseSpec spec) {
+        switch (spec.noiseType) {
+            case Inconsistency:
+                if (spec.constraint == null)
+                    return "Constraint cannot be null.";
+                break;
+            case Duplicate:
+                if (spec.numberOfSeed == null)
+                    return "Numer of Seed is missing.";
+                break;
+            case Error:
+                if (spec.granularity == GranularityType.Cell && spec.distance != null)
+                    return "Input distance is missing.";
+                break;
+        }
+        return null;
     }
 
     private static char getRandomChar() {

@@ -10,6 +10,7 @@ import au.com.bytecode.opencsv.CSVWriter;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.*;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,10 +28,10 @@ public class DataProfile {
     private HashMap<String, Double> min;
     private HashMap<String, Double> max;
 
-    public DataProfile(
-        List<List<String>> data,
-        List<String> columnNames,
-        List<DataType> types
+    private void internalCreation(
+        @NotNull List<List<String>> data,
+        @NotNull List<String> columnNames,
+        @NotNull List<DataType> types
     ) {
         this.data = data;
         this.columnNames = Lists.newArrayList();
@@ -47,6 +48,82 @@ public class DataProfile {
         this.max = Maps.newHashMap();
         this.min = Maps.newHashMap();
         this.mark = Sets.newHashSet();
+    }
+
+    public DataProfile(@NotNull List<List<String>> data) {
+        Preconditions.checkArgument(data.size() > 0);
+        int width = 0;
+        for (int i = 0; i < data.size(); i ++) {
+            if (data.get(i).size() > 0) {
+                width = data.get(i).size();
+                break;
+            }
+        }
+
+        if (width == 0)
+            throw new IllegalArgumentException("Data cannot be empty.");
+
+        List<String> columnNames = Lists.newArrayList();
+        List<DataType> dataTypes = Lists.newArrayList();
+        for (int i = 0; i < width; i ++) {
+            // TODO: limited to 52 default columns
+            columnNames.add((i > 25 ? (char)((i - 25) + 'A') : (char)(i + 'a')) + "");
+            dataTypes.add(DataType.Text);
+        }
+
+        internalCreation(data, columnNames, dataTypes);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> DataProfile(
+        @NotNull List<List<String>> data,
+        @NotNull List<T> params
+    ) {
+        Preconditions.checkArgument(data.size() > 0);
+        Preconditions.checkArgument(params.size() > 0);
+
+        int width = 0;
+        for (int i = 0; i < data.size(); i ++) {
+            if (data.get(i).size() > 0) {
+                width = data.get(i).size();
+                break;
+            }
+        }
+
+        if (width == 0)
+            throw new IllegalArgumentException("Data cannot be empty.");
+
+        List<DataType> dataTypes = null;
+        List<String> columnNames = null;
+        T instance = params.get(0);
+        if (instance instanceof DataType) {
+            dataTypes = (List<DataType>)params;
+            columnNames = Lists.newArrayList();
+        }
+
+        if (instance instanceof String) {
+            columnNames = (List<String>)params;
+            dataTypes = Lists.newArrayList();
+        }
+
+        for (int i = 0; i < width; i ++) {
+            if (instance instanceof DataType)
+                // TODO: limited to 52 default columns
+                columnNames.add(i > 25 ? (i - 25) + "A" : i + "a");
+
+            if (instance instanceof String) {
+                dataTypes.add(DataType.Text);
+            }
+        }
+        internalCreation(data, columnNames, dataTypes);
+    }
+
+    public DataProfile(
+        @NotNull List<List<String>> data,
+        @NotNull List<String> columnNames,
+        @NotNull List<DataType> types
+    ) {
+        internalCreation(data, columnNames, types);
     }
 
     public DataProfile append(String[] values) {
