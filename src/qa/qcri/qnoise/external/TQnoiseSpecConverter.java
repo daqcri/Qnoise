@@ -75,7 +75,8 @@ public class TQnoiseSpecConverter {
         }
 
         if (spec.isSetFilteredColumns()) {
-            result.filteredColumns = (String[])spec.getFilteredColumns().toArray();
+            result.filteredColumns = new String[spec.getFilteredColumns().size()];
+            spec.getFilteredColumns().toArray(result.filteredColumns);
         }
 
         if (spec.isSetNumberOfSeed())
