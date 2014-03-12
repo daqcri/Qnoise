@@ -65,7 +65,11 @@ public class QNoiseThriftHandler implements TQnoise.Iface {
         else
             profile = new DataProfile(data, header, dataTypes);
 
-        QnoiseFacade.inject(profile, specList);
+        try {
+            QnoiseFacade.inject(profile, specList);
+        } catch (Exception ex) {
+            throw new TInputException(ex.getMessage());
+        }
         return profile.getData();
     }
 

@@ -359,7 +359,7 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       if (value == null) {
         unsetSpecs();
       } else {
-        setSpecs((List<TQnoiseSpec>) value);
+        setSpecs((List<TQnoiseSpec>)value);
       }
       break;
 
@@ -367,7 +367,7 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       if (value == null) {
         unsetHeader();
       } else {
-        setHeader((List<String>) value);
+        setHeader((List<String>)value);
       }
       break;
 
@@ -375,7 +375,7 @@ public class TQnoiseInput implements org.apache.thrift.TBase<TQnoiseInput, TQnoi
       if (value == null) {
         unsetType();
       } else {
-        setType((List<String>) value);
+        setType((List<String>)value);
       }
       break;
 

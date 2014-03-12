@@ -51,7 +51,12 @@ public class TQnoiseSpecConverter {
         NoiseSpec result = new NoiseSpec();
         result.noiseType = TNoiseTypeConverter.convert(spec.getNoiseType());
         result.percentage = spec.getPercentage();
-        result.model = TNoiseModelConverter.convert(spec.getModel());
+
+        if (spec.isSetModel()) {
+            result.model = TNoiseModelConverter.convert(spec.getModel());
+        } else {
+            result.model = NoiseModel.Random;
+        }
 
         if (spec.isSetDistance()) {
             List<Double> distances = spec.getDistance();
@@ -79,8 +84,8 @@ public class TQnoiseSpecConverter {
             spec.getFilteredColumns().toArray(result.filteredColumns);
         }
 
-        if (spec.isSetNumberOfSeed())
-            result.numberOfSeed = spec.getNumberOfSeed();
+        if (spec.isSetSeed())
+            result.numberOfSeed = spec.getSeed();
 
         if (spec.isSetLogfile())
             result.logFile = spec.getLogfile();

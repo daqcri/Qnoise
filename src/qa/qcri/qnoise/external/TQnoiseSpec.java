@@ -28,7 +28,7 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
   private static final org.apache.thrift.protocol.TField MODEL_FIELD_DESC = new org.apache.thrift.protocol.TField("model", org.apache.thrift.protocol.TType.I32, (short)3);
   private static final org.apache.thrift.protocol.TField IS_ON_CELL_FIELD_DESC = new org.apache.thrift.protocol.TField("isOnCell", org.apache.thrift.protocol.TType.BOOL, (short)4);
   private static final org.apache.thrift.protocol.TField FILTERED_COLUMNS_FIELD_DESC = new org.apache.thrift.protocol.TField("filteredColumns", org.apache.thrift.protocol.TType.LIST, (short)5);
-  private static final org.apache.thrift.protocol.TField NUMBER_OF_SEED_FIELD_DESC = new org.apache.thrift.protocol.TField("numberOfSeed", org.apache.thrift.protocol.TType.DOUBLE, (short)6);
+  private static final org.apache.thrift.protocol.TField SEED_FIELD_DESC = new org.apache.thrift.protocol.TField("seed", org.apache.thrift.protocol.TType.DOUBLE, (short)6);
   private static final org.apache.thrift.protocol.TField DISTANCE_FIELD_DESC = new org.apache.thrift.protocol.TField("distance", org.apache.thrift.protocol.TType.LIST, (short)7);
   private static final org.apache.thrift.protocol.TField CONSTRAINT_FIELD_DESC = new org.apache.thrift.protocol.TField("constraint", org.apache.thrift.protocol.TType.LIST, (short)8);
   private static final org.apache.thrift.protocol.TField LOGFILE_FIELD_DESC = new org.apache.thrift.protocol.TField("logfile", org.apache.thrift.protocol.TType.STRING, (short)9);
@@ -41,10 +41,10 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
 
   private TNoiseType noiseType; // required
   private double percentage; // required
-  private TNoiseModel model; // required
+  private TNoiseModel model; // optional
   private boolean isOnCell; // optional
   private List<String> filteredColumns; // optional
-  private double numberOfSeed; // optional
+  private double seed; // optional
   private List<Double> distance; // optional
   private List<String> constraint; // optional
   private String logfile; // optional
@@ -64,7 +64,7 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
     MODEL((short)3, "model"),
     IS_ON_CELL((short)4, "isOnCell"),
     FILTERED_COLUMNS((short)5, "filteredColumns"),
-    NUMBER_OF_SEED((short)6, "numberOfSeed"),
+    SEED((short)6, "seed"),
     DISTANCE((short)7, "distance"),
     CONSTRAINT((short)8, "constraint"),
     LOGFILE((short)9, "logfile");
@@ -92,8 +92,8 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
           return IS_ON_CELL;
         case 5: // FILTERED_COLUMNS
           return FILTERED_COLUMNS;
-        case 6: // NUMBER_OF_SEED
-          return NUMBER_OF_SEED;
+        case 6: // SEED
+          return SEED;
         case 7: // DISTANCE
           return DISTANCE;
         case 8: // CONSTRAINT
@@ -142,9 +142,9 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
   // isset id assignments
   private static final int __PERCENTAGE_ISSET_ID = 0;
   private static final int __ISONCELL_ISSET_ID = 1;
-  private static final int __NUMBEROFSEED_ISSET_ID = 2;
+  private static final int __SEED_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
-  private _Fields optionals[] = {_Fields.IS_ON_CELL,_Fields.FILTERED_COLUMNS,_Fields.NUMBER_OF_SEED,_Fields.DISTANCE,_Fields.CONSTRAINT,_Fields.LOGFILE};
+  private _Fields optionals[] = {_Fields.MODEL,_Fields.IS_ON_CELL,_Fields.FILTERED_COLUMNS,_Fields.SEED,_Fields.DISTANCE,_Fields.CONSTRAINT,_Fields.LOGFILE};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -152,14 +152,14 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, TNoiseType.class)));
     tmpMap.put(_Fields.PERCENTAGE, new org.apache.thrift.meta_data.FieldMetaData("percentage", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
-    tmpMap.put(_Fields.MODEL, new org.apache.thrift.meta_data.FieldMetaData("model", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.MODEL, new org.apache.thrift.meta_data.FieldMetaData("model", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, TNoiseModel.class)));
     tmpMap.put(_Fields.IS_ON_CELL, new org.apache.thrift.meta_data.FieldMetaData("isOnCell", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.FILTERED_COLUMNS, new org.apache.thrift.meta_data.FieldMetaData("filteredColumns", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
-    tmpMap.put(_Fields.NUMBER_OF_SEED, new org.apache.thrift.meta_data.FieldMetaData("numberOfSeed", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.SEED, new org.apache.thrift.meta_data.FieldMetaData("seed", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.DISTANCE, new org.apache.thrift.meta_data.FieldMetaData("distance", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
@@ -178,14 +178,12 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
 
   public TQnoiseSpec(
     TNoiseType noiseType,
-    double percentage,
-    TNoiseModel model)
+    double percentage)
   {
     this();
     this.noiseType = noiseType;
     this.percentage = percentage;
     setPercentageIsSet(true);
-    this.model = model;
   }
 
   /**
@@ -208,7 +206,7 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       }
       this.filteredColumns = __this__filteredColumns;
     }
-    this.numberOfSeed = other.numberOfSeed;
+    this.seed = other.seed;
     if (other.isSetDistance()) {
       List<Double> __this__distance = new ArrayList<Double>();
       for (Double other_element : other.distance) {
@@ -241,8 +239,8 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
     setIsOnCellIsSet(false);
     this.isOnCell = false;
     this.filteredColumns = null;
-    setNumberOfSeedIsSet(false);
-    this.numberOfSeed = 0.0;
+    setSeedIsSet(false);
+    this.seed = 0.0;
     this.distance = null;
     this.constraint = null;
     this.logfile = null;
@@ -397,27 +395,27 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
     }
   }
 
-  public double getNumberOfSeed() {
-    return this.numberOfSeed;
+  public double getSeed() {
+    return this.seed;
   }
 
-  public TQnoiseSpec setNumberOfSeed(double numberOfSeed) {
-    this.numberOfSeed = numberOfSeed;
-    setNumberOfSeedIsSet(true);
+  public TQnoiseSpec setSeed(double seed) {
+    this.seed = seed;
+    setSeedIsSet(true);
     return this;
   }
 
-  public void unsetNumberOfSeed() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __NUMBEROFSEED_ISSET_ID);
+  public void unsetSeed() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SEED_ISSET_ID);
   }
 
-  /** Returns true if field numberOfSeed is set (has been assigned a value) and false otherwise */
-  public boolean isSetNumberOfSeed() {
-    return EncodingUtils.testBit(__isset_bitfield, __NUMBEROFSEED_ISSET_ID);
+  /** Returns true if field seed is set (has been assigned a value) and false otherwise */
+  public boolean isSetSeed() {
+    return EncodingUtils.testBit(__isset_bitfield, __SEED_ISSET_ID);
   }
 
-  public void setNumberOfSeedIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __NUMBEROFSEED_ISSET_ID, value);
+  public void setSeedIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SEED_ISSET_ID, value);
   }
 
   public int getDistanceSize() {
@@ -564,11 +562,11 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       }
       break;
 
-    case NUMBER_OF_SEED:
+    case SEED:
       if (value == null) {
-        unsetNumberOfSeed();
+        unsetSeed();
       } else {
-        setNumberOfSeed((Double)value);
+        setSeed((Double) value);
       }
       break;
 
@@ -616,8 +614,8 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
     case FILTERED_COLUMNS:
       return getFilteredColumns();
 
-    case NUMBER_OF_SEED:
-      return Double.valueOf(getNumberOfSeed());
+    case SEED:
+      return Double.valueOf(getSeed());
 
     case DISTANCE:
       return getDistance();
@@ -649,8 +647,8 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       return isSetIsOnCell();
     case FILTERED_COLUMNS:
       return isSetFilteredColumns();
-    case NUMBER_OF_SEED:
-      return isSetNumberOfSeed();
+    case SEED:
+      return isSetSeed();
     case DISTANCE:
       return isSetDistance();
     case CONSTRAINT:
@@ -719,12 +717,12 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
         return false;
     }
 
-    boolean this_present_numberOfSeed = true && this.isSetNumberOfSeed();
-    boolean that_present_numberOfSeed = true && that.isSetNumberOfSeed();
-    if (this_present_numberOfSeed || that_present_numberOfSeed) {
-      if (!(this_present_numberOfSeed && that_present_numberOfSeed))
+    boolean this_present_seed = true && this.isSetSeed();
+    boolean that_present_seed = true && that.isSetSeed();
+    if (this_present_seed || that_present_seed) {
+      if (!(this_present_seed && that_present_seed))
         return false;
-      if (this.numberOfSeed != that.numberOfSeed)
+      if (this.seed != that.seed)
         return false;
     }
 
@@ -821,12 +819,12 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetNumberOfSeed()).compareTo(typedOther.isSetNumberOfSeed());
+    lastComparison = Boolean.valueOf(isSetSeed()).compareTo(typedOther.isSetSeed());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetNumberOfSeed()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.numberOfSeed, typedOther.numberOfSeed);
+    if (isSetSeed()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.seed, typedOther.seed);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -892,14 +890,16 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
     sb.append("percentage:");
     sb.append(this.percentage);
     first = false;
-    if (!first) sb.append(", ");
-    sb.append("model:");
-    if (this.model == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.model);
+    if (isSetModel()) {
+      if (!first) sb.append(", ");
+      sb.append("model:");
+      if (this.model == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.model);
+      }
+      first = false;
     }
-    first = false;
     if (isSetIsOnCell()) {
       if (!first) sb.append(", ");
       sb.append("isOnCell:");
@@ -916,10 +916,10 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       }
       first = false;
     }
-    if (isSetNumberOfSeed()) {
+    if (isSetSeed()) {
       if (!first) sb.append(", ");
-      sb.append("numberOfSeed:");
-      sb.append(this.numberOfSeed);
+      sb.append("seed:");
+      sb.append(this.seed);
       first = false;
     }
     if (isSetDistance()) {
@@ -962,9 +962,6 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'noiseType' was not present! Struct: " + toString());
     }
     // alas, we cannot check 'percentage' because it's a primitive and you chose the non-beans generator.
-    if (model == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'model' was not present! Struct: " + toString());
-    }
     // check for sub-struct validity
   }
 
@@ -1054,10 +1051,10 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // NUMBER_OF_SEED
+          case 6: // SEED
             if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
-              struct.numberOfSeed = iprot.readDouble();
-              struct.setNumberOfSeedIsSet(true);
+              struct.seed = iprot.readDouble();
+              struct.setSeedIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -1133,9 +1130,11 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       oprot.writeDouble(struct.percentage);
       oprot.writeFieldEnd();
       if (struct.model != null) {
-        oprot.writeFieldBegin(MODEL_FIELD_DESC);
-        oprot.writeI32(struct.model.getValue());
-        oprot.writeFieldEnd();
+        if (struct.isSetModel()) {
+          oprot.writeFieldBegin(MODEL_FIELD_DESC);
+          oprot.writeI32(struct.model.getValue());
+          oprot.writeFieldEnd();
+        }
       }
       if (struct.isSetIsOnCell()) {
         oprot.writeFieldBegin(IS_ON_CELL_FIELD_DESC);
@@ -1156,9 +1155,9 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
           oprot.writeFieldEnd();
         }
       }
-      if (struct.isSetNumberOfSeed()) {
-        oprot.writeFieldBegin(NUMBER_OF_SEED_FIELD_DESC);
-        oprot.writeDouble(struct.numberOfSeed);
+      if (struct.isSetSeed()) {
+        oprot.writeFieldBegin(SEED_FIELD_DESC);
+        oprot.writeDouble(struct.seed);
         oprot.writeFieldEnd();
       }
       if (struct.distance != null) {
@@ -1215,27 +1214,32 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI32(struct.noiseType.getValue());
       oprot.writeDouble(struct.percentage);
-      oprot.writeI32(struct.model.getValue());
       BitSet optionals = new BitSet();
-      if (struct.isSetIsOnCell()) {
+      if (struct.isSetModel()) {
         optionals.set(0);
       }
-      if (struct.isSetFilteredColumns()) {
+      if (struct.isSetIsOnCell()) {
         optionals.set(1);
       }
-      if (struct.isSetNumberOfSeed()) {
+      if (struct.isSetFilteredColumns()) {
         optionals.set(2);
       }
-      if (struct.isSetDistance()) {
+      if (struct.isSetSeed()) {
         optionals.set(3);
       }
-      if (struct.isSetConstraint()) {
+      if (struct.isSetDistance()) {
         optionals.set(4);
       }
-      if (struct.isSetLogfile()) {
+      if (struct.isSetConstraint()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetLogfile()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
+      if (struct.isSetModel()) {
+        oprot.writeI32(struct.model.getValue());
+      }
       if (struct.isSetIsOnCell()) {
         oprot.writeBool(struct.isOnCell);
       }
@@ -1248,8 +1252,8 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
           }
         }
       }
-      if (struct.isSetNumberOfSeed()) {
-        oprot.writeDouble(struct.numberOfSeed);
+      if (struct.isSetSeed()) {
+        oprot.writeDouble(struct.seed);
       }
       if (struct.isSetDistance()) {
         {
@@ -1281,14 +1285,16 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
       struct.setNoiseTypeIsSet(true);
       struct.percentage = iprot.readDouble();
       struct.setPercentageIsSet(true);
-      struct.model = TNoiseModel.findByValue(iprot.readI32());
-      struct.setModelIsSet(true);
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
+        struct.model = TNoiseModel.findByValue(iprot.readI32());
+        struct.setModelIsSet(true);
+      }
+      if (incoming.get(1)) {
         struct.isOnCell = iprot.readBool();
         struct.setIsOnCellIsSet(true);
       }
-      if (incoming.get(1)) {
+      if (incoming.get(2)) {
         {
           org.apache.thrift.protocol.TList _list15 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
           struct.filteredColumns = new ArrayList<String>(_list15.size);
@@ -1301,11 +1307,11 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
         }
         struct.setFilteredColumnsIsSet(true);
       }
-      if (incoming.get(2)) {
-        struct.numberOfSeed = iprot.readDouble();
-        struct.setNumberOfSeedIsSet(true);
-      }
       if (incoming.get(3)) {
+        struct.seed = iprot.readDouble();
+        struct.setSeedIsSet(true);
+      }
+      if (incoming.get(4)) {
         {
           org.apache.thrift.protocol.TList _list18 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.DOUBLE, iprot.readI32());
           struct.distance = new ArrayList<Double>(_list18.size);
@@ -1318,7 +1324,7 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
         }
         struct.setDistanceIsSet(true);
       }
-      if (incoming.get(4)) {
+      if (incoming.get(5)) {
         {
           org.apache.thrift.protocol.TList _list21 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
           struct.constraint = new ArrayList<String>(_list21.size);
@@ -1331,7 +1337,7 @@ public class TQnoiseSpec implements org.apache.thrift.TBase<TQnoiseSpec, TQnoise
         }
         struct.setConstraintIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(6)) {
         struct.logfile = iprot.readString();
         struct.setLogfileIsSet(true);
       }

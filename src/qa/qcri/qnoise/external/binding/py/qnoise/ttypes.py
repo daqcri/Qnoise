@@ -125,7 +125,7 @@ class TQnoiseSpec(object):
    - model
    - isOnCell
    - filteredColumns
-   - numberOfSeed
+   - seed
    - distance
    - constraint
    - logfile
@@ -138,19 +138,19 @@ class TQnoiseSpec(object):
     (3, TType.I32, 'model', None, None, ), # 3
     (4, TType.BOOL, 'isOnCell', None, None, ), # 4
     (5, TType.LIST, 'filteredColumns', (TType.STRING,None), None, ), # 5
-    (6, TType.DOUBLE, 'numberOfSeed', None, None, ), # 6
+    (6, TType.DOUBLE, 'seed', None, None, ), # 6
     (7, TType.LIST, 'distance', (TType.DOUBLE,None), None, ), # 7
     (8, TType.LIST, 'constraint', (TType.STRING,None), None, ), # 8
     (9, TType.STRING, 'logfile', None, None, ), # 9
   )
 
-  def __init__(self, noiseType=None, percentage=None, model=None, isOnCell=None, filteredColumns=None, numberOfSeed=None, distance=None, constraint=None, logfile=None,):
+  def __init__(self, noiseType=None, percentage=None, model=None, isOnCell=None, filteredColumns=None, seed=None, distance=None, constraint=None, logfile=None,):
     self.noiseType = noiseType
     self.percentage = percentage
     self.model = model
     self.isOnCell = isOnCell
     self.filteredColumns = filteredColumns
-    self.numberOfSeed = numberOfSeed
+    self.seed = seed
     self.distance = distance
     self.constraint = constraint
     self.logfile = logfile
@@ -196,7 +196,7 @@ class TQnoiseSpec(object):
           iprot.skip(ftype)
       elif fid == 6:
         if ftype == TType.DOUBLE:
-          self.numberOfSeed = iprot.readDouble();
+          self.seed = iprot.readDouble();
         else:
           iprot.skip(ftype)
       elif fid == 7:
@@ -257,9 +257,9 @@ class TQnoiseSpec(object):
         oprot.writeString(iter18)
       oprot.writeListEnd()
       oprot.writeFieldEnd()
-    if self.numberOfSeed is not None:
-      oprot.writeFieldBegin('numberOfSeed', TType.DOUBLE, 6)
-      oprot.writeDouble(self.numberOfSeed)
+    if self.seed is not None:
+      oprot.writeFieldBegin('seed', TType.DOUBLE, 6)
+      oprot.writeDouble(self.seed)
       oprot.writeFieldEnd()
     if self.distance is not None:
       oprot.writeFieldBegin('distance', TType.LIST, 7)
@@ -287,8 +287,6 @@ class TQnoiseSpec(object):
       raise TProtocol.TProtocolException(message='Required field noiseType is unset!')
     if self.percentage is None:
       raise TProtocol.TProtocolException(message='Required field percentage is unset!')
-    if self.model is None:
-      raise TProtocol.TProtocolException(message='Required field model is unset!')
     return
 
 

@@ -742,7 +742,7 @@ public class TQnoise {
         if (value == null) {
           unsetEx();
         } else {
-          setEx((TInputException) value);
+          setEx((TInputException)value);
         }
         break;
 

@@ -21,7 +21,7 @@ exception TInputException {
 struct TQnoiseSpec {
     1: required TNoiseType noiseType,
     2: required double percentage,
-    3: required TNoiseModel model,
+    3: optional TNoiseModel model,
     4: optional bool isOnCell,
     5: optional list<string> filteredColumns,
     6: optional double seed,
