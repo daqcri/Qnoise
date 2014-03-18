@@ -20,4 +20,13 @@ public enum GranularityType {
 
         throw new IllegalArgumentException("Unknown granularity string " + granularity);
     }
+
+    public static GranularityType fromInt(int granularity) {
+        switch (granularity) {
+            case 0: return Row;
+            case 1: return Cell;
+            default:
+                throw new IllegalArgumentException("Unknown granularity");
+        }
+    }
 }

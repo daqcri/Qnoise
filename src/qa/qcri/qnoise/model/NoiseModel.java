@@ -9,15 +9,24 @@ public enum NoiseModel {
     Random,
     Histogram;
 
-    public static NoiseModel fromString(String modal) {
+    public static NoiseModel fromString(String model) {
         NoiseModel result;
-        if (modal.equalsIgnoreCase("r")) {
+        if (model.equalsIgnoreCase("r")) {
             result = NoiseModel.Random;
-        } else if (modal.equalsIgnoreCase("h")) {
+        } else if (model.equalsIgnoreCase("h")) {
             result = NoiseModel.Histogram;
         } else {
-            throw new IllegalArgumentException("Unknown modal string " + modal);
+            throw new IllegalArgumentException("Unknown modal string " + model);
         }
         return result;
+    }
+
+    public static NoiseModel fromInt(int model) {
+        switch (model) {
+            case 0: return Random;
+            case 1: return Histogram;
+            default:
+                throw new IllegalArgumentException("Unknown noise model");
+        }
     }
 }

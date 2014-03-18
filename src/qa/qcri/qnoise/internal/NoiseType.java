@@ -35,4 +35,16 @@ public enum NoiseType {
 
         throw new IllegalArgumentException("Unknown model string " + model);
     }
+
+    public static NoiseType fromInt(int model) {
+        switch (model) {
+            case 0: return Missing;
+            case 1: return Inconsistency;
+            case 2: return Outlier;
+            case 3: return Error;
+            case 4: return Duplicate;
+            default:
+                throw new IllegalArgumentException("Unknown noise type");
+        }
+    }
 }
