@@ -15,14 +15,11 @@ import qa.qcri.qnoise.model.ModelBase;
 import qa.qcri.qnoise.model.ModelFactory;
 import qa.qcri.qnoise.model.NoiseModel;
 import qa.qcri.qnoise.util.NoiseHelper;
-import qa.qcri.qnoise.util.Tracer;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class ErrorNoiseInjector extends InjectorBase {
-    private Tracer tracer = Tracer.getTracer(this.getClass());
-
     @Override
     public void act(
         NoiseContext context,
@@ -46,7 +43,7 @@ public class ErrorNoiseInjector extends InjectorBase {
 
         double perc = spec.percentage;
 
-        int len = (int)Math.floor(perc * profile.getWidth());
+        int len = (int)Math.floor(perc * profile.getLength());
         report.addMetric(NoiseReport.Metric.ChangedItem, len);
         int count = 0;
         while(count < len) {

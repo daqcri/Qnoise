@@ -122,13 +122,16 @@ public class NoiseJsonAdapterDeserializer implements JsonDeserializer<NoiseJsonA
             } else if (spec.filteredColumns != null)
                 spec.distance = new double[spec.filteredColumns.length];
 
-            JsonArray domain = noiseObj.getAsJsonArray("domain");
-            if (domain != null) {
-                spec.distance = new double[domain.size()];
-                for (int i = 0; i < domain.size(); i ++)
-                    spec.distance[i] = domain.get(i).getAsDouble();
-            } else if (spec.filteredColumns != null)
-                spec.distance = new double[spec.filteredColumns.length];
+            // domain or distance
+            if (spec.distance == null) {
+                JsonArray domain = noiseObj.getAsJsonArray("domain");
+                if (domain != null) {
+                    spec.distance = new double[domain.size()];
+                    for (int i = 0; i < domain.size(); i ++)
+                        spec.distance[i] = domain.get(i).getAsDouble();
+                } else if (spec.filteredColumns != null)
+                    spec.distance = new double[spec.filteredColumns.length];
+            }
 
             JsonArray constraints = noiseObj.getAsJsonArray("constraint");
             if (constraints != null) {

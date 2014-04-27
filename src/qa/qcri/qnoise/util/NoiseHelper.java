@@ -105,7 +105,7 @@ public class NoiseHelper {
 
             Pair<Integer, Integer> index = new Pair<>(rowIndex, columnIndex);
             if (profile.set(index, newValue)) {
-                tracer.infoChange(index, profile.getCell(index), newValue);
+                tracer.infoChange(index, currentValue, newValue);
                 report.logChange(index, tuple[columnIndex], newValue);
             } else {
                 tracer.infoUnchange(index);
@@ -124,7 +124,7 @@ public class NoiseHelper {
                     return "Numer of Seed is missing.";
                 break;
             case Error:
-                if (spec.granularity == GranularityType.Cell && spec.distance != null)
+                if (spec.granularity == GranularityType.Cell && spec.distance == null)
                     return "Input distance is missing.";
                 break;
         }

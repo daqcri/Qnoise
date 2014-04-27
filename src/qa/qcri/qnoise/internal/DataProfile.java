@@ -370,7 +370,11 @@ public class DataProfile {
     public void writeData(CSVWriter writer) throws IOException {
         List<String[]> csvData = Lists.newArrayList();
         for (List<String> entry : data) {
-            csvData.add((String[])entry.toArray());
+            Object[] data = entry.toArray();
+            String[] strData = new String[data.length];
+            for (int i = 0; i < data.length; i ++)
+                strData[i] = (String)data[i];
+            csvData.add(strData);
         }
         writer.writeAll(csvData);
         writer.flush();
