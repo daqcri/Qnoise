@@ -55,11 +55,12 @@ public class OutlierInjector extends InjectorBase {
         Double rmax = mean + 5 * std; // (extra 3 * std)
 
         ModelBase randomModal = ModelFactory.createRandomModel();
-        int index = randomModal.nextIndexWithoutReplacement(0, profile.getLength(), true);
         Random random = new Random();
+        int index;
         for (int i = 0; i < len; i ++) {
             // TODO: should we ignore the point already in the outlier region
             // how to deal with small deviation data?
+            index = randomModal.nextIndexWithoutReplacement(0, profile.getLength(), true);
             double u = Math.random() * (rmax - lmax) + lmax;
             double v = random.nextGaussian() + u;
             Pair<Integer, Integer> record = new Pair<>(index, columnIndex);
@@ -68,6 +69,7 @@ public class OutlierInjector extends InjectorBase {
 
             while (!profile.set(record, Double.toString(v))) {
                 index = randomModal.nextIndexWithoutReplacement(0, profile.getLength(), false);
+                record = new Pair<>(index, columnIndex);
             }
         }
 
